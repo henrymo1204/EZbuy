@@ -1,0 +1,68 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(233, 202, 64);  
+  display:flex;
+  align-items:center;
+  justify-content: center;
+
+}
+.login{
+    background-color: rgb(42, 5, 68);
+    width: 500px;
+    color: white;
+    padding: 40px;
+    box-shadow: 10px 10px 25px #00000080; 
+    text-align: center;
+}
+.login a{ 
+    text-decoration: none;
+}
+.login a:hover{ 
+    color: goldenrod;
+    transition: 0.3s;
+}
+
+.login input{
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    background: none;
+    padding:12px;
+    font-size: 15px;
+    border-radius:22px;
+    outline: none;
+    color: white;
+}
+
+.login input[type = "text"],.login input[type="password"] {
+    border: 2px solid white;
+    width: 250;
+}
+
+.login input[type = "text"]:focus,
+.login input[type="password"]:focus {
+    border-color: yellow;
+    width:300 ;
+    transition: 0.5s;
+}
+.login input[type = "submit"]{
+    border: 2px solid rgb(224, 221, 6);
+    width: 250;
+    cursor: pointer; /*剪头变 手指可以按键*/
+}
+.login input[type = "submit"]:hover{
+    background-color: rgba(155, 155, 10, 0.781);
+    transition: 0.3s;
+}
+.login input[type = "register"]{
+    color:white;
+    border: 2px solid rgb(241, 241, 237);
+    width: 250;
+    cursor: pointer; /*剪头变 手指可以按键*/
+}
+.login input[type = "register"]:hover{
+    background-color: rgba(155, 155, 10, 0.781);
+    transition: 0.3s;
+}
+
+
