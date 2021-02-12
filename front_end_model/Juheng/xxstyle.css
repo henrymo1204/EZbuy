@@ -1,11 +1,10 @@
 /************************************************************
-This is the Mohammad's relation CSS you can change from here 
-*************************************************************/
+ This is the Juheng's relation CSS you can change from here 
+ ************************************************************/
 body {
-    background-image:url("../imag/mh_background.jpg");
+    background-image:url("../imag/JH_background.jpg");
     margin: 0;
 }
-
 
 /** this is the whole wrapper style set up **/
 #wrapper{

@@ -1,11 +1,10 @@
-/************************************************************
-This is the Mohammad's relation CSS you can change from here 
-*************************************************************/
+/**********************************************************
+This is the Gabriel's relation CSS you can change from here 
+************************************************************/
 body {
-    background-image:url("../imag/mh_background.jpg");
+    background-image:url("../imag/Gb_backgroud.jpg");
     margin: 0;
 }
-
 
 /** this is the whole wrapper style set up **/
 #wrapper{
