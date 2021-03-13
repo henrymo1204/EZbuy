@@ -1,0 +1,55 @@
+// This app was created by group 6 for CSUF's CPSC 462 class. It is a collaborative effort to
+//create a react-based website that functions as a unique web store.
+//
+import Button from 'react-bootstrap/Button';
+
+import React from 'react';
+
+//Import components
+import MyNavbar from './components/Navbar';
+import HomeButton from './components/HomeButton';
+import AboutBar from './components/AboutBar';
+import ContentCard from './components/ContentCard';
+
+//Import render styling from react bootstrap
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+import { Component } from 'react';
+import './App.css';
+
+const welcome = {
+  greeting: 'Hey',
+  title: 'EZ Buy',
+};
+
+class App extends Component {
+
+  render() {
+    return (
+      <Container fluid={true} className="pt-2">
+        {/* <div>
+        <a href="http://localhost:3000/">
+          <Image src="/images/ez_buy_logo.jpg" className="ezBuyIcon" />
+        </a>
+      </div> */}
+        <HomeButton />
+
+        <MyNavbar />
+
+        {<br></br>}
+
+        <ContentCard />
+
+        {<br></br>}
+
+        <AboutBar />
+
+      </Container>
+    );
+  }
+}
+
+
+export default App;
