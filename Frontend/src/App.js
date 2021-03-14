@@ -2,9 +2,20 @@
 //create a react-based website that functions as a unique web store.
 //
 import Button from 'react-bootstrap/Button';
+
 import React from 'react';
-import Homepage from './components/Homepage';
+
+//Import components
 import MyNavbar from './components/Navbar';
+import HomeButton from './components/HomeButton';
+import AboutBar from './components/AboutBar';
+import ContentCard from './components/ContentCard';
+
+//Import render styling from react bootstrap
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 import { Component } from 'react';
 import './App.css';
 
@@ -14,24 +25,28 @@ const welcome = {
 };
 
 class App extends Component {
+
   render() {
     return (
-      <div>
-        {/* <h1>{welcome.greeting} {welcome.title}</h1>
-
-        <button class="btn btn-default">
-          <img src="/images/ez_buy_logo.jpg" width="20" />y_Logo_Home
-    </button>*/}
-
-        <img src="/images/ez_buy_logo.jpg" alt="" />
+      <Container fluid={true} className="pt-2">
+        {/* <div>
+        <a href="http://localhost:3000/">
+          <Image src="/images/ez_buy_logo.jpg" className="ezBuyIcon" />
+        </a>
+      </div> */}
+        <HomeButton />
 
         <MyNavbar />
 
-        {/*<label htmlFor="search">Search: </label>
-        <input id="search" type="text" />
+        {<br></br>}
 
-        <button type="submit" class="btn btn-default">Submit</button> */}
-      </div>
+        <ContentCard />
+
+        {<br></br>}
+
+        <AboutBar />
+
+      </Container>
     );
   }
 }

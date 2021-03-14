@@ -10,6 +10,7 @@ class MyNavbar extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
+                    {/* TODO: change link */}
                     <Nav.Link href="#link">All Products</Nav.Link>
                 </Nav>
                 <Form inline>
@@ -17,6 +18,7 @@ class MyNavbar extends Component {
                     <Button variant="outline-success">Search</Button>
                 </Form>
                 <Nav className="mr-auto2">
+                    {/* TODO: change link */}
                     <Nav.Link href="login">Login</Nav.Link>
                     <Nav.Link href="cart">Cart</Nav.Link>
                 </Nav>
