@@ -40,6 +40,7 @@ basic_auth = CustomBasicAuth(app)
 user_upstreams = app.config['USER_UPSTREAMS']
 
 user_request_counter = 0
+app.debug = True
 
 
 @app.errorhandler(404)

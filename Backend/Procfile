@@ -1,3 +1,6 @@
 # foreman start -m gateway=1,user_service=3
-gateway:          FLASK_APP=gateway flask run -p $PORT
-user_service:     FLASK_APP=user_service flask run -p $PORT
+gateway:          FLASK_APP=gateway flask run -p $PORT --no-debugger --no-reload
+user_service:     FLASK_APP=user_service flask run -p $PORT --no-debugger --no-reload
+
+#gateway:          FLASK_APP=gateway flask run -p $PORT
+#user_service:     FLASK_APP=user_service flask run -p $PORT
