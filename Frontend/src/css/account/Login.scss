@@ -1,3 +1,43 @@
+// .login-wrapper {
+//   position: absolute;
+//   left: 28.54%;
+//   right: 32.5%;
+//   top: 27.15%;
+//   bottom: 21.09%;
+//   color: rgb(3, 1, 1);
+//   background-image: linear-gradient(
+//     to top,
+//     rgba(245, 238, 238, 0.925),
+//     rgb(29, 33, 223)
+//   );
+//   padding: 30px;
+//   border-radius: 10px;
+//   box-shadow: 0px 0px 10px 0px #000;
+
+//   .login-form {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//   }
+
+//   #title {
+//     font-size: 250%;
+//     font-weight: bold;
+//     color: black;
+//   }
+// }
+
+// .login-wrapper {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100vh;
+//     .login-box {
+//       width: 350px;
+//       padding: 1.5rem 1.5rem 2rem 1.5rem;
+//     }
+//   }
+
 .login-wrapper {
   position: absolute;
   left: 28.54%;
@@ -26,3 +66,5 @@
     color: black;
   }
 }
+
+@import 'bulma/bulma.sass';

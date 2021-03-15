@@ -1,0 +1,13 @@
+1. Use PyJWT as the library support:
+    https://pyjwt.readthedocs.io/en/stable/
+2. To install package
+    pip3 install -r requirements.txt
+3. Generate a public/private key pair
+    https://blog.miguelgrinberg.com/post/json-web-tokens-with-public-key-signatures
+    > openssl genrsa -out ./jwt_key.pem 2048
+    > openssl rsa -pubout -in ./jwt_key.pem -out ./jwt_key_pub.pem
+4. Use decorater to declare which route need to enforce JWT auth
+5. Reference tutorial
+    https://www.youtube.com/watch?v=J5bIPtEbS0Q
+
+6. HTTP authorization header

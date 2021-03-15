@@ -1,46 +1,16 @@
-
 import sys
 import flask
 import requests
 import re
-
-from flask_basicauth import BasicAuth
-
-
-class CustomBasicAuth(BasicAuth):
-
-    def check_credentials(self, username, password):
-        global user_request_counter
-
-        try:
-            auth_url = load_balance_user_requests() + "/user/auth"
-
-            response = requests.post(
-                auth_url, data={"username": username, "password": password})
-            user_request_counter = user_request_counter + 1
-
-            if user_request_counter == len(user_upstreams):
-                user_request_counter = 0
-
-            if response.status_code != 200 and response.json()["success"] != True:
-                return False
-
-            return True
-
-        except Exception as e:
-            print(e)
+from flask_cors import CORS
 
 
 app = flask.Flask(__name__)
 app.config.from_envvar('APP_CONFIG')
-app.config['BASIC_AUTH_FORCE'] = True
-
-basic_auth = CustomBasicAuth(app)
-
 user_upstreams = app.config['USER_UPSTREAMS']
+CORS(app)
 
 user_request_counter = 0
-app.debug = True
 
 
 @app.errorhandler(404)
@@ -51,12 +21,11 @@ def route_page(err):
     global user_upstreams
 
     try:
-        app.logger.info("database schema is %s", DB_SCHEMA_PATH)
         request_url = ""
         request_path = flask.request.full_path
 
-        # request load balanced to a user microservice
-        if request_path == '/?' or is_user_path(request_path) == True:
+        # request load balanced to a timeline microservice
+        if request_path == '/?' or is_user_service_path(request_path) == True:
             upstream = load_balance_user_requests()
             request_url = upstream + request_path
 
@@ -121,7 +90,7 @@ def remove_item(d, k, v):
     return dict(d)
 
 
-def is_user_path(request_path):
+def is_user_service_path(request_path):
     """ Check if current request is for user microservice
 
     :param request_path: The request path of current request.
@@ -131,17 +100,22 @@ def is_user_path(request_path):
 
     """
     rv = False
-    user_request_pattern = '/user/.*'
-    if re.search(user_request_pattern, request_path):
+    user_service_request_pattern = '(.*/user/.*)|(.*/register.*)|(.*/login.*)'
+    if re.search(user_service_request_pattern, request_path):
         rv = True
     return rv
 
 
 def delete_upstream(upstream):
-    """ Delete the given upstream from upstream pool                         
+    """ Delete the given upstream from upstream pool
+
+    :param is_timeline_request: If current request is for timeline microservice, if true
+                                the upstream will be deleted from timeline_upstreas, otherwise
+                                the upstream will be deleted from user_upstreams.                          
     :param upstream: The upstream to be deleted.
 
     """
+
     user_upstreams.remove(upstream)
 
 
