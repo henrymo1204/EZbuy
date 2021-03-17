@@ -39,7 +39,7 @@ class App extends Component {
         <Container fluid={true}>
           <Row>
             <Col>
-              <ContentCard header="Featured" imageurl={"/images/adGab.jpg"} timeleft="2 days"/>
+              <ContentCard header="Featured" imageurl={"/images/adGabe.jpg"} timeleft="2 days"/>
             </Col>
 
           </Row>
