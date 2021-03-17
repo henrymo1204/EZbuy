@@ -1,19 +1,25 @@
+// This component class uses cards which can be found here 
+//https://react-bootstrap.github.io/components/cards/
+
 import React from 'react';
 import { Component } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class ContentCard extends Component {
+
     render() {
         return (
-            <Card>
-                <Card.Img variant="top" src="holder.js/100px180" />
+            <Card className="text-center">
+                <Card.Header>{this.props.header}</Card.Header>
+                <Card.Img variant="top" src={this.props.imageurl} />
                 <Card.Body>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk
-                        of the card's content.
-      </Card.Text>
+                        Product description here
+                    </Card.Text>
+                    <Button variant="primary">Go to product</Button>
                 </Card.Body>
+                <Card.Footer className="text-muted">{this.props.timeleft}</Card.Footer>
             </Card>
         );
     }
