@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import '../../css/common/Panel.scss'
 
 class Panel extends React.Component {
     state = {

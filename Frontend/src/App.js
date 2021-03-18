@@ -28,7 +28,7 @@ const App = props => {
           <img src="/images/ez_buy_logo.jpg" width="20" />y_Logo_Home
     </button>*/}
 
-        <img src="/images/ez_buy_logo.jpg" alt="" />
+        <img className="ezbuy_logo" src="/images/ez_buy_logo.jpg" alt="" />
 
         <MyNavbar user={user}/>
 

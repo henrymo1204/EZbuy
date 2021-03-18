@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { Navbar, Nav, Form, Button, FormControl } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Panel from './commons/Panel'
 import UserProfile from './account/UserProfile'
@@ -28,7 +29,7 @@ import UserProfile from './account/UserProfile'
 //     }
 // }
 
-export default function MyNavBar(props) {
+const MyNavBar = props => {
 
     const toProfile = () => {
         Panel.open({
@@ -37,9 +38,7 @@ export default function MyNavBar(props) {
             user: props.user
           },
           callback: data => {
-            if (data === 'logout') {
-              props.history.go(0);
-            }
+            props.history.go(0);
           }
         });
     };
@@ -58,10 +57,10 @@ export default function MyNavBar(props) {
             <div className="end">
                 <Nav className="mr-auto2">
                     {props.user.username ? (
-                        <span className="username" onClick={toProfile}>
+                        <Nav.Link className="username" href=""onClick={toProfile}>
                         {/* <i className="far fa-user"></i> */}
                         {"Hi, " + props.user.username}
-                        </span>
+                        </Nav.Link>
                     ) : (
                         <Nav.Link href="login">Login</Nav.Link>
                     )}
@@ -72,3 +71,5 @@ export default function MyNavBar(props) {
         </Navbar>
     );
 }
+
+export default withRouter(MyNavBar);

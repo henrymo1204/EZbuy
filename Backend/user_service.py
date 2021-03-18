@@ -75,16 +75,22 @@ def createUser():
     username_key = 'username'
     email_key = 'email'
     password_key = 'password'
+    userRole_key = 'role'
 
     # return status code 400 if username or password is not passed from the HTTP request.
     if username_key not in dataDict:
         return bad_request(400, f"missing {username_key} field in request")
+    elif email_key not in dataDict:
+        return bad_request(400, f"missing {email_key} field in request")
     elif password_key not in dataDict:
         return bad_request(400, f"missing {password_key} field in request")
+    elif userRole_key not in dataDict:
+        return bad_request(400, f"missing {userRole_key} field in request")
 
     username = dataDict['username']
     email = dataDict['email']
     password = dataDict['password']
+    userRole = dataDict['role']
 
     # return status code 400 if username or password value is not valid
     if username == None:
@@ -93,6 +99,8 @@ def createUser():
         return bad_request(400, f"{email_key} field is empty")
     elif password == None:
         return bad_request(400, f"{password_key} field is empty")
+    elif userRole == None:
+        return bad_request(400, f"{userRole_key} field is empty")
 
     # generate hashed password to store in database
     hashedPass = generate_password_hash(password)
@@ -101,9 +109,9 @@ def createUser():
         db_connection = get_db()
 
         insert_query = f"INSERT INTO Users \
-                        (Username, Email, HashedPass) \
+                        (Username, Email, UserRole, HashedPass) \
                         VALUES \
-                        ('{username}','{email}','{hashedPass}')"
+                        ('{username}','{email}', '{userRole}', '{hashedPass}')"
 
         # insert the new user information to database
         cur = db_connection.cursor()
@@ -167,7 +175,11 @@ def loginUser():
             return unauthorized(401, 'invalid username')
 
         # get hased password from database
-        hashedPass_index = 2
+        email_index = 1
+        userRole_index = 2
+        hashedPass_index = 3
+        email = rows[0][email_index]
+        userRole = rows[0][userRole_index]
         hashedPass = rows[0][hashedPass_index]
 
         # check if the given password matches what's stored in database
@@ -179,7 +191,7 @@ def loginUser():
 
         jwt_encode_key = open(TOKEN_SIGN_KEY).read()
         jwt_token = jwt.encode(
-            {'username': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, jwt_encode_key, algorithm="RS256")
+            {'username': username, 'email': email, 'userRole': userRole, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, jwt_encode_key, algorithm="RS256")
 
     except Exception as e:
         # returns status code 500 when database operation fails

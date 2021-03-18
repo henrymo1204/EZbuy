@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from '../commons/axios';
 import {useForm, Controller, Checkbox} from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -7,6 +7,8 @@ import "../../css/account/Register.scss";
 
 
 export default function Login(props) {
+  const [isBuyer, setRole] = useState(0);
+
   const { register, handleSubmit, errors, control} = useForm();
 
   const onSubmit = async data => {
@@ -15,10 +17,12 @@ export default function Login(props) {
     // handle register 
     try {
       const { username, email, password } = data;
+      const userRole = isBuyer ? 'buyer' : 'seller'
       const res = await axios.post('/register', {
         username,
         email,
         password,
+        role : userRole,
         type: 0
       });
       const jwToken = res.data;
@@ -42,18 +46,20 @@ export default function Login(props) {
     return isChecked;
   };
 
-  const handleBuyerChecked = () => {
+  const handleBuyerChecked = (userRole) => {
     var isChecked = document.getElementById('buyer-check').checked;
     if (isChecked) {
+      setRole(true);
       document.getElementById('checkbox-warn').style.visibility = "hidden";
     } else {
       document.getElementById('checkbox-warn').style.visibility = "visible";
     }
   };
 
-  const handleSellerChecked = () => {
+  const handleSellerChecked = (userRole) => {
     var isChecked = document.getElementById("seller-check").checked;
     if (isChecked) {
+      setRole(false);
       document.getElementById('checkbox-warn').style.visibility = "hidden";
     } else {
       document.getElementById('checkbox-warn').style.visibility = "visible";

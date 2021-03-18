@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../css/account/UserProfile.scss'
 
 export default function UserProfile(props) {
   const logout = () => {
@@ -12,21 +13,11 @@ export default function UserProfile(props) {
       <fieldset disabled>
         <div className="field">
           <div className="control">
-            <label className="label">Nickname</label>
+            <label className="label">Username</label>
             <input
               className="input"
               type="text"
-              defaultValue={props.user.nickname}
-            />
-          </div>
-        </div>
-        <div className="field">
-          <div className="control">
-            <label className="label">Email</label>
-            <input
-              className="input"
-              type="text"
-              defaultValue={props.user.email}
+              defaultValue={props.user.username}
             />
           </div>
         </div>
@@ -36,7 +27,7 @@ export default function UserProfile(props) {
             <input
               className="input"
               type="text"
-              defaultValue={props.user.type === 1 ? 'Manager' : 'General User'}
+              defaultValue={props.user.type === 1 ? 'Seller' : 'Buyer'}
             />
           </div>
         </div>

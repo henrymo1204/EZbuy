@@ -28,6 +28,10 @@ body {
   );
 }
 
+.ezbuy_logo {
+  width: 10%;
+}
+
 /* if identified the "id" use the #*/
 
 #wrapper {
