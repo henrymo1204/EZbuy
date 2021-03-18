@@ -6,6 +6,7 @@ import Register from './components/account/Register';
 import Logout from './components/account/Logout';
 import Cart from './components/Cart';
 import AllProducts from './components/AllProducts';
+import XRViewer from './components/XRViewer';
 
 const Router = () => (
   <BrowserRouter>
@@ -15,7 +16,8 @@ const Router = () => (
       <Route path="/register" component={Register} />
       <Route path="/logout" component={Logout} />
       <Route path="/cart" component={Cart} />
-      <Route path="/allProducts" component={AllProducts} />
+      <Route path="/allproducts" component={AllProducts} />
+      <Route path="/3dviewer" component={XRViewer} />
     </Switch>
   </BrowserRouter>
 );

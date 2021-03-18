@@ -39,9 +39,9 @@ class App extends Component {
         <Container fluid={true}>
           <Row>
             <Col>
-              <ContentCard header="Featured" imageurl={"/images/adGabe.jpg"} timeleft="2 days"/>
+            {/* Change product urls */}
+              <ContentCard header="Featured" imageurl={"/images/WebXR_Banner.png"} producturl={"3dviewer"} timeleft="2 days"/>
             </Col>
-
           </Row>
           {<br></br>}
           <Row>
