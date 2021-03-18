@@ -1,0 +1,16 @@
+.paymentInfo-container {
+  min-width: 1000px;
+  height: 700px;
+
+  .paymentInfo-wrapper {
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px 5px rgb(105, 100, 100);
+
+    background-image: linear-gradient(
+      to top,
+      rgba(245, 238, 238, 0.925),
+      rgb(216, 136, 98)
+    );
+  }
+}
+@import "bulma/bulma.sass";

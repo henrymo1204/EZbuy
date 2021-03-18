@@ -5,7 +5,8 @@ import Button from 'react-bootstrap/Button';
 import React from 'react';
 import Homepage from './components/Homepage';
 import MyNavbar from './components/Navbar';
-import { Component } from 'react';
+import UserProfile from './components/account/UserProfile'
+import { Component, useMemo} from 'react';
 import './App.css';
 
 const welcome = {
@@ -13,8 +14,12 @@ const welcome = {
   title: 'EZ Buy',
 };
 
-class App extends Component {
-  render() {
+const App = props => {
+
+    const user = useMemo(() => {
+      return global.auth.getUser() || {};
+    }, []);
+
     return (
       <div>
         {/* <h1>{welcome.greeting} {welcome.title}</h1>
@@ -25,7 +30,7 @@ class App extends Component {
 
         <img src="/images/ez_buy_logo.jpg" alt="" />
 
-        <MyNavbar />
+        <MyNavbar user={user}/>
 
         {/*<label htmlFor="search">Search: </label>
         <input id="search" type="text" />
@@ -33,7 +38,6 @@ class App extends Component {
         <button type="submit" class="btn btn-default">Submit</button> */}
       </div>
     );
-  }
 }
 
 

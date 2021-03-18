@@ -1,24 +1,61 @@
-.button {
+.logout-container {
+  min-width: 1000px;
+  height: 700px;
+
+  .logout-wrapper {
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px 5px rgb(105, 100, 100);
+
+    background-image: linear-gradient(
+      to top,
+      rgba(245, 238, 238, 0.925),
+      rgb(29, 33, 223)
+    );
+
+    width: 40%;
+    height: 50%;
+    top: 25%;
+    left: 30%;
+    padding: 0px 0px 0px 0px;
+    position: relative;
+
+    .logout-title {
+      height: 50%;
+      padding-top: 10%;
+      font-size: 250%;
+      font-weight: bold;
+      color: black;
+    }
+
+    .logout-buttons {
+      height: 50%;
+    }
+
+    .logout-yes {
+      margin-right: 10%;
+    }
+
+    .logout-no {
+      margin-left: 10%;
+    }
+  }
+}
+
+.account-button {
   border-radius: 16px;
   padding: 1px 2px;
   background: #e4ff3e;
   color: black;
-  border: 3px solid #b1b8b1;
+  border: 1px solid #b1b8b1;
   width: 120px;
   font-size: 16px;
   font-weight: bold;
   transition-duration: 0.4s;
 }
 
-.button:hover {
+.account-button:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
-  background-color: #454945; /* Green */
-  color: white;
-}
-#title {
-  padding: 30px 30px;
-  font-size: 250%;
-  font-weight: bold;
+  background-color: orange; /* Green */
   color: black;
 }

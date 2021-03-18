@@ -39,13 +39,13 @@ export default function Login(props) {
                   <input
                     className={`input ${errors.username && 'text-warn'}`}
                     type="text"
-                    placeholder="Username"
+                    placeholder="Please enter username"
                     name="username"
                     ref={register({
                       required: 'username is required',
                       minLength: {
                         value: 6,
-                        message: 'cannot be less than 6 digits'
+                        message: 'minimum length for username is 6'
                       }
                     })}
                   />
@@ -61,13 +61,13 @@ export default function Login(props) {
                   <input
                     className={`input ${errors.password && 'text-warn'}`}
                     type="password"
-                    placeholder="Password"
+                    placeholder="Please enter Password"
                     name="password"
                     ref={register({
                       required: 'password is required',
                       minLength: {
                         value: 6,
-                        message: 'cannot be less than 6 digits'
+                        message: 'minimum length for password is 6'
                       }
                     })}
                   />
@@ -78,7 +78,7 @@ export default function Login(props) {
               </div>
             </div>
             <div className="footer-container text-center">
-              <button className="button">Login</button>
+              <button className="account-button">Login</button>
             <div className="footer-middle text-center">OR</div>
             <Nav className="justify-content-center">
                 <Nav.Link href="/register">Create account</Nav.Link>

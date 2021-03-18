@@ -179,7 +179,7 @@ def loginUser():
 
         jwt_encode_key = open(TOKEN_SIGN_KEY).read()
         jwt_token = jwt.encode(
-            {'user': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, jwt_encode_key, algorithm="RS256")
+            {'username': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, jwt_encode_key, algorithm="RS256")
 
     except Exception as e:
         # returns status code 500 when database operation fails
