@@ -11,7 +11,7 @@ class MyNavbar extends Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     {/* TODO: change link */}
-                    <Nav.Link href="allProducts">All Products</Nav.Link>
+                    <Nav.Link href="allproducts">All Products</Nav.Link>
                 </Nav>
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />

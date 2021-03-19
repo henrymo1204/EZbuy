@@ -87,6 +87,7 @@ const products = [
 
 class AllProducts extends Component {
 
+  
   render() {
     return (
       <Container fluid={true} className="pt-2">
@@ -99,11 +100,13 @@ class AllProducts extends Component {
 
         <MyNavbar />
 
-        <main className="pa3 pa5-ns flex flex-wrap">
+        <main className="main">
             {
                 products.map(p => <Products key={p.id} {...p} />)
             }
         </main>
+
+        
         {/* got the code from https://www.youtube.com/watch?v=2-S-FiEl07I */}
 
         <AboutBar />

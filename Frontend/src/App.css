@@ -1,6 +1,11 @@
-img {
-  height: 70px;
+/* Css for images on home page. Note: advertisement images don't have thier sizes set yet. */
+.ezBuyIcon{
+  height:70px;
 }
+
+/* .featuredImage{
+  height:200px
+} */
 
 /***********************************
  This is the CSS for the FirstPage 
@@ -159,3 +164,12 @@ body {
   width: 100%;
 }
 .navbar-brand {float:none;}
+
+/***********************************
+ This is the CSS for the XR 3D Viewer 
+ *************************************/
+
+ .aframebox {
+  height: 500px;
+  width: 700px;
+  }
