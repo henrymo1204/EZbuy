@@ -61,7 +61,6 @@ class App extends Component {
         {<br></br>}
         {<br></br>}
 
-
         <AboutBar />
 
       </Container>
