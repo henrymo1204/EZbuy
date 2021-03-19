@@ -174,4 +174,25 @@ body {
  .aframebox {
     height: 500px;
     width: 700px;
-  }
+ }
+
+.filter {
+  background-color: white;
+  width: 70%;
+  margin: 40px;
+  padding: 10px;
+  flex-wrap: wrap;
+  align-self: center;
+}
+
+.filter-radio {
+  margin: 20px;
+}
+
+.products {
+  margin: 35px;
+  flex-wrap: wrap;
+  width: 95%;
+  position: relative;
+  display: flex;
+}
