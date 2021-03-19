@@ -17,7 +17,7 @@ class ContentCard extends Component {
                     <Card.Text>
                         Product description here
                     </Card.Text>
-                    <Button variant="primary">Go to product</Button>
+                    <Button variant="primary" href={this.props.producturl}>Go to product</Button>
                 </Card.Body>
                 <Card.Footer className="text-muted">{this.props.timeleft}</Card.Footer>
             </Card>
