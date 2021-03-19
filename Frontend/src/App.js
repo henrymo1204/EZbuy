@@ -2,11 +2,26 @@
 //create a react-based website that functions as a unique web store.
 //
 import Button from 'react-bootstrap/Button';
+
 import React from 'react';
-import Homepage from './components/Homepage';
+
+//Import components
 import MyNavbar from './components/Navbar';
+<<<<<<< HEAD
 import UserProfile from './components/account/UserProfile'
 import { Component, useMemo} from 'react';
+=======
+import HomeButton from './components/HomeButton';
+import AboutBar from './components/AboutBar';
+import ContentCard from './components/ContentCard';
+
+//Import render styling from react bootstrap
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+import { Component } from 'react';
+>>>>>>> development
 import './App.css';
 
 const welcome = {
@@ -14,6 +29,7 @@ const welcome = {
   title: 'EZ Buy',
 };
 
+<<<<<<< HEAD
 const App = props => {
 
     const user = useMemo(() => {
@@ -23,20 +39,53 @@ const App = props => {
     return (
       <div>
         {/* <h1>{welcome.greeting} {welcome.title}</h1>
+=======
+class App extends Component {
 
-        <button class="btn btn-default">
-          <img src="/images/ez_buy_logo.jpg" width="20" />y_Logo_Home
-    </button>*/}
+  render() {
+>>>>>>> development
 
+    return (
+      <Container fluid={true} className="pt-2">
+
+<<<<<<< HEAD
         <img className="ezbuy_logo" src="/images/ez_buy_logo.jpg" alt="" />
+=======
+        <HomeButton />
+>>>>>>> development
 
         <MyNavbar user={user}/>
 
-        {/*<label htmlFor="search">Search: </label>
-        <input id="search" type="text" />
+        {<br></br>}
+        <Container fluid={true}>
+          <Row>
+            <Col>
+            {/* Change product urls */}
+              <ContentCard header="Featured" imageurl={"/images/WebXR_Banner.png"} producturl={"3dviewer"} timeleft="2 days"/>
+            </Col>
+          </Row>
+          {<br></br>}
+          <Row>
+            <Col>
+              <ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" />
+            </Col>
+            <Col>
+              <ContentCard imageurl={"/images/model.jpg"} timeleft="1 day"/>
+            </Col>
+            <Col>
+              <ContentCard imageurl={"/images/model.jpg"} timeleft="4 hours"/>
+            </Col>
+          </Row>
+        </Container>
 
-        <button type="submit" class="btn btn-default">Submit</button> */}
-      </div>
+        {<br></br>}
+        {<br></br>}
+        {<br></br>}
+
+
+        <AboutBar />
+
+      </Container>
     );
 }
 

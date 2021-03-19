@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Panel from './commons/Panel'
 import UserProfile from './account/UserProfile'
 
+<<<<<<< HEAD
 // class MyNavbar extends Component {
 //     render() {
 //         return (
@@ -64,6 +65,25 @@ const MyNavBar = props => {
                     ) : (
                         <Nav.Link href="login">Login</Nav.Link>
                     )}
+=======
+class MyNavbar extends Component {
+    render() {
+        return (
+            <Navbar bg="light" expand="lg">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                    {/* TODO: change link */}
+                    <Nav.Link href="allproducts">All Products</Nav.Link>
+                </Nav>
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-success">Search</Button>
+                </Form>
+                <Nav className="mr-auto2">
+                    {/* TODO: change link */}
+                    <Nav.Link href="login">Login</Nav.Link>
+>>>>>>> development
                     <Nav.Link href="cart">Cart</Nav.Link>
                 </Nav>
             </div>
