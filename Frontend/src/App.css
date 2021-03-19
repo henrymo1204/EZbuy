@@ -1,10 +1,12 @@
 /* Css for images on home page. Note: advertisement images don't have thier sizes set yet. */
 .ezBuyIcon{
   height:70px;
+  width: 150px;
 }
 
-/* .featuredImage{
-  height:200px
+/* .card-img-top{
+  height: auto;
+  width: auto;
 } */
 
 /***********************************
@@ -170,6 +172,6 @@ body {
  *************************************/
 
  .aframebox {
-  height: 500px;
-  width: 700px;
+    height: 500px;
+    width: 700px;
   }
