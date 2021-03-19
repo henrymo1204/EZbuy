@@ -9,11 +9,11 @@ export default function UserProfile(props) {
 
   return (
     <div className="user-profile">
-      <p className="title has-text-centered">Profile</p>
+      <p className="title has-text-centered">Account</p>
       <fieldset disabled>
         <div className="field">
           <div className="control">
-            <label className="label">Username</label>
+            <label className="label has-text-left">Username</label>
             <input
               className="input"
               type="text"
@@ -23,7 +23,7 @@ export default function UserProfile(props) {
         </div>
         <div className="field">
           <div className="control">
-            <label className="label">Type</label>
+            <label className="label has-text-left">User Type</label>
             <input
               className="input"
               type="text"

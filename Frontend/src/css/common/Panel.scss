@@ -37,12 +37,14 @@
   transition: all 0.3s ease-in-out;
   z-index: 99;
   .head {
-    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+
     text-align: right;
     .close {
       font-size: 24px;
       font-weight: 600;
-      color: #333;
+      color: black;
       cursor: pointer;
       line-height: 1;
       margin-right: 4px;

@@ -7,10 +7,6 @@ import React from 'react';
 
 //Import components
 import MyNavbar from './components/Navbar';
-<<<<<<< HEAD
-import UserProfile from './components/account/UserProfile'
-import { Component, useMemo} from 'react';
-=======
 import HomeButton from './components/HomeButton';
 import AboutBar from './components/AboutBar';
 import ContentCard from './components/ContentCard';
@@ -20,8 +16,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import { Component } from 'react';
->>>>>>> development
 import './App.css';
 
 const welcome = {
@@ -29,32 +23,17 @@ const welcome = {
   title: 'EZ Buy',
 };
 
-<<<<<<< HEAD
 const App = props => {
-
-    const user = useMemo(() => {
-      return global.auth.getUser() || {};
-    }, []);
-
-    return (
-      <div>
-        {/* <h1>{welcome.greeting} {welcome.title}</h1>
-=======
-class App extends Component {
-
-  render() {
->>>>>>> development
 
     return (
       <Container fluid={true} className="pt-2">
 
-<<<<<<< HEAD
-        <img className="ezbuy_logo" src="/images/ez_buy_logo.jpg" alt="" />
-=======
+        {/* <img className="ezbuy_logo" src="/images/ez_buy_logo.jpg" alt="" /> */}
         <HomeButton />
->>>>>>> development
 
-        <MyNavbar user={user}/>
+        {/* <MyNavbar user={user}/> */}
+
+        <MyNavbar />
 
         {<br></br>}
         <Container fluid={true}>

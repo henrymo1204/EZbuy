@@ -2,7 +2,6 @@
 //create a react-based website that functions as a unique web store.
 //
 import Button from 'react-bootstrap/Button';
-
 import React from 'react';
 
 //Import components
@@ -86,7 +85,6 @@ const products = [
 ]
 
 class AllProducts extends Component {
-
   
   render() {
     return (
