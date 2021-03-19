@@ -61,7 +61,6 @@ const App = props => {
         {<br></br>}
         {<br></br>}
 
-
         <AboutBar />
 
       </Container>

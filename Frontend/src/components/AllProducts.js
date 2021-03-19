@@ -10,11 +10,13 @@ import HomeButton from './HomeButton';
 import AboutBar from './AboutBar';
 import ContentCard from './ContentCard';
 import Products from './Products';
+import Filter from './Filter';
 
 //Import render styling from react bootstrap
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Form from 'react-bootstrap/Form'
 
 import { Component } from 'react';
 
@@ -98,11 +100,21 @@ class AllProducts extends Component {
 
         <MyNavbar />
 
-        <main className="main">
-            {
+        
+        <Row>
+          <Col md='auto'>
+            <div classNane="radio-buttons">
+              <Filter />
+            </div>
+          </Col>
+          <Col>
+            <div className="products">
+              {
                 products.map(p => <Products key={p.id} {...p} />)
-            }
-        </main>
+              }
+            </div>
+          </Col>
+        </Row>
 
         
         {/* got the code from https://www.youtube.com/watch?v=2-S-FiEl07I */}
