@@ -5,6 +5,7 @@ import UserProfile from './account/UserProfile'
 import { useMemo} from 'react';
 import { withRouter } from 'react-router-dom';
 
+//this is the container for login and cart button
 const NavBarEnd = props => {
 
     const userInfo = useMemo(() => {
