@@ -6,9 +6,8 @@ img{
 section{
   border: 1px;
   padding: 10px;
-  width: 20%;
+  width: 150px;
   text-align: center;
-  float: left;
   margin: 5px;
   background-color: white;
 }
