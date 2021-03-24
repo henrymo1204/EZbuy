@@ -5,6 +5,8 @@ import {Nav} from 'react-bootstrap';
 import axios from '../commons/axios';
 import '../../css/account/Login.scss'
 
+/*This is the Login component */ 
+
 export default function Login(props) {
     const { register, handleSubmit, errors } = useForm();
   
@@ -21,7 +23,7 @@ export default function Login(props) {
         props.history.push('/');
       } catch (error) {
         const message = error.response.data.message;
-        toast.error(message);
+        toast.error("Login Failed. Wrong username or password.");
       }
     };
   

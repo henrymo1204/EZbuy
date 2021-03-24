@@ -27,7 +27,7 @@ export default function Login(props) {
       });
       const jwToken = res.data;
       global.auth.setToken(jwToken);
-      toast.success('Register Success');
+      toast.success('Register Success. Please login.');
       // route back to login page
       props.history.push('/login');
     } catch (error) {
