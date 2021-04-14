@@ -1,7 +1,17 @@
+# CPSC462 Project: EZBuy
+
+# Professor: Lidia Morrison
+
+# Team members:
+#     Ying Luo,            yingluo_holiday@csu.fullerton.edu
+#     Gabriel Magallanes,  gabe695@csu.fullerton.edu
+#     Juheng Mo,           henrymo@csu.fullerton.edu
+#     Mohammad Mirwais,    mirwais.88@csu.fullerton.edu
+
 from flask import Flask, request, g, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils import jwt_token_required
-import datetime
+from datetime import datetime
 import sqlite3
 import click
 import json
@@ -106,22 +116,76 @@ def createUser():
     hashedPass = generate_password_hash(password)
 
     try:
-        db_connection = get_db()
+        _create_user(username, email, userRole, hashedPass)
 
-        insert_query = f"INSERT INTO Users \
-                        (Username, Email, UserRole, HashedPass) \
-                        VALUES \
-                        ('{username}','{email}', '{userRole}', '{hashedPass}')"
+        userID = _get_userID(username)
 
-        # insert the new user information to database
-        cur = db_connection.cursor()
-        cur.execute(insert_query)
-        db_connection.commit()
+        _create_user_cart(userID)
+
+        if userRole == 'seller':
+            _create_user_shop(userID)
     except Exception as e:
         # return status code 500 when database operation fails
         return internal_server_error(500, str(e))
 
     return jsonify({'success': True})
+
+
+def _create_user(username, email, userRole, hashedPass):
+    db_connection = get_db()
+
+    insert_query = f"INSERT INTO Users \
+                        (Username, Email, UserRole, HashedPass) \
+                        VALUES \
+                        ('{username}','{email}', '{userRole}', '{hashedPass}')"
+
+    # insert the new user information to database
+    cur = db_connection.cursor()
+    cur.execute(insert_query)
+    db_connection.commit()
+
+
+def _get_userID(username):
+    db_connection = get_db()
+
+    search_query = f"SELECT * FROM Users \
+                        WHERE username='{username}'"
+
+    cur = db_connection.cursor()
+    cur.execute(search_query)
+    db_connection.commit()
+
+    rows = cur.fetchall()
+
+    userID_index = 0
+    return rows[0][userID_index]
+
+
+def _create_user_cart(userID):
+    db_connection = get_db()
+    cur_time = datetime.now().strftime("%B %d, %Y %I:%M%p")
+
+    insert_query = f"INSERT INTO Carts \
+                        (UserID, TotalPrice, LastUpdateTime) \
+                        VALUES \
+                        ({userID}, 0, {cur_time})"
+
+    cur = db_connection.cursor()
+    cur.execute(insert_query)
+    db_connection.commit()
+
+
+def _create_user_shop(userID):
+    db_connection = get_db()
+
+    insert_query = f"INSERT INTO Shops \
+                        (UserID) \
+                        VALUES \
+                        ({userID})"
+
+    cur = db_connection.cursor()
+    cur.execute(insert_query)
+    db_connection.commit()
 
 
 @app.route('/login', methods=['POST'])

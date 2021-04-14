@@ -7,36 +7,63 @@ from flask_cors import CORS
 
 app = flask.Flask(__name__)
 app.config.from_envvar('APP_CONFIG')
-user_upstreams = app.config['USER_UPSTREAMS']
 CORS(app)
 
-user_request_counter = 0
+service_request_counter_dict = dict(
+    user_service=0,
+    cart_service=0,
+    order_service=0,
+    shipment_service=0,
+    payment_service=0,
+    inventory_service=0,
+    shop_service=0
+)
+
+service_request_pattern_dict = dict(
+    user_service='(.*/user.*)|(.*/register.*)|(.*/login.*)',
+    cart_service='.*/cart.*',
+    order_service='.*/order.*',
+    shipment_service='.*/shipment.*',
+    payment_service='.*/payment.*',
+    inventory_service='.*/inventory.*',
+    shop_service='.*/shop.*'
+)
+
+service_upstream_dict = dict(
+    user_service=app.config['USER_UPSTREAMS'],
+    cart_service=app.config['CART_UPSTREAMS'],
+    order_service=app.config['ORDER_UPSTREAMS'],
+    shipment_service=app.config['SHIPMENT_UPSTREAMS'],
+    payment_service=app.config['PAYMENT_UPSTREAMS'],
+    inventory_service=app.config['INVENTORY_UPSTREAMS'],
+    shop_service=app.config['SHOP_UPSTREAMS']
+)
 
 
-@app.errorhandler(404)
+@ app.errorhandler(404)
 def route_page(err):
-    upstream = ""
 
-    global user_request_counter
-    global user_upstreams
+    request_url = ""
+    request_path = flask.request.full_path
+
+    # find service name based on request path
+    service_name = find_service_with_request(request_path)
+
+    # find a upstream for the service
+    upstream = load_balance_with_service(service_name)
+
+    # construct request url based on upstream
+    request_url = upstream + request_path
+
+    # update service request counter
+    service_request_counter_dict[service_name] += 1
+
+    # reset service request counter to 0 if reach the end of upstream list
+    # based on round-robin load balancing
+    if service_request_counter_dict[service_name] == len(service_upstream_dict[service_name]):
+        service_request_counter_dict[service_name] = 0
 
     try:
-        request_url = ""
-        request_path = flask.request.full_path
-
-        # request load balanced to a timeline microservice
-        if request_path == '/?' or is_user_service_path(request_path) == True:
-            upstream = load_balance_user_requests()
-            request_url = upstream + request_path
-
-            # increase the user_request_counter by 1 for the round-robin load balancing use
-            user_request_counter = user_request_counter + 1
-
-            # if user_request_counter equals size of user_upstreams, each upstream has been
-            # called once, restart a new round of round-robin load balancing from the first upstream
-            if user_request_counter == len(user_upstreams):
-                user_request_counter = 0
-
         response = requests.request(
             flask.request.method,
             request_url,
@@ -56,7 +83,7 @@ def route_page(err):
 
     except requests.exceptions.ConnectionError as e:
         # delete the current upstream from upstream pool as current connection failed
-        delete_upstream(upstream)
+        delete_upstream(service_name, upstream)
 
         app.log_exception(sys.exc_info())
         return flask.json.jsonify({
@@ -73,7 +100,7 @@ def route_page(err):
 
     # delete the current upstream from upstream pool on response code in the 500 range
     if response.status_code >= 500:
-        delete_upstream(upstream)
+        delete_upstream(service_name, upstream)
 
     return flask.Response(
         response=response.content,
@@ -90,38 +117,49 @@ def remove_item(d, k, v):
     return dict(d)
 
 
-def is_user_service_path(request_path):
-    """ Check if current request is for user microservice
+def find_service_with_request(request_path):
+    """ Find service name from request path
 
-    :param request_path: The request path of current request.
+    :param: <string> request_path: The request path of current request.
 
-    :return: True if request is for user microservice, 
-             False if request is for timeline microservice.
+    :return: <string> the service name
 
     """
-    rv = False
-    user_service_request_pattern = '(.*/user/.*)|(.*/register.*)|(.*/login.*)'
-    if re.search(user_service_request_pattern, request_path):
-        rv = True
-    return rv
+    serviceName = None
+
+    for k, v in service_request_pattern_dict.items():
+        if re.search(v, request_path):
+            serviceName = k
+            break
+
+    return serviceName
 
 
-def delete_upstream(upstream):
+def delete_upstream(service_name, upstream):
     """ Delete the given upstream from upstream pool
 
-    :param is_timeline_request: If current request is for timeline microservice, if true
-                                the upstream will be deleted from timeline_upstreas, otherwise
-                                the upstream will be deleted from user_upstreams.                          
-    :param upstream: The upstream to be deleted.
+    :param:  <string> service_name the name of the service                         
+    :param:  <string> upstream: The upstream to be deleted.
+
+    :returns:  <string> the selected upstream
 
     """
 
-    user_upstreams.remove(upstream)
+    upstreams = service_upstream_dict[service_name]
+    upstreams.remove(upstream)
 
 
-def load_balance_user_requests():
-    """ Round-robin load balancing among the user microservices """
-    global user_request_counter
-    upstream = user_upstreams[user_request_counter % len(user_upstreams)]
+def load_balance_with_service(service_name):
+    """ Round-robin load balancing among the microservices 
+
+    :param: <string> service_name the name of the service  
+
+    :returns: <string> the selected upstream
+
+    """
+
+    counter = service_request_counter_dict[service_name]
+    upstreams = service_upstream_dict[service_name]
+    upstream = upstreams[counter % len(upstreams)]
 
     return upstream
