@@ -25,7 +25,7 @@ service_request_pattern_dict = dict(
     order_service='.*/order.*',
     shipment_service='.*/shipment.*',
     payment_service='.*/payment.*',
-    inventory_service='.*/inventory.*',
+    inventory_service='.*/products.*',
     shop_service='.*/shop.*'
 )
 
@@ -83,7 +83,7 @@ def route_page(err):
 
     except requests.exceptions.ConnectionError as e:
         # delete the current upstream from upstream pool as current connection failed
-        delete_upstream(service_name, upstream)
+        # delete_upstream(service_name, upstream)
 
         app.log_exception(sys.exc_info())
         return flask.json.jsonify({
@@ -99,8 +99,8 @@ def route_page(err):
     )
 
     # delete the current upstream from upstream pool on response code in the 500 range
-    if response.status_code >= 500:
-        delete_upstream(service_name, upstream)
+    # if response.status_code >= 500:
+    # delete_upstream(service_name, upstream)
 
     return flask.Response(
         response=response.content,

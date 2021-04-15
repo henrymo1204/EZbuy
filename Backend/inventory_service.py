@@ -70,12 +70,13 @@ def getAllProducts():
         # return status code 500 when database operation fails
         return internal_server_error(500, str(e))
 
-    result = []
+    products = []
     for row in rows:
-        result.append({'id': row[0], 'name': row[1],
-                       'description': row[2], 'img': row[4], 'price': row[3]})
+        # image is bytes, need to encode as json does not support bytes
+        products.append({'id': row[0], 'name': row[1],
+                         'description': row[2], 'img': row[4].decode('utf8'), 'price': row[3]})
 
-    return jsonify(result)
+    return jsonify({'success': True, 'products': products})
 
 
 @app.route('/products/<pid>', methods=['GET'])

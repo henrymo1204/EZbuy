@@ -11,7 +11,7 @@
 from flask import Flask, request, g, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils import jwt_token_required
-from datetime import datetime
+import datetime
 import sqlite3
 import click
 import json
@@ -123,7 +123,7 @@ def createUser():
         _create_user_cart(userID)
 
         if userRole == 'seller':
-            _create_user_shop(userID)
+            _create_user_shop(userID, username)
     except Exception as e:
         # return status code 500 when database operation fails
         return internal_server_error(500, str(e))
@@ -163,25 +163,27 @@ def _get_userID(username):
 
 def _create_user_cart(userID):
     db_connection = get_db()
-    cur_time = datetime.now().strftime("%B %d, %Y %I:%M%p")
+    cur_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     insert_query = f"INSERT INTO Carts \
                         (UserID, TotalPrice, LastUpdateTime) \
                         VALUES \
-                        ({userID}, 0, {cur_time})"
+                        ({userID}, 0, '{cur_time}')"
 
     cur = db_connection.cursor()
     cur.execute(insert_query)
     db_connection.commit()
 
 
-def _create_user_shop(userID):
+def _create_user_shop(userID, username):
     db_connection = get_db()
 
+    shopname = f'shop of {username}'
+
     insert_query = f"INSERT INTO Shops \
-                        (UserID) \
+                        (UserID, Shopname) \
                         VALUES \
-                        ({userID})"
+                        ({userID}, '{shopname}')"
 
     cur = db_connection.cursor()
     cur.execute(insert_query)
@@ -239,9 +241,9 @@ def loginUser():
             return unauthorized(401, 'invalid username')
 
         # get hased password from database
-        email_index = 1
-        userRole_index = 2
-        hashedPass_index = 3
+        email_index = 2
+        userRole_index = 3
+        hashedPass_index = 4
         email = rows[0][email_index]
         userRole = rows[0][userRole_index]
         hashedPass = rows[0][hashedPass_index]
