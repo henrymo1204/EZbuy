@@ -17,6 +17,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from 'react-bootstrap/Form'
+import axios from './commons/axios';
 
 import { Component } from 'react';
 
@@ -27,69 +28,26 @@ const welcome = {
   title: 'EZ Buy',
 };
 
-const products = [
-  {
-    id: 1,
-    name: "Apple",
-    description: "Red Apple",
-    img: "/images/ez_buy_logo.jpg",
-    price: 100
-  },
-
-  {
-    id: 2,
-    name: "Banana",
-    description: "Yellow Banana",
-    img: "/images/ez_buy_logo.jpg",
-    price: 100
-  },
-
-  {
-    id: 3,
-    name: "Orange",
-    description: "Orange Orange",
-    img: "/images/ez_buy_logo.jpg",
-    price: 100
-  },
-
-  {
-    id: 4,
-    name: "Strawberry",
-    description: "Red Strawberry",
-    img: "/images/ez_buy_logo.jpg",
-    price: 100
-  },
-
-  {
-    id: 5,
-    name: "Watermellon",
-    description: "Green Watermellon",
-    img: "/images/ez_buy_logo.jpg",
-    price: 100
-  },
-
-  {
-    id: 6,
-    name: "Cat",
-    description: "Cat",
-    img: "/images/ez_buy_logo.jpg",
-    price: 100
-  },
-
-  
-  {
-    id: 7,
-    name: "Dog",
-    description: "Dog",
-    img: "/images/ez_buy_logo.jpg",
-    price: 100
-  },
-]
-
 class AllProducts extends Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = { products: null };
+  }
+
+  componentDidMount() {
+    axios.get('/products/').then((res) => {
+      this.setState({ products: res.data['products'] })
+    });
+  }
+
   render() {
+    const { products } = this.state;
+    if (products === null) {
+      return <div></div>
+    }
+
     return (
+      // route back to homepage
       <Container fluid={true} className="pt-2">
         {/* <div>
         <a href="http://localhost:3000/">
