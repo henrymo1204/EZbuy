@@ -1,6 +1,8 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+
 /* Css for images on home page. Note: advertisement images don't have thier sizes set yet. */
-.ezBuyIcon{
-  height:70px;
+.ezBuyIcon {
+  height: 70px;
   width: 150px;
 }
 
@@ -22,6 +24,7 @@ body {
     rgb(214, 106, 33)
   );
   margin: 0;
+  height: 80%;
 }
 
 .container {
@@ -169,16 +172,18 @@ body {
   text-align: center;
   width: 100%;
 }
-.navbar-brand {float:none;}
+.navbar-brand {
+  float: none;
+}
 
 /***********************************
  This is the CSS for the XR 3D Viewer 
  *************************************/
 
- .aframebox {
-    height: 500px;
-    width: 700px;
- }
+.aframebox {
+  height: 500px;
+  width: 700px;
+}
 
 .filter {
   background-color: white;

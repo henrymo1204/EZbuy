@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import { toast } from 'react-toastify';
 import {Nav} from 'react-bootstrap';
 import axios from '../commons/axios';
-import '../../css/account/Login.scss'
+import '../../css/account/Login.scss';
 
 /*This is the Login component */ 
 

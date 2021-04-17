@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import { Navbar, Nav, Form, Button, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBarEnd from './NavBarEnd'
+//***********************************************************************************//
+//Change the Navbar.js by Ying cuz make the cart botton and  login botton to Component
+//***********************************************************************************//
 
 // class MyNavbar extends Component {
 //     render() {
@@ -41,7 +44,7 @@ class MyNavbar extends Component {
                     <Button variant="outline-success">Search</Button>
                 </Form>
                 {/* extract login and cart button to a separate component */}
-                <NavBarEnd />
+                <NavBarEnd cartNum={this.props.cartNum}/>
                 </Navbar.Collapse>
             </Navbar>
         );

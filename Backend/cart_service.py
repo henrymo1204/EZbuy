@@ -47,16 +47,19 @@ def cartService():
     return 'Welcome to Cart Service!'
 
 
-@app.route('/cart/', methods=['POST'])
+@app.route('/cart', methods=['POST'])
 def addCartItem():
 
     dataDict = json.loads(request.data)
 
-    cartID = dataDict['cartID']
+    userID = dataDict['userID']
     productID = dataDict['productID']
     quantity = dataDict['quantity']
 
     try:
+
+        cartID = _getCartIDWithUserID(userID)
+
         db_connection = get_db()
 
         db_query = f"INSERT INTO Cart_Items \
@@ -117,15 +120,53 @@ def updateCartItem(cartItemID):
     return jsonify({'success': True})
 
 
-@app.route('/cart/<cartID>', methods=['GET'])
-def getAllCartItems(cartID):
+@app.route('/cart/item', methods=['GET'])
+def getCartItem():
+    userID = request.args.get('userID')
+    productID = request.args.get('productID')
 
-    result = []
+    items = []
 
     try:
+        cartID = _getCartIDWithUserID(userID)
+
         db_connection = get_db()
 
-        db_query = f"SELETE * \
+        db_query = f"SELECT * \
+            FROM Cart_Items \
+            WHERE \
+            CartID = '{cartID}' \
+            AND ProductID = '{productID}'"
+
+        # insert the new user information to database
+        cur = db_connection.cursor()
+        cur.execute(db_query)
+        db_connection.commit()
+
+        rows = cur.fetchall()
+
+        for row in rows:
+            items.append(
+                {'cartItemID': row[0], 'cartID': row[1], 'productID': row[2], 'quantity': row[3]})
+
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+
+    return jsonify({'success': True, 'items': items})
+
+
+@app.route('/cart/<userID>', methods=['GET'])
+def getAllCartItems(userID):
+
+    items = []
+
+    try:
+        cartID = _getCartIDWithUserID(userID)
+
+        db_connection = get_db()
+
+        db_query = f"SELECT * \
             FROM Cart_Items \
             WHERE \
             CartID = '{cartID}'"
@@ -137,17 +178,30 @@ def getAllCartItems(cartID):
 
         rows = cur.fetchall()
 
-        for r in rows:
-            item = []
-            for idx in range(2, len(item)):
-                item.append(r[idx])
-            result.append(item)
+        for row in rows:
+            items.append(
+                {'cartItemID': row[0], 'cartID': row[1], 'productID': row[2], 'quantity': row[3]})
 
     except Exception as e:
         # return status code 500 when database operation fails
         return internal_server_error(500, str(e))
 
-    return jsonify({'success': True, 'items': result})
+    return jsonify({'success': True, 'items': items})
+
+
+def _getCartIDWithUserID(userID):
+    db_connection = get_db()
+    db_query = f"SELECT CartID FROM Carts \
+                    WHERE \
+                    UserID = '{userID}'"
+
+    cur = db_connection.cursor()
+    cur.execute(db_query)
+    db_connection.commit()
+
+    rows = cur.fetchall()
+
+    return rows[0][0]
 
 
 @ app.errorhandler(401)

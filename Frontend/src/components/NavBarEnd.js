@@ -24,6 +24,7 @@ const NavBarEnd = props => {
         });
     };
 
+
     return (
         <div className="end">
             <Nav className="mr-auto2">
@@ -34,7 +35,7 @@ const NavBarEnd = props => {
                 ) : (
                     <Nav.Link href="login">Login</Nav.Link>
                 )}
-                <Nav.Link href="cart">Cart</Nav.Link>
+                <Nav.Link href="cart" ><i className="fas fa-shopping-cart"></i><span className="cart-num"> ({props.cartNum})</span></Nav.Link>
             </Nav>
         </div>
     );

@@ -29,6 +29,7 @@ const welcome = {
 };
 
 class AllProducts extends Component {
+
   constructor(props) {
     super(props);
     this.state = { products: null };
@@ -36,9 +37,24 @@ class AllProducts extends Component {
 
   componentDidMount() {
     axios.get('/products/').then((res) => {
-      this.setState({ products: res.data['products'] })
+      this.setState({ products: res.data['products'], cartNum: 0 })
     });
   }
+
+  getCartNum = async () => {
+    const userID = 1;
+    const response = await axios.get(`/cart/${userID}`);
+    const cartItems = response.data['items'] || []
+    const cartNum = cartItems.map(item => item['quantity']).reduce((sum, change) => sum + change, 0); 
+    return cartNum;
+  };
+
+  updateCartNum = async () => {
+    const cartNum = await this.getCartNum();
+    this.setState({
+      cartNum: cartNum
+    });
+  };
 
   render() {
     const { products } = this.state;
@@ -56,7 +72,7 @@ class AllProducts extends Component {
       </div> */}
         <HomeButton />
 
-        <MyNavbar />
+        <MyNavbar cartNum={this.state.cartNum}/>
 
         
         <Row>
@@ -68,7 +84,7 @@ class AllProducts extends Component {
           <Col>
             <div className="products">
               {
-                products.map(p => <Products key={p.id} {...p} />)
+                products.map(p => <Products productDetail={p} updateCartNum={this.updateCartNum}/>)
               }
             </div>
           </Col>
