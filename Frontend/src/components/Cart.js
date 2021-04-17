@@ -1,48 +1,57 @@
-// This app was created by group 6 for CSUF's CPSC 462 class. It is a collaborative effort to
-//create a react-based website that functions as a unique web store.
-//
-import Button from 'react-bootstrap/Button';
+
+/*****************************************************************************************
+                           This is the Cart Page
+ ****************************************************************************************/
+
 
 import React from 'react';
-
-//Import components
-import MyNavbar from './Navbar';
-import HomeButton from './HomeButton';
-import AboutBar from './AboutBar';
-import ContentCard from './ContentCard';
-
-//Import render styling from react bootstrap
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 import { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
+import{Button, Row, Col, Nav} from 'react-bootstrap';
+
+import CartItem from '../components/CartItem';
+import Layout from '../components/Layout'
+
+import '../css/cart/Cart.scss';
+import '../css/common/BodyWrapper.scss'
 
 const welcome = {
   greeting: 'Hey',
   title: 'EZ Buy',
 };
 
-class Cart extends Component {
-
-  render() {
+class Cart extends Component{
+  render(){
     return (
-      <Container fluid={true} className="pt-2">
-        {/* <div>
-        <a href="http://localhost:3000/">
-          <Image src="/images/ez_buy_logo.jpg" className="ezBuyIcon" />
-        </a>
-      </div> */}
-        <HomeButton />
-
-        <MyNavbar />
-
-        <AboutBar />
-
-      </Container>
-    );
+      <Layout>
+        <div className = "cart-page">
+          <span classNmae = "cart-title"> Shopping Cart </span>
+          <div className ="cart-list" >
+            <CartItem/>
+            <CartItem/>
+            <CartItem/> 
+          </div>
+         <div clasName ="cart-total">
+           Total:
+            <span className= "total-price is-vcentered" > $ 1234.00</span>
+          </div>
+          <Row>
+            <Col>
+              <Nav.Link href="allproducts" >
+                <button className="common-button"> Continue Shopping </button>
+              </Nav.Link>
+            </Col>
+            <Col>
+              <Nav.Link href="paymentInfo" >
+                <button className="common-button"> Place Order </button>
+              </Nav.Link>
+            </Col>
+          </Row>
+         </div>
+      </Layout>
+    )
   }
 }
 
-
-export default Cart;
+export default withRouter(Cart);

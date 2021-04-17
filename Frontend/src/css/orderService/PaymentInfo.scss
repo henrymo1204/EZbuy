@@ -1,7 +1,11 @@
 .paymentInfo-container {
   min-width: 1000px;
   height: 700px;
-
+  .logo {
+    width: 10%;
+    height: 5%;
+    position: relative;
+  }
   .paymentInfo-wrapper {
     border-radius: 3px;
     box-shadow: 5px 5px 5px 5px rgb(105, 100, 100);

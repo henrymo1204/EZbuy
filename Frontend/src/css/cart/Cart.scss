@@ -6,15 +6,108 @@
     height: 5%;
     position: relative;
   }
-  .cart-wrapper {
-    border-radius: 3px;
-    box-shadow: 5px 5px 5px 5px rgb(105, 100, 100);
+  // .cart-wrapper {
+  //   border-radius: 3px;
+  //   box-shadow: 5px 5px 5px 5px rgb(105, 100, 100);
 
-    background-image: linear-gradient(
-      to top,
-      rgba(245, 238, 238, 0.925),
-      rgb(216, 136, 98)
-    );
+  //   background-image: linear-gradient(
+  //     to top,
+  //     rgba(245, 238, 238, 0.925),
+  //     rgb(216, 136, 98)
+  //   );
+  // }
+  .cart-page {
+    max-width: 1100px;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 1rem;
+    .cart-title {
+      color: rgba(31, 28, 28, 0.726);
+      font-weight: 500;
+      font-size: 18px;
+      border-bottom: 2px solid #333;
+    }
+    .cart-list {
+      margin-top: 2rem;
+      padding: 0rem 1rem;
+      background: #fff;
+      color: #333;
+      .close {
+        font-weight: 800;
+        display: block;
+        padding: 0 8px;
+        cursor: pointer;
+      }
+      .cart-name {
+        width: 400px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .num-input {
+        border: 2px solid rgb(212, 210, 210);
+        border-radius: 0;
+        width: 100px;
+        font-size: 14px;
+      }
+      .price {
+        font-weight: 600;
+        // &::before {
+        //   content: '￥';
+        //   font-size: 12px;
+        //   margin-right: 2px;
+        // }
+      }
+      .sum-price {
+        font-weight: 600;
+        color: rgb(214, 111, 111);
+        // &::before {
+        //   content: '￥';
+        //   font-size: 12px;
+        //   margin-right: 2px;
+        // }
+      }
+      & td {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .no-cart {
+    padding: 1.5rem;
+    background: #fff;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  .cart-total {
+    margin-top: 1.5rem;
+    text-align: right;
+    color: #333;
+    .total-price {
+      margin-left: 8px;
+      font-size: 20px;
+      font-weight: 600;
+      color: rgb(214, 111, 111);
+      // &::before {
+      //   content: '￥';
+      //   font-size: 16px;
+      // }
+    }
   }
 }
+.cart-item-enter {
+  opacity: 0.1;
+  transition: all 0.3s ease-in;
+}
+.cart-item-enter.cart-item-enter-active {
+  opacity: 1;
+}
+.cart-item-exit {
+  opacity: 1;
+  transition: all 0.3s ease-in;
+}
+.cart-item-exit.cart-item-exit-active {
+  opacity: 0.1;
+}
+
 @import "bulma/bulma.sass";

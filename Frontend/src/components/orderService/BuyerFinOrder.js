@@ -1,15 +1,63 @@
-import React from 'react';
-// import '../../orderService/PaymentInfo.scss'
+/*********************************************************************************/
+/*************This is the UI page of the Buyer Finish Order page *****************/
+/*********************************************************************************/
 
-export default function BuyerFinOrder(props) {
-    
-  
+import React from 'react';
+import { Component } from 'react';
+import {Button,Row,Col,Container,From} from 'react-bootstrap'
+
+import '../../css/common/BodyWrapper.scss'
+import OrderListItem from './OrderListItem';
+import Layout from '../../components/Layout'
+
+const welcome = {
+  greeting: 'Hey',
+  title: 'EZ Buy',
+};
+
+class BuyerFinOrder extends Component {
+
+  render() {
     return (
-      <div className="login-container ">
-        <div className="login-wrapper">
-            <div className="title"><h1>Buyer Finished  the Order page</h1></div>
-       
-        </div>
-      </div>
-    );
+      <Layout>
+        <Container fluid={true}>
+          <div className="body-wrapper">
+              <div className="text-center logout-title">
+              Your order has been placed ! 
+              </div>
+              <Row>
+                <Col classNmae ="bd-left">
+                <div  className="text-center group-buttons">
+                  <Row>
+                    <button className="account-button " >
+                    Review your order
+                    </button>
+                  </Row>
+                  <Row>
+                    <button className="account-button " >
+                    Continue shopping
+                    </button>
+                  </Row>
+                  <Row>
+                    <button className="account-button " >
+                    Log out
+                    </button>
+                  </Row>
+                </div>
+                </Col>
+                <Col classNmae ="bd-right">
+                  <OrderListItem/>
+                  <OrderListItem/>
+                  <OrderListItem/>
+                </Col>
+            
+              </Row>
+          </div>
+
+        </Container>
+       </Layout>     
+     );
   }
+}
+
+export default BuyerFinOrder;

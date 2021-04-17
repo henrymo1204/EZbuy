@@ -61,5 +61,3 @@ const Products = (props) => {
 };
 
 export default Products;
-
-{/* got the code from https://www.youtube.com/watch?v=2-S-FiEl07I */}

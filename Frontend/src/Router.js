@@ -1,15 +1,18 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from './App';
+import NotFound from './components/NotFound';
+
 import Login from './components/account/Login';
 import Register from './components/account/Register';
 import Logout from './components/account/Logout';
-import PaymentInfo from './components/orderService/PaymentInfo';
-import OrderFin from './components/orderService/OrderFin';
-import OrderHis from './components/orderService/OrderHis';
-import BuyerFinOrder from './components/orderService/BuyerFinOrder';
-import OrderDet from './components/orderService/OrderDet';
+
 import Cart from './components/Cart';
+import PaymentInfo from './components/orderService/PaymentInfo';
+import BuyerFinOrder from './components/orderService/BuyerFinOrder';
+import OrderHis from './components/orderService/OrderHis';
+import OrderDetail from './components/orderService/OrderDetail';
+
 import AllProducts from './components/AllProducts';
 import XRViewer from './components/XRViewer';
 
@@ -20,14 +23,16 @@ const Router = () => (
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/logout" component={Logout} />
+
       <Route path="/cart" component={Cart} />
       <Route path="/paymentInfo" component={PaymentInfo} />
-      <Route path="/order/finish" component={OrderFin} />
-      <Route path="/order/history" component={OrderHis} />
-      <Route path="/order/buyerfinish" component={BuyerFinOrder} />
-      <Route path="/order/orderdetail" component={OrderDet} />
+      <Route path="/buyerfinishorder" component={BuyerFinOrder} />
+      <Route path="/orderhistory" component={OrderHis} />
+      <Route path="/orderdetail" component={OrderDetail} />
+
       <Route path="/allproducts" component={AllProducts} />
       <Route path="/3dviewer" component={XRViewer} />
+      <Route component = {NotFound} />
     </Switch>
     
   </BrowserRouter>

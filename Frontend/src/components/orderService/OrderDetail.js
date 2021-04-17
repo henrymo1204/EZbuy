@@ -1,11 +1,11 @@
-// This app was created by group 6 for CSUF's CPSC 462 class. It is a collaborative effort to
-//create a react-based website that functions as a unique web store.
-//
-import Button from 'react-bootstrap/Button';
 
+/****************************************************************************************
+                          This is the page of order detail
+****************************************************************************************/
+import Button from 'react-bootstrap/Button';
 import React from 'react';
 import '../../css/common/BodyWrapper.scss'
-import HistoryItem from './HistoryItem';
+import DetailItem from './DetailItem';
 
 //Import components
 import MyNavbar from '../Navbar';
@@ -25,7 +25,7 @@ const welcome = {
   title: 'EZ Buy',
 };
 
-class OrderHis extends Component {
+class OrderDetail extends Component {
 
   render() {
     return (
@@ -37,24 +37,24 @@ class OrderHis extends Component {
           
           <div className="body-wrapper">
               <div className="text-center">
-                  Order History
+                  Order Detail
                   <br></br>
                   <br></br>
 
               </div>
               <Row>
                 <Col classNmae ="bd-left">
-                <img src = "/images/ez_buy_logo.jpg" alt= "" width="100" />
+                
                 <div> Hi Alex</div>
-                <div> 3 orders placed in past 3 Months</div>
+                <img src = "/images/ez_buy_logo.jpg" alt= "" width="100" />
+                <div> </div>
                 
                 </Col>
                 <Col classNmae ="bd-right">
-                  <HistoryItem/>
-                  <HistoryItem/>
-                  <HistoryItem/>
-                  <br></br>
-                  <br></br>
+                 <div>Order 1 Detail</div>
+                  <DetailItem/>
+                  <DetailItem/>
+                  <DetailItem/>
                   <br></br>
                   <br></br>
                 </Col>
@@ -74,4 +74,4 @@ class OrderHis extends Component {
 }
 
 
-export default OrderHis;
+export default OrderDetail;

@@ -89,10 +89,6 @@ class AllProducts extends Component {
             </div>
           </Col>
         </Row>
-
-        
-        {/* got the code from https://www.youtube.com/watch?v=2-S-FiEl07I */}
-
         <AboutBar />
 
       </Container>
