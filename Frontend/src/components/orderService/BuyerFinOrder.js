@@ -8,7 +8,7 @@ import {Button,Row,Col,Container,From} from 'react-bootstrap'
 
 import '../../css/common/BodyWrapper.scss'
 import OrderListItem from './OrderListItem';
-import Layout from '../../components/Layout'
+import PageTemplate from '../../components/PageTemplate'
 
 const welcome = {
   greeting: 'Hey',
@@ -19,7 +19,7 @@ class BuyerFinOrder extends Component {
 
   render() {
     return (
-      <Layout>
+      <PageTemplate>
         <Container fluid={true}>
           <div className="body-wrapper">
               <div className="text-center logout-title">
@@ -55,7 +55,7 @@ class BuyerFinOrder extends Component {
           </div>
 
         </Container>
-       </Layout>     
+       </PageTemplate>     
      );
   }
 }

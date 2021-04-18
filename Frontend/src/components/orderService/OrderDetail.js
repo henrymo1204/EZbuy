@@ -8,6 +8,7 @@ import '../../css/common/BodyWrapper.scss'
 import DetailItem from './DetailItem';
 
 //Import components
+import PageTemplate from '../../components/PageTemplate'
 import MyNavbar from '../Navbar';
 import HomeButton from '../HomeButton';
 import AboutBar from '../AboutBar';
@@ -29,10 +30,7 @@ class OrderDetail extends Component {
 
   render() {
     return (
-      <Container fluid={true} className="pt-2">
-        <HomeButton />
-
-        <MyNavbar />
+      <PageTemplate>
         <Container fluid={true}>
           
           <div className="body-wrapper">
@@ -66,9 +64,7 @@ class OrderDetail extends Component {
 
         </Container>
 
-        <AboutBar />
-
-      </Container>
+      </PageTemplate>
     );
   }
 }

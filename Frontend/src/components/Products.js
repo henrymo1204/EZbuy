@@ -5,16 +5,15 @@ import { toast } from 'react-toastify';
 const Products = (props) => {
 
   const productID = props.productDetail['productID']
-  const name = props.productDetail['name']
-  const description = props.productDetail['description']
-  const img = props.productDetail['img']
-  const price= props.productDetail['price']
+  const name = props.productDetail['productName']
+  const description = props.productDetail['productDescription']
+  const img = props.productDetail['productImage']
+  const price= props.productDetail['productPrice']
 
   const addCart = async () => {
   
     try {
       const userID = 1;
-      const productID = 1;
       //get cart item from backend if existing
       const response = await axios.get(`/cart/item?productID=${productID}&&userID=${userID}`)
 
@@ -32,16 +31,15 @@ const Products = (props) => {
         await axios.patch(`/cart/${cartItemID}`, item_updates);
       } else {
         //if item not existing, need to insert new cart item in backend
-        const cart_item = {
+        await axios.post('/cart', {
           userID : userID,
           productID : productID,
           quantity : 1
-        };
-    
-        await axios.post('/cart', cart_item);
+        });
       }
 
-      props.updateCartNum();
+      await global.appState.updateLocalCartNum();
+      props.updatePage();
       toast.success('Added to shopping cart succeeded.');
     } catch (error) {
       toast.error('Added to shopping cart failed.');

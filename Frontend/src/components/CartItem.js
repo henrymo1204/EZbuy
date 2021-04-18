@@ -1,26 +1,71 @@
+import React, {useMemo, useState} from 'react';
+import '../css/cart/Cart.scss';
+import {formatPrice} from './commons/utils'
+import axios from './commons/axios';
+import { toast } from 'react-toastify';
 
-// import axios from 'commons/axios';
-// import { formatPrice } from 'commons/helper';
-import React from 'react';
+const CartItem = (props) => {
 
-const CartItem = () => {
+  const [quantity, setQuantity] = useState(props.cartItem.productQuantity);
+  const { cartItemID, cartID, productID, productQuantity, productName, productDescription,
+          productPrice, productImage, product3DImage, isAuctionProduct
+        } = props.cartItem || {};
+
+  const sumPrice = useMemo(() => {
+    return formatPrice(productQuantity * parseInt(productPrice));
+  }, [productQuantity, productPrice]);
+
+  const handleUpdate = e => {
+    const newQuantity = parseInt(e.target.value);
+    setQuantity(newQuantity);
+    const newCartItem = {
+      ...props.cartItem,
+      productQuantity: newQuantity
+    };
+    axios.patch(`/cart/${cartItemID}`, {quantity: newQuantity}).then(res => {
+      if (res.data['success'] == true) {
+        toast.success('cart update success.');
+      } else {
+        toast.error('cart update failed.');
+      }
+      props.updateCartItem(newCartItem);
+    });
+  };
+
+  const handleDelete = () => {
+    axios.delete(`/cart/${cartItemID}`).then(res => {
+      if (res.data['success'] == true) {
+        toast.success('cart update success.');
+      } else {
+        toast.error('cart update failed.');
+      }
+      props.deleteCartItem(props.cartItem);
+    });
+  };
+
     return (
       <div className="columns is-vcentered">
-        <div className="column is-narrow">
+        <div className="column is-narrow" onClick={handleDelete}>
           <span className="close">X</span>
         </div>
         <div className="column is-narrow">
-          <img src = "/images/ez_buy_logo.jpg" alt= "" width="100" />
+          <img src ={productImage} alt={productName} width="100" />
         </div>
-        <div className="column cart-name is-narrow">EZ Buy' selled product </div>
+        <div className="column cart-name is-narrow">{productName}</div>
+        <div className="column cart-descript is-narrow">{productDescription}</div>
         <div className="column">
-          <span className="price">$ 234.00 </span>
-        </div>
-        <div className="column">
-          <input type="number" className="input num-input"/>
+          <span className="price">{formatPrice(productPrice)}</span>
         </div>
         <div className="column">
-          <span className="sum-price">$ 234.00</span>
+          <input 
+            type="number" 
+            className="input num-input" 
+            min={1}
+            value={productQuantity} 
+            onChange={handleUpdate}/>
+        </div>
+        <div className="column">
+          <span className="sum-price">{sumPrice}</span>
         </div>
       </div>
     );

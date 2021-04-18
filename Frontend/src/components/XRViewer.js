@@ -10,11 +10,12 @@ import { Component } from 'react';
 import 'aframe';
 
 //Import components
-import MyNavbar from './Navbar';
-import HomeButton from './HomeButton';
-import AboutBar from './AboutBar';
-import ContentCard from './ContentCard';
-import Products from './Products';
+import PageTemplate from './PageTemplate'
+// import MyNavbar from './Navbar';
+// import HomeButton from './HomeButton';
+// import AboutBar from './AboutBar';
+// import ContentCard from './ContentCard';
+// import Products from './Products';
 
 //Import render styling from react bootstrap
 import Container from "react-bootstrap/Container";
@@ -93,12 +94,7 @@ class XRViwer extends Component {
 
     render() {
         return (
-            <Container fluid={true} className="pt-2">
-
-                <HomeButton />
-
-                <MyNavbar />
-
+            <PageTemplate>
                 <Jumbotron>
                     <Row>
                         <Col>
@@ -139,9 +135,7 @@ class XRViwer extends Component {
                     </Row>
                 </Jumbotron>
 
-                <AboutBar />
-
-            </Container>
+            </PageTemplate>
         );
     }
 }

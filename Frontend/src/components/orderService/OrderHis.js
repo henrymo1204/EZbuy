@@ -8,10 +8,7 @@ import '../../css/common/BodyWrapper.scss'
 import HistoryItem from './HistoryItem';
 
 //Import components
-import MyNavbar from '../Navbar';
-import HomeButton from '../HomeButton';
-import AboutBar from '../AboutBar';
-import ContentCard from '../ContentCard';
+import PageTemplate from '../../components/PageTemplate'
 
 //Import render styling from react bootstrap
 import Container from "react-bootstrap/Container";
@@ -29,10 +26,7 @@ class OrderHis extends Component {
 
   render() {
     return (
-      <Container fluid={true} className="pt-2">
-        <HomeButton />
-
-        <MyNavbar />
+      <PageTemplate>
         <Container fluid={true}>
           
           <div className="body-wrapper">
@@ -66,9 +60,7 @@ class OrderHis extends Component {
 
         </Container>
 
-        <AboutBar />
-
-      </Container>
+      </PageTemplate>
     );
   }
 }

@@ -132,7 +132,28 @@ INSERT INTO Products (ShopID, ProductName, ProductDescription, Price, Quantity, 
 VALUES 
 (1, "test_product1", "test_product_descrip1", 10, 1, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 1),
 (2, "test_product2", "test_product_descrip2", 20, 2, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
-(3, "test_product2", "test_product_descrip2", 30, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0);
+(3, "test_product3", "test_product_descrip3", 30, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(1, "test_product4", "test_product_descrip4", 40, 1, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 1),
+(2, "test_product5", "test_product_descrip5", 50, 2, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(3, "test_product6", "test_product_descrip6", 60, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(1, "test_product7", "test_product_descrip7", 70, 1, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 1),
+(2, "test_product8", "test_product_descrip8", 80, 2, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(3, "test_product9", "test_product_descrip9", 90, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(1, "test_product10", "test_product_descrip10", 100, 1, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 1),
+(2, "test_product11", "test_product_descrip11", 110, 2, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(3, "test_product12", "test_product_descrip12", 120, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(1, "test_product13", "test_product_descrip13", 10, 1, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 1),
+(2, "test_product14", "test_product_descrip14", 20, 2, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(3, "test_product15", "test_product_descrip15", 30, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(1, "test_product16", "test_product_descrip16", 40, 1, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 1),
+(2, "test_product17", "test_product_descrip17", 50, 2, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(3, "test_product18", "test_product_descrip18", 60, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(1, "test_product19", "test_product_descrip19", 70, 1, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 1),
+(2, "test_product20", "test_product_descrip20", 80, 2, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(3, "test_product21", "test_product_descrip21", 90, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(1, "test_product22", "test_product_descrip22", 100, 1, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 1),
+(2, "test_product23", "test_product_descrip23", 110, 2, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0),
+(3, "test_product24", "test_product_descrip24", 120, 3, X'0102030405060708090a0b0c0d0e0f', X'0102030405060708090a0b0c0d0e0f', 0);
 
 -- ################################################################
 --                     End Products table setup

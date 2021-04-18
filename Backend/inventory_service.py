@@ -73,8 +73,8 @@ def getAllProducts():
     products = []
     for row in rows:
         # image is bytes, need to encode as json does not support bytes
-        products.append({'id': row[0], 'name': row[1],
-                         'description': row[2], 'img': row[4].decode('utf8'), 'price': row[3]})
+        products.append({'productID': row[0], 'productName': row[1],
+                         'productDescription': row[2], 'productImage': row[4].decode('utf8'), 'productPrice': row[3]})
 
     return jsonify({'success': True, 'products': products})
 

@@ -6,9 +6,7 @@ import Button from 'react-bootstrap/Button';
 import React from 'react';
 
 //Import components
-import MyNavbar from './components/Navbar';
-import HomeButton from './components/HomeButton';
-import AboutBar from './components/AboutBar';
+import PageTemplate from './components/PageTemplate'
 import ContentCard from './components/ContentCard';
 
 //Import render styling from react bootstrap
@@ -26,14 +24,7 @@ const welcome = {
 const App = props => {
 
     return (
-      <Container fluid={true} className="pt-2">
-
-        {/* <img className="ezbuy_logo" src="/images/ez_buy_logo.jpg" alt="" /> */}
-        <HomeButton />
-
-        {/* <MyNavbar user={user}/> */}
-
-        <MyNavbar />
+      <PageTemplate>
 
         {<br></br>}
         <Container fluid={true}>
@@ -61,9 +52,7 @@ const App = props => {
         {<br></br>}
         {<br></br>}
 
-        <AboutBar />
-
-      </Container>
+      </PageTemplate>
     );
 }
 

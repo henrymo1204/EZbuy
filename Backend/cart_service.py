@@ -81,9 +81,8 @@ def addCartItem():
 @app.route('/cart/<cartItemID>', methods=['PATCH', 'DELETE'])
 def updateCartItem(cartItemID):
 
-    dataDict = json.loads(request.data)
-
     if request.method == 'PATCH':
+        dataDict = json.loads(request.data)
         quantity = dataDict['quantity']
 
         try:
@@ -156,8 +155,10 @@ def getCartItem():
     return jsonify({'success': True, 'items': items})
 
 
-@app.route('/cart/<userID>', methods=['GET'])
-def getAllCartItems(userID):
+@app.route('/cart/items', methods=['GET'])
+def getAllCartItems():
+
+    userID = request.args.get('userID')
 
     items = []
 
@@ -179,8 +180,36 @@ def getAllCartItems(userID):
         rows = cur.fetchall()
 
         for row in rows:
+
+            cartItemID = row[0]
+            cartID = row[1]
+            productID = row[2]
+            quantity = row[3]
+
+            db_query = f"SELECT * \
+                FROM Products \
+                WHERE \
+                ProductID = '{productID}'"
+
+            cur = db_connection.cursor()
+            cur.execute(db_query)
+            db_connection.commit()
+
+            rows = cur.fetchall()
+
+            product_detail = rows[0]
+            productName = product_detail[2]
+            productDescription = product_detail[3]
+            productPrice = product_detail[4]
+            productImage = product_detail[6]
+            product3DImage = product_detail[7]
+            isAuctionProduct = product_detail[8]
+
             items.append(
-                {'cartItemID': row[0], 'cartID': row[1], 'productID': row[2], 'quantity': row[3]})
+                {'cartItemID': cartItemID, 'cartID': cartID, 'productID': productID, 'productQuantity': quantity,
+                 'productName': productName, 'productDescription': productDescription, 'productPrice': productPrice,
+                 'productImage': productImage.decode('utf8'), 'product3DImage': product3DImage.decode('utf8'), 'isAuctionProduct': isAuctionProduct
+                 })
 
     except Exception as e:
         # return status code 500 when database operation fails
