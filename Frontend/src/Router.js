@@ -16,6 +16,11 @@ import OrderDetail from './components/orderService/OrderDetail';
 import AllProducts from './components/AllProducts';
 import XRViewer from './components/XRViewer';
 
+import SellerInfo from './components/SellerInfo';
+import SellerInventory from './components/SellerInventory';
+import SellerProduct from './components/SellerProduct';
+import SellerOrders from './components/SellerOrders';
+
 const Router = () => (
   <BrowserRouter>
     <Switch>
@@ -32,6 +37,10 @@ const Router = () => (
 
       <Route path="/allproducts" component={AllProducts} />
       <Route path="/3dviewer" component={XRViewer} />
+      <Route path="/sellerinfo" component={SellerInfo} />
+      <Route path="/sellerinventory" component={SellerInventory} />
+      <Route path="/addproduct" component={SellerProduct} />
+      <Route path="/sellerorders" component={SellerOrders} />
       <Route component = {NotFound} />
     </Switch>
     
