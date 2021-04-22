@@ -15,17 +15,17 @@ import PageTemplate from './PageTemplate.js'
 
 const SellerPageTemplate = props => {
 
-  // const logout = () => {
-  //   global.auth.logout();
-  // };
+  const logout = () => {
+    global.auth.logout();
+  };
   
   return (
     <PageTemplate>
       <div class="sidenav">
         <a href="/sellerinfo">Account</a>
         <a href="/sellerinventory">Inventory</a>
-        <a href="#">Orders</a>
-        <a href='#'>Log Out</a>
+        <a href="/sellerorders">Orders</a>
+        <a href="/logout" onClick={logout}>Log Out</a>
       </div>
       <div class="main">
         {props.children}
