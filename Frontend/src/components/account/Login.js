@@ -1,45 +1,94 @@
 import React from 'react';
-import {Form, Button} from 'react-bootstrap';
-import {Row,Col} from 'react-bootstrap';
+import {useForm} from 'react-hook-form';
+import { toast } from 'react-toastify';
 import {Nav} from 'react-bootstrap';
-import "../../css/account/Login.scss"
+import axios from '../commons/axios';
+import '../../css/account/Login.scss';
 
-class Login extends React.Component {
-    render () {
-        return (
-            <div class="container">
-                <div class="login-wrapper">
-                    <Form class="login-form">
-                        <Nav className="justify-content-center">
-                            <Nav.Link href="/" id="title">Welcome</Nav.Link>
-                        </Nav>
-                        <Form.Group as={Row} controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">
-                            Email
-                            </Form.Label>
-                            <Col sm="10">
-                        <Form.Control type="email" placeholder="Email" />
-                            </Col>
-                        </Form.Group>
+/*This is the Login component */ 
 
-                        <Form.Group as={Row} controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">Password</Form.Label>
-                            <Col sm="10">
-                        <Form.Control type="password" placeholder="Password" />
-                            </Col>
-                        </Form.Group>
-                        <Nav className="justify-content-center">
-                            <Nav.Link href="/" ><Button className="button">Log in</Button></Nav.Link>
-                        </Nav>
-                        <div className="text-center">OR</div>
-                        <Nav className="justify-content-center">
-                            <Nav.Link href="/register">Create account</Nav.Link>
-                        </Nav>
-                    </Form>
+export default function Login(props) {
+    const { register, handleSubmit, errors } = useForm();
+  
+    const onSubmit = async data => {
+      // handle login
+      try {
+        const { username, password } = data;
+        const res = await axios.post('/login', { username, password });
+        const jwToken = res.data['jwt_token'];
+        console.log(jwToken);
+        global.auth.setToken(jwToken);
+        toast.success('Login Success');
+        // route back to homepage
+        props.history.push('/');
+      } catch (error) {
+        const message = error.response.data.message;
+        toast.error("Login Failed. Wrong username or password.");
+      }
+    };
+  
+    return (
+      <div className="login-container ">
+        <div className="login-wrapper">
+        <form className="login-box" onSubmit={handleSubmit(onSubmit)}>
+            <Nav className="justify-content-center title-container">
+              <Nav.Link href="/" className="title">Welcome</Nav.Link>
+            </Nav>
+            <div className="field-container">
+              <div className="field">
+                <label className="label">Username</label>
+                <div className="control">
+                  <input
+                    className={`input ${errors.username && 'text-warn'}`}
+                    type="text"
+                    placeholder="Please enter username"
+                    name="username"
+                    ref={register({
+                      required: 'username is required',
+                      minLength: {
+                        value: 6,
+                        message: 'minimum length for username is 6'
+                      }
+                    })}
+                  />
+                  {errors.username && (
+                    <p className="helper has-text-danger">{errors.username.message}</p>
+                  )}
                 </div>
-            </div> 
-        );
-    }
-}
+              </div>
 
-export default Login;
+              <div className="field">
+                <label className="label">Password</label>
+                <div className="control">
+                  <input
+                    className={`input ${errors.password && 'text-warn'}`}
+                    type="password"
+                    placeholder="Please enter Password"
+                    name="password"
+                    ref={register({
+                      required: 'password is required',
+                      minLength: {
+                        value: 6,
+                        message: 'minimum length for password is 6'
+                      }
+                    })}
+                  />
+                  {errors.password && (
+                    <p className="helper has-text-danger">{errors.password.message}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="footer-container text-center">
+              <button className="account-button">Login</button>
+            <div className="footer-middle text-center">OR</div>
+            <Nav className="justify-content-center">
+                <Nav.Link href="/register">Create account</Nav.Link>
+            </Nav>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+  

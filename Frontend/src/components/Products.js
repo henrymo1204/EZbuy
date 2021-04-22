@@ -1,21 +1,61 @@
 import React from 'react';
+import axios from './commons/axios';
+import { toast } from 'react-toastify';
 
-const Product = ({id, name, description, img, price }) => {
+const Products = (props) => {
+
+  const productID = props.productDetail['productID']
+  const name = props.productDetail['productName']
+  const description = props.productDetail['productDescription']
+  const img = props.productDetail['productImage']
+  const price= props.productDetail['productPrice']
+
+  const addCart = async () => {
+  
+    try {
+      const userID = 1;
+      //get cart item from backend if existing
+      const response = await axios.get(`/cart/item?productID=${productID}&&userID=${userID}`)
+
+      const items = response.data['items']
+
+      if (items && items.length > 0) {
+        //if item existing, only need to update quantity
+        const previousQuantity = items[0]['quantity']
+        const cartItemID = items[0]['cartItemID']
+
+        const item_updates = {
+          quantity : previousQuantity + 1
+        };
+
+        await axios.patch(`/cart/${cartItemID}`, item_updates);
+      } else {
+        //if item not existing, need to insert new cart item in backend
+        await axios.post('/cart', {
+          userID : userID,
+          productID : productID,
+          quantity : 1
+        });
+      }
+
+      await global.appState.updateLocalCartNum();
+      props.updatePage();
+      toast.success('Added to shopping cart succeeded.');
+    } catch (error) {
+      toast.error('Added to shopping cart failed.');
+    }
+  };
 
   return (
-    <article className="mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10" id={id}>
-      <div className="tc">
-        <img src={img} class="br-100 h4 w4 dib ba b--black-05 pa2" title={name} />
-        <h1 className="f3 mb2">{name}</h1>
-        <h2 className="f5 fw4 gray mt0">{description}</h2>
-
-        <button className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn">Add</button>
-        <span>$ {price}</span>
-      </div>
-    </article>
+    <section>
+      <img src={img}></img>
+      <p>{name}</p>
+      <p>
+        <button className="button" onClick={addCart}>Add</button>
+      </p>
+      <p>$ {price}</p>
+    </section>
   );
 };
 
-export default Product;
-
-{/* got the code from https://www.youtube.com/watch?v=2-S-FiEl07I */}
+export default Products;

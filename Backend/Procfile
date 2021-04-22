@@ -1,0 +1,9 @@
+# foreman start -m gateway=1,user_service=1,cart_service=1,shop_service=1,order_service=1,payment_service=1,shipment_service=1,inventory_service=1
+gateway:           FLASK_APP=gateway flask run -p $PORT --no-debugger --no-reload
+user_service:      FLASK_APP=user_service flask run -p $PORT --no-debugger --no-reload
+cart_service:      FLASK_APP=cart_service flask run -p $PORT --no-debugger --no-reload
+shop_service:      FLASK_APP=shop_service flask run -p $PORT --no-debugger --no-reload
+order_service:     FLASK_APP=order_service flask run -p $PORT --no-debugger --no-reload
+payment_service:   FLASK_APP=payment_service flask run -p $PORT --no-debugger --no-reload
+shipment_service:  FLASK_APP=shipment_service flask run -p $PORT --no-debugger --no-reload
+inventory_service: FLASK_APP=inventory_service flask run -p $PORT --no-debugger --no-reload

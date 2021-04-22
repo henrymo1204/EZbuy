@@ -6,9 +6,7 @@ import Button from 'react-bootstrap/Button';
 import React from 'react';
 
 //Import components
-import MyNavbar from './components/Navbar';
-import HomeButton from './components/HomeButton';
-import AboutBar from './components/AboutBar';
+import PageTemplate from './components/PageTemplate'
 import ContentCard from './components/ContentCard';
 
 //Import render styling from react bootstrap
@@ -16,39 +14,46 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import { Component } from 'react';
-import './App.css';
+import './App.scss';
 
 const welcome = {
   greeting: 'Hey',
   title: 'EZ Buy',
 };
 
-class App extends Component {
+const App = props => {
 
-  render() {
     return (
-      <Container fluid={true} className="pt-2">
-        {/* <div>
-        <a href="http://localhost:3000/">
-          <Image src="/images/ez_buy_logo.jpg" className="ezBuyIcon" />
-        </a>
-      </div> */}
-        <HomeButton />
-
-        <MyNavbar />
+      <PageTemplate>
 
         {<br></br>}
-
-        <ContentCard />
+        <Container fluid={true}>
+          <Row>
+            <Col>
+            {/* Change product urls */}
+              <ContentCard header="Featured" imageurl={"/images/WebXR_Banner.png"} producturl={"3dviewer"} timeleft="2 days"/>
+            </Col>
+          </Row>
+          {<br></br>}
+          <Row>
+            <Col>
+              <ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" />
+            </Col>
+            <Col>
+              <ContentCard imageurl={"/images/model.jpg"} timeleft="1 day"/>
+            </Col>
+            <Col>
+              <ContentCard imageurl={"/images/model.jpg"} timeleft="4 hours"/>
+            </Col>
+          </Row>
+        </Container>
 
         {<br></br>}
+        {<br></br>}
+        {<br></br>}
 
-        <AboutBar />
-
-      </Container>
+      </PageTemplate>
     );
-  }
 }
 
 

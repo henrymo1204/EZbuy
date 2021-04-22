@@ -1,0 +1,5 @@
+1. Switch to a python file (other file will not show attach for debuging)
+2. Find the process id in terminal Flask log.
+3. Set breakpoints in code.
+4. Run->Start Debugging->Attach using Process ID->input the process ID to debug from step 2.
+5. Makse some request to trigger the breakpoint.
