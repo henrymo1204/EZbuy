@@ -200,6 +200,45 @@ def getOrderItems(orderID):
     return jsonify({'success': True, 'orderItems': orderItems})
 
 
+@app.route('/order/<shopID>/', methods=['GET'])
+def getOrdersByShop(shopID):
+    result = []
+    try:
+        db_connection = get_db()
+
+        db_query = f"SELECT OrderID, ProductID, Quantity FROM Order_Items WHERE ProductID IN (SELECT ProductID FROM Products WHERE ShopID = '{shopID}');"
+        cur = db_connection.cursor()
+        cur.execute(db_query)
+        db_connection.commit()
+
+        rows = cur.fetchall()
+
+    except Exception as e:
+        return internal_server_error(500, str(e))
+    '''
+    for i in rows:
+        print(i[0])
+        db_connection = get_db()
+        
+        db_query = f"SELECT ProductID, Quantity FROM Order_Items WHERE OrderID = " + str(i[0]) + ";"
+        cur = db_connection.cursor()
+        cur.execute(db_query)
+        db_connection.commit()
+        
+        row = cur.fetchall()
+        result.append({i[0]: row})'''
+    for row in rows:
+        if any(row[0] in d for d in result):
+            for i in result:
+                if list(i.keys())[0] == row[0]:
+                    i[row[0]].append({'ProductID': row[1], 'Quantity': row[2]})
+        else:
+            result.append(
+                {row[0]: [{'ProductID': row[1], 'Quantity': row[2]}]})
+
+    return jsonify({'orders': result})
+
+
 @ app.errorhandler(401)
 def unauthorized(e, message):
     """ Error handler on status code 401

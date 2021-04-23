@@ -253,13 +253,26 @@ def loginUser():
         # check if the given password matches what's stored in database
         isAuthorized = check_password_hash(hashedPass, password)
 
+        db_connection = get_db()
+
+        search_query = f"SELECT ShopID FROM Shops \
+                        WHERE UserID='{userID}'"
+
+        # check if username is in database
+        cur = db_connection.cursor()
+        cur.execute(search_query)
+        db_connection.commit()
+
+        rows = cur.fetchall()
+        shopID = rows[0][0]
+
         if isAuthorized == False:
             # return status code 401 when password doesn't matches the one stored in database
             return unauthorized(401, 'wrong password')
 
         jwt_encode_key = open(TOKEN_SIGN_KEY).read()
         jwt_token = jwt.encode(
-            {'userID': userID, 'username': username, 'email': email, 'userRole': userRole, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, jwt_encode_key, algorithm="RS256")
+            {'userID': userID, 'shopID': shopID, 'username': username, 'email': email, 'userRole': userRole, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, jwt_encode_key, algorithm="RS256")
 
     except Exception as e:
         # returns status code 500 when database operation fails

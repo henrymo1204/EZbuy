@@ -125,6 +125,45 @@ def addProduct(sid):
         return internal_server_error(500, str(e))
 
     return jsonify({'success': True})
+    
+    
+@app.route('/shops/<sid>/', methods=['GET'])
+def getProducts(sid):
+    """ Add a new product. Parameters are from HTTP POST requests.
+
+    :param productName: Name of the new product
+    :param productDescription: Description of the new product
+    :param price: Price of the new product
+    :param quantity: Quantity of the new product
+    :param productImage: Image file of the new product
+    :param product3DImage: 3D image file of the new product
+    :param isAuctionItem: boolean value to see if the item is an auction item, 0 is no and 1 is yes
+
+    :return: <tuple> json response data, response code
+
+    :raises Exception: on database queries failure.
+
+    """
+
+
+    try:
+        db_connection = get_db()
+        search_query = f"SELECT ProductID, ProductName, Price, Quantity, ProductImage FROM Products WHERE ShopID = '{sid}'"
+        cur = db_connection.cursor()
+        cur.execute(search_query)
+        db_connection.commit()
+        rows = cur.fetchall()
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+
+    products = []
+    for row in rows:
+        # image is bytes, need to encode as json does not support bytes
+        products.append({'productID': row[0], 'productName': row[1],
+                         'productImage': row[4], 'productPrice': row[2], 'productQuantity': row[3]})
+
+    return jsonify({'success': True, 'products': products})
 
 
 @app.route('/shops/<sid>/<pid>', methods=['PATCH', 'DELETE'])
@@ -154,9 +193,6 @@ def modifyProduct(sid, pid):
         productDescription_key = 'productDescription'
         price_key = 'price'
         quantity_key = 'quantity'
-        productImage_key = 'productImage'
-        product3DImage_key = 'product3DImage'
-        isAuctionItem_key = 'isAuctionItem'
 
         keys = []
         # add dictionary for the column name and the new column value to the keys list of the key is in the JSON request
@@ -172,15 +208,6 @@ def modifyProduct(sid, pid):
         if quantity_key in dataDict:
             quantity = dataDict['quantity']
             keys.append({'Quantity': quantity})
-        if productImage_key in dataDict:
-            productImage = dataDict['productImage']
-            keys.append({'ProductImage': productImage})
-        if product3DImage_key in dataDict:
-            product3DImage = dataDict['product3DImage']
-            keys.append({'Product3DImage': product3DImage})
-        if isAuctionItem_key in dataDict:
-            isAuctionItem = dataDict['isAuctionItem']
-            keys.append({'IsAuctionItem': isAuctionItem})
 
         try:
             db_connection = get_db()
@@ -220,7 +247,44 @@ def modifyProduct(sid, pid):
             return internal_server_error(500, str(e))
 
         return jsonify({'success': True})
+        
+       
+@app.route('/shops/<sid>/<pid>/', methods=['GET'])
+def getProduct(sid, pid):
+    """ Add a new product. Parameters are from HTTP POST requests.
 
+    :param productName: Name of the new product
+    :param productDescription: Description of the new product
+    :param price: Price of the new product
+    :param quantity: Quantity of the new product
+    :param productImage: Image file of the new product
+    :param product3DImage: 3D image file of the new product
+    :param isAuctionItem: boolean value to see if the item is an auction item, 0 is no and 1 is yes
+
+    :return: <tuple> json response data, response code
+
+    :raises Exception: on database queries failure.
+
+    """
+
+
+    try:
+        db_connection = get_db()
+        search_query = f"SELECT ProductName, ProductDescription, Price, Quantity, ProductImage, Product3DImage FROM Products WHERE ShopID = '{sid}' AND ProductID = '{pid}';"
+        cur = db_connection.cursor()
+        cur.execute(search_query)
+        db_connection.commit()
+        rows = cur.fetchall()
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+
+    products = []
+    for row in rows:
+        # image is bytes, need to encode as json does not support bytes
+        products.append({'productName': row[0], 'productDescription': row[1], 'productPrice': row[2], 'productQuantity': row[3], 'productImage': row[4], 'product3DImage': row[5]})
+
+    return jsonify({'success': True, 'products': products})
 
 @ app.errorhandler(401)
 def unauthorized(e, message):
