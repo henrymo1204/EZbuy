@@ -3,7 +3,7 @@
 //
 import Button from 'react-bootstrap/Button';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 
 //Import components
 import PageTemplate from './components/PageTemplate'
@@ -22,6 +22,11 @@ const welcome = {
 };
 
 const App = props => {
+
+  useEffect(async () => {
+    await global.appState.updateLocalCartNum();
+    // this.forceUpdate();
+  }, []);
 
     return (
       <PageTemplate>

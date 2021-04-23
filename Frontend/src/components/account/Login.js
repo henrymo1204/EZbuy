@@ -4,8 +4,9 @@ import { toast } from 'react-toastify';
 import {Nav} from 'react-bootstrap';
 import axios from '../commons/axios';
 import '../../css/account/Login.scss';
-
-/*This is the Login component */ 
+/************************************************************
+              This is the Login component                       
+ *************************************************************/
 
 export default function Login(props) {
     const { register, handleSubmit, errors } = useForm();
