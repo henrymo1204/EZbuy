@@ -15,7 +15,7 @@ import OrderReview from './components/orderService/OrderReview';
 // import OrderHis from './components/orderService/OrderHis';
 // import OrderDetail from './components/orderService/OrderDetail';
 
-import DetailItem from './components/orderService/DetailItem';
+// import DetailItem from './components/orderService/DetailItem';
 
 import AllProducts from './components/AllProducts';
 import XRViewer from './components/XRViewer';
@@ -41,7 +41,7 @@ const Router = () => (
       {/* <Route path="/orderhistory" component={OrderHis} /> */}
       {/* <Route path="/orderdetail" component={OrderDetail} /> */}
 
-      <Route path="/itemdetail" component={DetailItem} />
+      {/* <Route path="/itemdetail" component={DetailItem} /> */}
 
       <Route path="/allproducts" component={AllProducts} />
       <Route path="/3dviewer" component={XRViewer} />

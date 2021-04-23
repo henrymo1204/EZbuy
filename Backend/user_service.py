@@ -249,22 +249,23 @@ def loginUser():
         email = rows[0][email_index]
         userRole = rows[0][userRole_index]
         hashedPass = rows[0][hashedPass_index]
+        shopID = None
 
         # check if the given password matches what's stored in database
         isAuthorized = check_password_hash(hashedPass, password)
 
-        db_connection = get_db()
+        if userRole == 'seller':
 
-        search_query = f"SELECT ShopID FROM Shops \
-                        WHERE UserID='{userID}'"
+            search_query = f"SELECT ShopID FROM Shops \
+                            WHERE UserID='{userID}'"
 
-        # check if username is in database
-        cur = db_connection.cursor()
-        cur.execute(search_query)
-        db_connection.commit()
+            # check if username is in database
+            cur = db_connection.cursor()
+            cur.execute(search_query)
+            db_connection.commit()
 
-        rows = cur.fetchall()
-        shopID = rows[0][0]
+            rows = cur.fetchall()
+            shopID = rows[0][0]
 
         if isAuthorized == False:
             # return status code 401 when password doesn't matches the one stored in database
