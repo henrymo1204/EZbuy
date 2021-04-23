@@ -1,26 +1,32 @@
 
 // import axios from 'commons/axios';
 // import { formatPrice } from 'commons/helper';
+import Carousel from 'react-bootstrap/Carousel';
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import PageTemplate from '../PageTemplate';
 
 const DetailItem = () => {
-    return (
-      <div className="columns is-vcentered">
-        
-        <div className="column is-narrow">
-          <img src = "/images/ez_buy_logo.jpg" alt= "" width="100" />
-        </div>
-        <div className="column is-narrow">EZ Buy</div>
-        <div className="column">
-        <span className="price"> 5 </span>
-        </div>
-        <div className="column">
-          <span className="sum-price">  total : $ 234.00</span>
-        </div>
-      </div>
-    );
-  };
-  
-  export default DetailItem;
+  return (
+    <PageTemplate>
+      <section>
+        <Carousel>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="/images/number-1.jpg"
+              alt="First slide"
+            />
+          </Carousel.Item>
+        </Carousel>
+      </section>
+
+
+    </PageTemplate>
+
+  );
+};
+
+export default DetailItem;
 
 
