@@ -35,7 +35,10 @@ const NavBarEnd = props => {
                 ) : (
                     <Nav.Link href="login">Login</Nav.Link>
                 )}
-                <Nav.Link href="cart" ><i className="fas fa-shopping-cart"></i><span className="cart-num"> ({global.appState.getLocalCartNum()})</span></Nav.Link>
+                <Nav.Link href="cart" >
+                    <i className="fas fa-shopping-cart"></i>
+                    <span className="cart-num"> ({global.appState.getLocalCartNum()})</span>
+                </Nav.Link>
             </Nav>
         </div>
     );

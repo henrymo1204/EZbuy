@@ -47,26 +47,25 @@ def shipmentService():
     return 'Welcome to Shipment Service!'
 
 
-@app.route('/shipment/', methods=['POST'])
-def addShipment():
+@app.route('/shipment/<userID>/<orderID>', methods=['POST'])
+def addShipment(userID, orderID):
 
     dataDict = json.loads(request.data)
 
-    userID = dataDict['UserID']
-    orderID = dataDict['OrderID']
-    addr_City = dataDict['Addr_City']
-    addr_State = dataDict['Addr_State']
-    addr_Street = dataDict['Addr_Street']
-    zipCode = dataDict['ZipCode']
-    phoneNumber = dataDict['PhoneNumber']
+    addr_City = dataDict['addr_city']
+    addr_State = dataDict['addr_state']
+    addr_Street = dataDict['addr_street']
+    zipCode = dataDict['zipcode']
+    phoneNumber = dataDict['phone_number']
+    recipient = dataDict['recipient']
 
     try:
         db_connection = get_db()
 
         db_query = f"INSERT INTO Shipments \
-                        (UserID, OrderID, Addr_City, Addr_State, Addr_Street, ZipCode, PhoneNumber) \
+                        (UserID, OrderID, Addr_City, Addr_State, Addr_Street, ZipCode, PhoneNumber, Recipient) \
                         VALUES \
-                        ('{userID}','{orderID}', '{addr_City}', '{addr_State}','{addr_Street}', '{zipCode}', '{phoneNumber}')"
+                        ('{userID}','{orderID}', '{addr_City}', '{addr_State}','{addr_Street}', '{zipCode}', '{phoneNumber}', '{recipient}')"
 
         # insert the new user information to database
         cur = db_connection.cursor()
@@ -87,7 +86,7 @@ def getShipment(orderID):
     try:
         db_connection = get_db()
 
-        db_query = f"SELETE * \
+        db_query = f"SELECT * \
             FROM Shipments \
             WHERE \
             OrderID = '{orderID}'"

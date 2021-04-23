@@ -35,15 +35,15 @@ export default function UserProfile(props) {
 
       <br />
       <br />
-      <div className="field is-grouped is-grouped-centered">
-        <div className="control">
-          <button className="button is-danger" type="button" onClick={logout}>
+      <div className="field is-grouped is-grouped-centered profile-button-container">
+        <div className="control profile-button-control">
+          <button className="button is-danger profile-button" type="button" onClick={logout}>
             Logout
           </button>
         </div>
-        <div className="control">
+        <div className="control profile-button-control">
           <button
-            className="button"
+            className="button profile-button"
             type="button"
             onClick={() => {
               props.close();

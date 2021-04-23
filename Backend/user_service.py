@@ -241,9 +241,11 @@ def loginUser():
             return unauthorized(401, 'invalid username')
 
         # get hased password from database
+        userID_index = 0
         email_index = 2
         userRole_index = 3
         hashedPass_index = 4
+        userID = rows[0][userID_index]
         email = rows[0][email_index]
         userRole = rows[0][userRole_index]
         hashedPass = rows[0][hashedPass_index]
@@ -257,7 +259,7 @@ def loginUser():
 
         jwt_encode_key = open(TOKEN_SIGN_KEY).read()
         jwt_token = jwt.encode(
-            {'username': username, 'email': email, 'userRole': userRole, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, jwt_encode_key, algorithm="RS256")
+            {'userID': userID, 'username': username, 'email': email, 'userRole': userRole, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, jwt_encode_key, algorithm="RS256")
 
     except Exception as e:
         # returns status code 500 when database operation fails

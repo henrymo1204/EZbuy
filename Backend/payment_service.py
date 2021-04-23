@@ -9,7 +9,7 @@
 #     Mohammad Mirwais,    mirwais.88@csu.fullerton.edu
 
 from flask import Flask, request, g, jsonify
-from datetime import datetime
+import datetime
 import sqlite3
 import json
 from utils import jwt_token_required
@@ -47,20 +47,18 @@ def paymentService():
     return 'Welcome to Payment Service!'
 
 
-@app.route('/payment/', methods=['POST'])
-def addPayment():
+@app.route('/payment/<userID>/<orderID>', methods=['POST'])
+def addPayment(userID, orderID):
 
     dataDict = json.loads(request.data)
 
-    userID = dataDict['userID']
-    orderID = dataDict['orderID']
-    paymentMethod = dataDict['paymentMethod']
-    nameOnCard = dataDict['nameOnCard']
-    cardNumber = dataDict['cardNumber']
-    expireMonth = dataDict['expireMonth']
-    expireYear = dataDict['expireYear']
+    paymentMethod = dataDict['payment_method']
+    nameOnCard = dataDict['name_on_card']
+    cardNumber = dataDict['card_number']
+    expireMonth = dataDict['expire_month']
+    expireYear = dataDict['expire_year']
     CVV = dataDict['CVV']
-    cur_time = datetime.now().strftime("%B %d, %Y %I:%M%p")
+    payment_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     try:
         db_connection = get_db()
@@ -68,7 +66,7 @@ def addPayment():
         db_query = f"INSERT INTO Payments \
                         (UserID, OrderID, PaymentMethod, NameOnCard, CardNumber, ExpireMonth, ExpireYear, CVV, CreateTime) \
                         VALUES \
-                        ('{userID}','{orderID}', '{paymentMethod}', '{nameOnCard}','{cardNumber}', '{expireMonth}', '{expireYear}','{CVV}', '{cur_time}')"
+                        ('{userID}','{orderID}', '{paymentMethod}', '{nameOnCard}','{cardNumber}', '{expireMonth}', '{expireYear}','{CVV}', '{payment_time}')"
 
         # insert the new user information to database
         cur = db_connection.cursor()
@@ -89,7 +87,7 @@ def getPayment(orderID):
     try:
         db_connection = get_db()
 
-        db_query = f"SELETE * \
+        db_query = f"SELECT * \
             FROM Payments \
             WHERE \
             OrderID = '{orderID}'"

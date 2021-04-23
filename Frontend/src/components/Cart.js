@@ -17,11 +17,11 @@ import {formatPrice} from './commons/utils'
 import '../css/cart/Cart.scss';
 
 const Cart = () => {
+
   const [cartItems, setCartItems] = useState([]);
 
-  useEffect(() => {
-    const user = global.auth.getUser() || {};
-    const userID = 1;
+  useEffect(async () => {
+    const userID = global.appState.getUserID();
     axios.get(`/cart/items?userID=${userID}`).then(res => setCartItems(res.data['items']));
   }, []);
 
@@ -32,16 +32,20 @@ const Cart = () => {
     return formatPrice(totalPrice);
   }, [cartItems]);
 
-  const updateCartItem = itemToUpdate => {
+  const updateCartItem = async (itemToUpdate) => {
     const existingCartItems = [...cartItems];
     const idxToUpdate = existingCartItems.findIndex(item => item.cartItemID === itemToUpdate.cartItemID);
     existingCartItems.splice(idxToUpdate, 1, itemToUpdate);
     setCartItems(existingCartItems);
+    await global.appState.updateLocalCartNum();
+    // this.forceUpdate();
   };
 
-  const deleteCartItem = itemToDelete => {
+  const deleteCartItem = async (itemToDelete) => {
     const cartItemsAfterRemove = cartItems.filter(item => item.cartItemID !== itemToDelete.cartItemID);
     setCartItems(cartItemsAfterRemove);
+    await global.appState.updateLocalCartNum();
+    // this.forceUpdate();
   };
 
   return (
@@ -52,7 +56,7 @@ const Cart = () => {
           <div className="cart-list" >
             <TransitionGroup component={null}>
               {cartItems.map(item => (
-                <CSSTransition classNames="cart-item" timeout={300} key={item.cartItemID}>
+                <CSSTransition classNames="cart-item" timeout={100} key={item.cartItemID}>
                   <CartItem
                     key={item.cartItemID}
                     cartItem={item}
@@ -73,11 +77,13 @@ const Cart = () => {
                 <button className="common-button">Continue Shopping</button>
               </Nav.Link>
             </Col>
+            {cartItems.length !== 0 ? 
             <Col>
-              <Nav.Link href="paymentInfo"  className="cart-button">
+              <Nav.Link href="checkout"  className="cart-button">
                 <button className="common-button">Place Order</button>
               </Nav.Link>
             </Col>
+             : ''}
           </Row>
          </div>
       </PageTemplate>

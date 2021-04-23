@@ -13,7 +13,7 @@ const Products = (props) => {
   const addCart = async () => {
   
     try {
-      const userID = 1;
+      const userID = global.appState.getUserID();
       //get cart item from backend if existing
       const response = await axios.get(`/cart/item?productID=${productID}&&userID=${userID}`)
 

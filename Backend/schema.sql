@@ -236,6 +236,7 @@ CREATE TABLE Orders (
     OrderID INTEGER PRIMARY KEY AUTOINCREMENT,
     UserID INTEGER NOT NULL,
     CreateTime DATE NOT NULL,
+    TotalPrice REAL NOT NULL,
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 );
 
@@ -244,11 +245,11 @@ CREATE INDEX order_index
 ON Orders (OrderID);
 
 -- Populate test data for Orders table
-INSERT INTO Orders (UserID, CreateTime)
+INSERT INTO Orders (UserID, CreateTime, TotalPrice)
 VALUES 
-(1, "2019-01-01 10:00:00"),
-(2, "2020-01-01 10:00:00"),
-(3, "2021-01-01 10:00:00");
+(1, "2019-01-01 10:00:00", 100),
+(2, "2020-01-01 10:00:00", 200),
+(3, "2021-01-01 10:00:00", 300);
 -- ################################################################
 --                       End Orders table setup
 -- ################################################################
@@ -337,11 +338,12 @@ CREATE TABLE Shipments (
     ShipmentID INTEGER PRIMARY KEY AUTOINCREMENT,
     UserID INTEGER NOT NULL,
     OrderID INTEGER NOT NULL,
-    Addr_City VARCHAR(255),
-    Addr_State VARCHAR(255),
-    Addr_Street VARCHAR(255),
-    ZipCode VARCHAR(255),
-    PhoneNumber VARCHAR(255),
+    Addr_City VARCHAR(255) NOT NULL,
+    Addr_State VARCHAR(255) NOT NULL,
+    Addr_Street VARCHAR(255) NOT NULL,
+    ZipCode VARCHAR(255) NOT NULL,
+    PhoneNumber VARCHAR(255) NOT NULL,
+    Recipient VARCHAR(255)  NOT NULL,
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE
 );
 
@@ -350,11 +352,11 @@ CREATE INDEX shipment_index
 ON Shipments (ShipmentID);
 
 -- Populate test data for Shipment_Details table
-INSERT INTO Shipments (UserID, OrderID, Addr_City, Addr_State, Addr_Street, ZipCode, PhoneNumber)
+INSERT INTO Shipments (UserID, OrderID, Addr_City, Addr_State, Addr_Street, ZipCode, PhoneNumber, Recipient)
 VALUES 
-(1, 1, "Santa Clara", "CA", "test street1", "95054", "323-123-1234"),
-(1, 2, "Los Angeles", "CA", "test street2", "90007", "323-234-4567"),
-(1, 3, "Fullerton", "CA", "test street3", "92831", "323-345-6789");
+(1, 1, "Santa Clara", "CA", "test street1", "95054", "323-123-1234", "recipient1"),
+(1, 2, "Los Angeles", "CA", "test street2", "90007", "323-234-4567", "recipient1"),
+(1, 3, "Fullerton", "CA", "test street3", "92831", "323-345-6789", "recipient1");
 
 -- ################################################################
 --                  End Shipment_Details table setup
