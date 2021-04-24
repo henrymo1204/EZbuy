@@ -15,10 +15,37 @@ import SellerPageTemplate from './SellerPageTemplate';
 
 class SellerInfo extends Component {
 
+  getShop = () => {
+    const user = global.auth.getUser();
+    const shopID = user['shopID'];
+    axios.get(`/shops/${shopID}`)
+    .then((res) => {
+      console.log(res);
+      var shopName = document.getElementById('ShopName');
+      shopName.value = res['data']['shop']
+    })
+  }
+
+  editShop = () => {
+    const user = global.auth.getUser();
+    const shopID = user['shopID'];
+    axios.get(`/shops/${shopID}`)
+    .then((res) => {
+      console.log(res);
+      var shopName = document.getElementById('ShopName');
+      shopName.value = res['data']['shop']
+    })
+  }
+
   render() {
+    this.getShop();
     return (
         <SellerPageTemplate>
-            <label>Test</label>
+            <label>Shop Name</label>
+            <input id='ShopName'></input>
+            <label>About Us</label>
+            <input></input>
+            <button>Save</button>
         </SellerPageTemplate>
     );
   }

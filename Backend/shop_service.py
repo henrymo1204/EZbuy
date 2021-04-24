@@ -75,56 +75,117 @@ def addProduct(sid):
     isAuctionItem_key = 'isAuctionItem'
 
     # return status code 400 if productName, productDescription, price, quantity, productImage, product3DImage, or isAuctionItem is not passed from the HTTP request.
-    if productName_key not in dataDict:
-        return bad_request(400, f"missing {productName_key} field in request")
-    elif productDescription_key not in dataDict:
-        return bad_request(400, f"missing {productDescription_key} field in request")
-    elif price_key not in dataDict:
-        return bad_request(400, f"missing {price_key} field in request")
-    elif quantity_key not in dataDict:
-        return bad_request(400, f"missing {quantity_key} field in request")
-    elif productImage_key not in dataDict:
-        return bad_request(400, f"missing {productImage_key} field in request")
-    elif product3DImage_key not in dataDict:
-        return bad_request(400, f"missing {product3DImage_key} field in request")
-    elif isAuctionItem_key not in dataDict:
-        return bad_request(400, f"missing {isAuctionItem_key} field in request")
+    if product3DImage_key not in dataDict:
+        if productName_key not in dataDict:
+            return bad_request(400, f"missing {productName_key} field in request")
+        elif productDescription_key not in dataDict:
+            return bad_request(400, f"missing {productDescription_key} field in request")
+        elif price_key not in dataDict:
+            return bad_request(400, f"missing {price_key} field in request")
+        elif quantity_key not in dataDict:
+            return bad_request(400, f"missing {quantity_key} field in request")
+        elif productImage_key not in dataDict:
+            return bad_request(400, f"missing {productImage_key} field in request")
+        elif isAuctionItem_key not in dataDict:
+            return bad_request(400, f"missing {isAuctionItem_key} field in request")
+    
+        productName = dataDict['productName']
+        productDescription = dataDict['productDescription']
+        price = dataDict['price']
+        quantity = dataDict['quantity']
+        productImage = dataDict['productImage']
+        isAuctionItem = dataDict['isAuctionItem']
 
-    productName = dataDict['productName']
-    productDescription = dataDict['productDescription']
-    price = dataDict['price']
-    quantity = dataDict['quantity']
-    productImage = dataDict['productImage']
-    product3DImage = dataDict['product3DImage']
-    isAuctionItem = dataDict['isAuctionItem']
+        # return status code 400 if productName, productDescription, price, quantity, productImage, product3DImage, or isAuctionItem value is not valid
+        if productName == None:
+            return bad_request(400, f"{productName_key} field is empty")
+        elif productDescription == None:
+            return bad_request(400, f"{productDescription_key} field is empty")
+        elif price == None:
+            return bad_request(400, f"{price_key} field is empty")
+        elif quantity == None:
+            return bad_request(400, f"{quantity_key} field is empty")
+        elif productImage == None:
+            return bad_request(400, f"{productImage_key} field is empty")
+        elif isAuctionItem == None:
+            return bad_request(400, f"{isAuctionItem_key} field is empty")
 
-    # return status code 400 if productName, productDescription, price, quantity, productImage, product3DImage, or isAuctionItem value is not valid
-    if productName == None:
-        return bad_request(400, f"{productName_key} field is empty")
-    elif productDescription == None:
-        return bad_request(400, f"{productDescription_key} field is empty")
-    elif price == None:
-        return bad_request(400, f"{price_key} field is empty")
-    elif quantity == None:
-        return bad_request(400, f"{quantity_key} field is empty")
-    elif productImage == None:
-        return bad_request(400, f"{productImage_key} field is empty")
-    elif product3DImage == None:
-        return bad_request(400, f"{product3DImage_key} field is empty")
-    elif isAuctionItem == None:
-        return bad_request(400, f"{isAuctionItem_key} field is empty")
+        try:
+            db_connection = get_db()
+            insert_query = f"INSERT INTO Products (ShopID, ProductName, ProductDescription, Price, Quantity, ProductImage, IsAuctionItem) VALUES ('{sid}', '{productName}', '{productDescription}', '{price}', '{quantity}', '{productImage}', '{isAuctionItem}')"
+            cur = db_connection.cursor()
+            cur.execute(insert_query)
+            db_connection.commit()
+        except Exception as e:
+            # return status code 500 when database operation fails
+            return internal_server_error(500, str(e))
+    else:
+        if productName_key not in dataDict:
+            return bad_request(400, f"missing {productName_key} field in request")
+        elif productDescription_key not in dataDict:
+            return bad_request(400, f"missing {productDescription_key} field in request")
+        elif price_key not in dataDict:
+            return bad_request(400, f"missing {price_key} field in request")
+        elif quantity_key not in dataDict:
+            return bad_request(400, f"missing {quantity_key} field in request")
+        elif productImage_key not in dataDict:
+            return bad_request(400, f"missing {productImage_key} field in request")
+        elif product3DImage_key not in dataDict:
+            return bad_request(400, f"missing {product3DImage_key} field in request")
+        elif isAuctionItem_key not in dataDict:
+            return bad_request(400, f"missing {isAuctionItem_key} field in request")
+    
+        productName = dataDict['productName']
+        productDescription = dataDict['productDescription']
+        price = dataDict['price']
+        quantity = dataDict['quantity']
+        productImage = dataDict['productImage']
+        product3DImage = dataDict['product3DImage']
+        isAuctionItem = dataDict['isAuctionItem']
 
+        # return status code 400 if productName, productDescription, price, quantity, productImage, product3DImage, or isAuctionItem value is not valid
+        if productName == None:
+            return bad_request(400, f"{productName_key} field is empty")
+        elif productDescription == None:
+            return bad_request(400, f"{productDescription_key} field is empty")
+        elif price == None:
+            return bad_request(400, f"{price_key} field is empty")
+        elif quantity == None:
+            return bad_request(400, f"{quantity_key} field is empty")
+        elif productImage == None:
+            return bad_request(400, f"{productImage_key} field is empty")
+        elif product3DImage == None:
+            return bad_request(400, f"{product3DImage_key} field is empty")
+        elif isAuctionItem == None:
+            return bad_request(400, f"{isAuctionItem_key} field is empty")
+
+        try:
+            db_connection = get_db()
+            insert_query = f"INSERT INTO Products (ShopID, ProductName, ProductDescription, Price, Quantity, ProductImage, Product3DImage, IsAuctionItem) VALUES ('{sid}', '{productName}', '{productDescription}', '{price}', '{quantity}', '{productImage}', '{product3DImage}', '{isAuctionItem}')"
+            cur = db_connection.cursor()
+            cur.execute(insert_query)
+            db_connection.commit()
+        except Exception as e:
+            # return status code 500 when database operation fails
+            return internal_server_error(500, str(e))
+
+    return jsonify({'success': True})
+
+
+@app.route('/shops/<sid>', methods=['GET'])
+def getShop(sid):
     try:
         db_connection = get_db()
-        insert_query = f"INSERT INTO Products (ShopID, ProductName, ProductDescription, Price, Quantity, ProductImage, Product3DImage, IsAuctionItem) VALUES ('{sid}', '{productName}', '{productDescription}', '{price}', '{quantity}', '{productImage}', '{product3DImage}', '{isAuctionItem}')"
+        search_query = f"SELECT Shopname FROM Shops WHERE ShopID = '{sid}'"
         cur = db_connection.cursor()
-        cur.execute(insert_query)
+        cur.execute(search_query)
         db_connection.commit()
+        rows = cur.fetchall()
     except Exception as e:
         # return status code 500 when database operation fails
         return internal_server_error(500, str(e))
 
-    return jsonify({'success': True})
+    return jsonify({'success': True, 'shop': rows})
     
     
 @app.route('/shops/<sid>/', methods=['GET'])
@@ -193,6 +254,8 @@ def modifyProduct(sid, pid):
         productDescription_key = 'productDescription'
         price_key = 'price'
         quantity_key = 'quantity'
+        productImage_key = 'productImage'
+        product3DImage_key = 'product3DImage'
 
         keys = []
         # add dictionary for the column name and the new column value to the keys list of the key is in the JSON request
@@ -208,6 +271,12 @@ def modifyProduct(sid, pid):
         if quantity_key in dataDict:
             quantity = dataDict['quantity']
             keys.append({'Quantity': quantity})
+        if productImage_key in dataDict:
+            productImage = dataDict['productImage']
+            keys.append({'ProductImage': productImage})
+        if product3DImage_key in dataDict:
+            product3DImage = dataDict['product3DImage']
+            keys.append({'Product3DImage': product3DImage})
 
         try:
             db_connection = get_db()
