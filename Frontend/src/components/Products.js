@@ -1,7 +1,8 @@
 import React from 'react';
+import { Nav } from 'react-bootstrap';
 import axios from './commons/axios';
 import { toast } from 'react-toastify';
-
+import "../css/Products.scss";
 const Products = (props) => {
 
   const productID = props.productDetail['productID']
@@ -51,7 +52,10 @@ const Products = (props) => {
       <img src={img}></img>
       <p>{name}</p>
       <p>
-        <button className="button" onClick={addCart}>Add</button>
+        <Nav.Link onClick={addCart}>
+          <i class="fas fa-cart-plus"></i>
+          <span>Add</span>
+        </Nav.Link>
       </p>
       <p>$ {price}</p>
     </section>

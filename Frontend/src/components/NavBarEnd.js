@@ -29,9 +29,9 @@ const NavBarEnd = props => {
         <div className="end">
             <Nav className="mr-auto2">
                 {userInfo.username ? (
-                    <Nav.Link className="username" href="/sellerinfo">
-                        {/* <Nav.Link className="username" href=""onClick={toProfile}></Nav.Link> */}
-                    {"Hi, " + userInfo.username}
+                    <Nav.Link className="username" onClick={toProfile}>
+                        <i class="fas fa-user"></i>
+                        {" Hi, " + userInfo.username}
                     </Nav.Link>
                 ) : (
                     <Nav.Link href="login">Login</Nav.Link>

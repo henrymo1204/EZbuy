@@ -185,7 +185,7 @@ def getOrderItems(orderID):
             productName = productDetail[2]
             productDescription = productDetail[3]
             productPrice = productDetail[4]
-            productImage = productDetail[6].decode()
+            productImage = productDetail[6]
 
             # assemble order item detail
             itemDetail = {'quantity': quantity, 'productName': productName,

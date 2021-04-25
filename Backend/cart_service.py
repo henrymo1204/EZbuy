@@ -208,7 +208,7 @@ def getAllCartItems():
             items.append(
                 {'cartItemID': cartItemID, 'cartID': cartID, 'productID': productID, 'productQuantity': quantity,
                  'productName': productName, 'productDescription': productDescription, 'productPrice': productPrice,
-                 'productImage': productImage.decode('utf8'), 'product3DImage': product3DImage.decode('utf8'), 'isAuctionProduct': isAuctionProduct
+                 'productImage': productImage, 'product3DImage': product3DImage, 'isAuctionProduct': isAuctionProduct
                  })
 
     except Exception as e:
@@ -231,6 +231,31 @@ def _getCartIDWithUserID(userID):
     rows = cur.fetchall()
 
     return rows[0][0]
+
+
+@app.route('/cart/items/<userID>', methods=['DELETE'])
+def deleteAllCartItems(userID):
+
+    try:
+        cartID = _getCartIDWithUserID(userID)
+
+        db_connection = get_db()
+
+        db_query = f"DELETE \
+            FROM Cart_Items \
+            WHERE \
+            CartID = '{cartID}'"
+
+        # insert the new user information to database
+        cur = db_connection.cursor()
+        cur.execute(db_query)
+        db_connection.commit()
+
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+
+    return jsonify({'success': True})
 
 
 @ app.errorhandler(401)

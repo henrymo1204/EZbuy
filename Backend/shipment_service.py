@@ -81,7 +81,7 @@ def addShipment(userID, orderID):
 @app.route('/shipment/<orderID>', methods=['GET'])
 def getShipment(orderID):
 
-    shipment = None
+    shipmentDetail = None
 
     try:
         db_connection = get_db()
@@ -98,13 +98,26 @@ def getShipment(orderID):
 
         rows = cur.fetchall()
 
-        shipment = rows[0]
+        addr_city = rows[0][3]
+        addr_state = rows[0][4]
+        addr_street = rows[0][5]
+        zipcode = rows[0][6]
+        phone_number = rows[0][7]
+        recipient = rows[0][8]
+        shipmentDetail = {
+            'addr_city': addr_city,
+            'addr_state': addr_state,
+            'addr_street': addr_street,
+            'zipcode': zipcode,
+            'phone_number': phone_number,
+            'recipient': recipient
+        }
 
     except Exception as e:
         # return status code 500 when database operation fails
         return internal_server_error(500, str(e))
 
-    return jsonify({'success': True, 'shipment': shipment})
+    return jsonify({'success': True, 'shipment': shipmentDetail})
 
 
 @ app.errorhandler(401)

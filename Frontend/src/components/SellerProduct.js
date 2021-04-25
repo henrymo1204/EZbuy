@@ -11,6 +11,7 @@ import PageTemplate from './PageTemplate'
 import axios from './commons/axios';
 
 import '../css/styles.css';
+import '../css/SellerProduct.scss'
 import SellerPageTemplate from './SellerPageTemplate';
 import {useForm} from 'react-hook-form';
 
@@ -33,23 +34,20 @@ class SellerProduct extends Component {
       var auction = 0;
 
       var r1 = new FileReader;
-      r1.readAsBinaryString(image);
-      var image_binary;
+      r1.readAsDataURL(image)
       r1.onload = function(e) {
-        image_binary = btoa(r1.result);
-        console.log(image_binary);
+        var imageB64 = r1.result;
         var r2 = new FileReader;
-        r2.readAsBinaryString(image3D);
-        var image3D_binary;
+        r2.readAsDataURL(image3D)
         r2.onload = function(e) {
-            image3D_binary = btoa(r2.result);
+            var image3DB64 = r2.result;
             axios.post(`/shops/${shopID}`, { 
                 'productName': productName, 
                 'productDescription': productDEscription, 
                 'price': price, 
                 'quantity': quantity, 
-                'productImage': image_binary, 
-                'product3DImage': image3D_binary, 
+                'productImage': imageB64, 
+                'product3DImage': image3DB64,  
                 'isAuctionItem': auction 
               })
             .then((res) => {
@@ -130,28 +128,28 @@ class SellerProduct extends Component {
             <SellerPageTemplate>
                 <form>
                     <div>
-                        <label>Product Name</label>
-                        <input id='productName'></input>
+                        <label className='add-product-label'>Product Name</label>
+                        <input className="add-product-input" id='productName'></input>
                     </div>
                     <div>
-                        <label>Product Description</label>
-                        <input id='productDescription'></input>
+                        <label className="add-product-label">Product Description</label>
+                        <input className="add-product-input" id='productDescription'></input>
                     </div>
                     <div>
-                        <label>Price</label>
-                        <input id='price'></input>
+                        <label className="add-product-label">Price</label>
+                        <input className="add-product-input" id='price'></input>
                     </div>
                     <div>
-                        <label>Quantity</label>
-                        <input id='quantity'></input>
+                        <label className="add-product-label">Quantity</label>
+                        <input className="add-product-input" id='quantity'></input>
                     </div>
                     <div>
-                        <label>Product Image</label>
-                        <input type='file' id='productImage'></input>
+                        <label className="add-product-label">Product Image</label>
+                        <input className="add-product-input" type='file' id='productImage'></input>
                     </div>
                     <div>
-                        <label>3D Product Image</label>
-                        <input type='file' id='3DProductImage'></input>
+                        <label className="add-product-label">3D Product Image</label>
+                        <input className="add-product-input" type='file' id='3DProductImage'></input>
                     </div>
                     <button type="button" class="btn btn-default" onClick={this.editProduct}>Save</button>
                 </form>
@@ -162,30 +160,30 @@ class SellerProduct extends Component {
         return (
             <SellerPageTemplate>
                 <form>
-                    <div>
-                        <label>Product Name</label>
-                        <input id='productName'></input>
+                    <div className='add-product-control'>
+                        <label className='add-product-label'>Product Name</label>
+                        <input className="add-product-input" id='productName'></input>
                     </div>
-                    <div>
-                        <label>Product Description</label>
-                        <input id='productDescription'></input>
+                    <div className='add-product-control'>
+                        <label className='add-product-label'>Product Description</label>
+                        <input className="add-product-input" id='productDescription'></input>
                     </div>
-                    <div>
-                        <label>Price</label>
-                        <input id='price'></input>
+                    <div className='add-product-control'>
+                        <label className='add-product-label'>Price</label>
+                        <input className="add-product-input" id='price'></input>
                     </div>
-                    <div>
-                        <label>Quantity</label>
-                        <input id='quantity'></input>
+                    <div className='add-product-control'>
+                        <label className='add-product-label'>Quantity</label>
+                        <input className="add-product-input" id='quantity'></input>
                     </div>
-                    <div>
-                        <label>Product Image</label>
-                        <input type='file' id='productImage' onChange={this.onImageChange}></input>
-                        <img id='img' scr={file}/>
+                    <div className='add-product-control'>
+                        <label className='add-product-label'>Product Image</label>
+                        <input className="add-product-input" type='file' id='productImage' onChange={this.onImageChange}></input>
+                        <img id='img' src={file}/>
                     </div>
-                    <div>
-                        <label>3D Product Image</label>
-                        <input type='file' id='3DProductImage'></input>
+                    <div className='add-product-control'>
+                        <label className='add-product-label'>3D Product Image</label>
+                        <input className="add-product-input" type='file' id='3DProductImage'></input>
                     </div>
                     <button type="button" class="btn btn-default" onClick={this.addProduct}>Add Product</button>
                 </form>

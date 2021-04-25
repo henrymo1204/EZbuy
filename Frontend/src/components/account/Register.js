@@ -71,7 +71,7 @@ export default function Login(props) {
       <div className="register-wrapper">
       <form className="register-box" onSubmit={handleSubmit(onSubmit)}>
         <Nav className="justify-content-center title-container">
-              <Nav.Link href="/" className="title">Register</Nav.Link>
+              <Nav.Link href="/" className="title">Create Account</Nav.Link>
         </Nav>
         <div className="field-container">
           <div className="field">

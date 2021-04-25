@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+import { propTypes } from 'react-bootstrap/esm/Image';
 import '../../css/account/UserProfile.scss'
 
 export default function UserProfile(props) {
@@ -20,6 +22,7 @@ export default function UserProfile(props) {
               defaultValue={props.user.username}
             />
           </div>
+        <br />
         </div>
         <div className="field">
           <div className="control">
@@ -27,12 +30,21 @@ export default function UserProfile(props) {
             <input
               className="input"
               type="text"
-              defaultValue={props.user.type === 1 ? 'Seller' : 'Buyer'}
+              defaultValue={props.user['userRole'] === 'seller' ? 'Seller' : 'Buyer'}
             />
           </div>
         </div>
       </fieldset>
 
+      <br />
+      <br />
+      {props.user['userRole'] === 'seller' ? 
+        <div className="shop-btn-container" ><Button href="/sellerinfo">Open Seller Shop</Button></div> : <br />}
+        <br />
+      <br />
+        <div className="shop-btn-container" ><Button href="/orderreview">Review Orders</Button></div> : <br />
+      <br />
+      <br />
       <br />
       <br />
       <div className="field is-grouped is-grouped-centered profile-button-container">

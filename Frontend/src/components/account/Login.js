@@ -33,7 +33,7 @@ export default function Login(props) {
         <div className="login-wrapper">
         <form className="login-box" onSubmit={handleSubmit(onSubmit)}>
             <Nav className="justify-content-center title-container">
-              <Nav.Link href="/" className="title">Welcome</Nav.Link>
+              <Nav.Link href="/" className="title">Sign In</Nav.Link>
             </Nav>
             <div className="field-container">
               <div className="field">
