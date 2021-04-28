@@ -23,6 +23,7 @@ import SellerInfo from './components/SellerInfo';
 import SellerInventory from './components/SellerInventory';
 import SellerProduct from './components/SellerProduct';
 import SellerOrders from './components/SellerOrders';
+import Search from './components/Search';
 
 const Router = () => (
   <BrowserRouter>
@@ -47,6 +48,7 @@ const Router = () => (
       <Route path="/sellerinventory" component={SellerInventory} />
       <Route path="/addproduct" component={SellerProduct} />
       <Route path="/sellerorders" component={SellerOrders} />
+      <Route path="/search" component={Search} />
       <Route component = {NotFound} />
     </Switch>
     

@@ -2,27 +2,42 @@
 //https://react-bootstrap.github.io/components/cards/
 
 import React from 'react';
-import { Component } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Nav } from 'react-bootstrap';
 
-class ContentCard extends Component {
+const ContentCard = (props) => {
 
-    render() {
-        return (
-            <Card className="text-center">
-                <Card.Header>{this.props.header}</Card.Header>
-                <Card.Img variant="top" src={this.props.imageurl} />
-                <Card.Body>
-                    <Card.Text>
-                        Product description here
-                    </Card.Text>
-                    <Button variant="primary" href={this.props.producturl}>Go to product</Button>
-                </Card.Body>
-                <Card.Footer className="text-muted">{this.props.timeleft}</Card.Footer>
-            </Card>
-        );
-    }
-}
+    const productName = props.adDetail['productName'];
+    const productDescription = props.adDetail['productDescription'];
+    const imageurl = props.adDetail['imageurl'];
+    const timeLeft = props.adDetail['timeLeft'];
+    const productURL = props.adDetail['productURL']; 
+
+    return (
+        // <Card className={"text-center " + props.attributes}>
+        //     <Card.Header>{productName}</Card.Header>
+        //     <Card.Img variant="top" src={imageurl} />
+        //     <Card.Body>
+        //         <Card.Text>{productDescription}</Card.Text>
+        //         <Button variant="primary" href={productURL}>Go to product</Button>
+        //     </Card.Body>
+        //     <Card.Footer className="text-muted">{timeLeft}</Card.Footer>
+        // </Card>
+
+        <Card className={"text-center " + props.attributes}>
+            <Card.Img variant="top" src={imageurl} className="ad-image"/>
+            <Card.Body>
+                <Card.Title className="ad-detail">{productName}</Card.Title>
+                <Card.Text className="ad-detail">{productDescription}</Card.Text>
+                <Card.Text className="ad-detail">{timeLeft}</Card.Text>
+                <Nav.Link className="ad-detail">
+                    <i class="far fa-hand-point-right"></i>
+                    <span> Buy Now</span>
+                </Nav.Link>  
+            </Card.Body>
+        </Card>
+    );
+};
 
 export default ContentCard;

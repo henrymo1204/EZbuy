@@ -172,21 +172,54 @@ def addProduct(sid):
     return jsonify({'success': True})
 
 
-@app.route('/shops/<sid>', methods=['GET'])
+@app.route('/shops/<sid>', methods=['GET', 'PATCH'])
 def getShop(sid):
-    try:
-        db_connection = get_db()
-        search_query = f"SELECT Shopname FROM Shops WHERE ShopID = '{sid}'"
-        cur = db_connection.cursor()
-        cur.execute(search_query)
-        db_connection.commit()
-        rows = cur.fetchall()
-    except Exception as e:
-        # return status code 500 when database operation fails
-        return internal_server_error(500, str(e))
+    if request.method == 'GET':
+        try:
+            db_connection = get_db()
+            search_query = f"SELECT Shopname, AboutUs FROM Shops WHERE ShopID = '{sid}'"
+            cur = db_connection.cursor()
+            cur.execute(search_query)
+            db_connection.commit()
+            rows = cur.fetchall()
+        except Exception as e:
+            # return status code 500 when database operation fails
+            return internal_server_error(500, str(e))
 
-    return jsonify({'success': True, 'shop': rows})
+        return jsonify({'success': True, 'shop': rows})
+    elif request.method == 'PATCH':
+        dataDict = json.loads(request.data)
+
+        shopName_key = 'shopName'
+        aboutUs_key = 'aboutUs'
+   
+        if shopName_key not in dataDict:
+            return bad_request(400, f"missing {shopName_key} field in request")
+        elif aboutUs_key not in dataDict:
+            return bad_request(400, f"missing {aboutUs_key} field in request")
     
+        shopName = dataDict['shopName']
+        aboutUs = dataDict['aboutUs']
+
+        # return status code 400 if productName, productDescription, price, quantity, productImage, product3DImage, or isAuctionItem value is not valid
+        if shopName == None:
+            return bad_request(400, f"{shopName_key} field is empty")
+        elif aboutUs == None:
+            return bad_request(400, f"{aboutUs_key} field is empty")
+            
+        try:
+            db_connection = get_db()
+            update_query = "UPDATE Shops SET ShopName = '" + shopName + "', AboutUs = '" + aboutUs + "' WHERE ShopID=" + sid + ";"
+
+            cur = db_connection.cursor()
+            cur.execute(update_query)
+            db_connection.commit()
+        except Exception as e:
+            # return status code 500 when database operation fails
+            return internal_server_error(500, str(e))
+
+        return jsonify({'success': True})
+        
     
 @app.route('/shops/<sid>/', methods=['GET'])
 def getProducts(sid):

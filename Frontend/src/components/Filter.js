@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
+import "../css/product/Filter.scss"
 
 class Filter extends Component {
     render(){
@@ -9,24 +10,24 @@ class Filter extends Component {
                 <Form.Group>
                 <div class="filter-radio">
                     <label>
-                        <input type="radio" value="Apple" />
-                        Apple
+                        <input type="radio" />
+                        Brand1
                     </label>
                 </div>
                 </Form.Group>
                 <Form.Group>
                 <div class="filter-radio">
                     <label>
-                        <input type="radio" value="Banana" />
-                        Banana
+                        <input type="radio"/>
+                        Brand2(3D)
                     </label>
                 </div>
                 </Form.Group>
                 <Form.Group>
                 <div class="filter-radio">
                     <label>
-                        <input type="radio" value="Orange" />
-                        Orange
+                        <input type="radio" />
+                        Brand3(auction)
                     </label>
                 </div>
                 </Form.Group>

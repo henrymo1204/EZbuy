@@ -1,7 +1,9 @@
 import React from 'react';
+import { Nav } from 'react-bootstrap';
 import axios from './commons/axios';
 import { toast } from 'react-toastify';
-
+import "../css/product/Products.scss";
+import {Card} from "react-bootstrap";
 const Products = (props) => {
 
   const productID = props.productDetail['productID']
@@ -47,14 +49,20 @@ const Products = (props) => {
   };
 
   return (
-    <section>
-      <img src={img}></img>
-      <p>{name}</p>
-      <p>
-        <button className="button" onClick={addCart}>Add</button>
-      </p>
-      <p>$ {price}</p>
-    </section>
+      <Card className="product-card box">
+        <Card.Img variant="top" src={img} className="product-image"/>
+        <Card.Body>
+          <Card.Title className="product-detail">{name}</Card.Title>
+          <Card.Text className="product-detail">{description}</Card.Text>
+          <Card.Text className="product-detail">{price}</Card.Text>
+          <Card.Text className="product-detail">
+            <Nav.Link onClick={addCart}>
+            <i class="fas fa-cart-plus"></i>
+            <span>Add</span>
+          </Nav.Link>  
+          </Card.Text>
+        </Card.Body>
+      </Card>
   );
 };
 

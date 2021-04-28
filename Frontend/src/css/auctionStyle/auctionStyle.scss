@@ -1,0 +1,111 @@
+// .grid {
+//   min-height: 100%;
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   overflow: scroll;
+// }
+
+// .allproducts-container {
+//   height: 100vh;
+// }
+
+// .allproducts-control {
+//   height: 100vh;
+// }
+.auction-container {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(161, 116, 196, 0.925),
+    rgb(37, 38, 83)
+  );
+  .auction-left {
+    margin: 7vh;
+    width: 80%;
+    height: 85vh;
+    background-image: linear-gradient(
+      to top,
+      rgba(161, 116, 196, 0.925),
+      rgb(231, 197, 152)
+    );
+    border-radius: 25px;
+    border: 4px solid #444442;
+    padding: 20px;
+    .bid-picture {
+      position: relative;
+      left: 10%;
+      margin: 2vh;
+      width: 70%;
+      height: 50%;
+      background: white;
+      text-align: center;
+    }
+    .bid-name {
+      background: white;
+      position: relative;
+      left: 10%;
+      margin: 2vh;
+      width: 70%;
+      height: 10%;
+      text-align: center;
+    }
+    .bid-description {
+      background: white;
+      position: relative;
+      left: 10%;
+      margin: 2vh;
+      width: 70%;
+      height: 25%;
+      text-align: center;
+    }
+  }
+  .auction-right {
+    margin: 7vh;
+    width: 80%;
+    height: 85vh;
+    background-image: linear-gradient(
+      to top,
+      rgba(161, 116, 196, 0.925),
+      rgb(231, 197, 152)
+    );
+    border-radius: 25px;
+    border: 4px solid #444442;
+    padding: 20px;
+    .bid-cound-down {
+      background: white;
+      position: relative;
+      left: 10%;
+      margin: 5vh;
+      width: 70%;
+      height: 15%;
+      text-align: center;
+    }
+    .bid-price {
+      background: white;
+      position: relative;
+      left: 10%;
+      margin: 5vh;
+      width: 70%;
+      height: 15%;
+      text-align: center;
+    }
+    .bid-input-price {
+      position: relative;
+      left: 10%;
+      margin: 5vh;
+      width: 70%;
+      height: 15%;
+      text-align: center;
+    }
+    .bid-button {
+      position: relative;
+      margin: 5vh;
+      width: 100%;
+      height: 15%;
+      color: rgb(243, 243, 28);
+      text-align: center;
+    }
+  }
+}

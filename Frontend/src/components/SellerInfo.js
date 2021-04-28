@@ -13,6 +13,8 @@ import axios from './commons/axios';
 import '../css/styles.css';
 import SellerPageTemplate from './SellerPageTemplate';
 
+import { toast } from 'react-toastify';
+
 class SellerInfo extends Component {
 
   getShop = () => {
@@ -20,20 +22,25 @@ class SellerInfo extends Component {
     const shopID = user['shopID'];
     axios.get(`/shops/${shopID}`)
     .then((res) => {
-      console.log(res);
       var shopName = document.getElementById('ShopName');
-      shopName.value = res['data']['shop']
+      shopName.value = res['data']['shop'][0][0]
+      var shopName = document.getElementById('AboutUs');
+      shopName.value = res['data']['shop'][0][1]
     })
   }
 
   editShop = () => {
     const user = global.auth.getUser();
     const shopID = user['shopID'];
-    axios.get(`/shops/${shopID}`)
+    var shopName = document.getElementById('ShopName').value
+    var aboutUs = document.getElementById('AboutUs').value
+    axios.patch(`/shops/${shopID}`, {
+      'shopName': shopName,
+      'aboutUs': aboutUs
+    })
     .then((res) => {
       console.log(res);
-      var shopName = document.getElementById('ShopName');
-      shopName.value = res['data']['shop']
+      toast.success('Saved successfully.');
     })
   }
 
@@ -44,8 +51,8 @@ class SellerInfo extends Component {
             <label>Shop Name</label>
             <input id='ShopName'></input>
             <label>About Us</label>
-            <input></input>
-            <button>Save</button>
+            <input id='AboutUs'></input>
+            <button onClick={this.editShop}>Save</button>
         </SellerPageTemplate>
     );
   }

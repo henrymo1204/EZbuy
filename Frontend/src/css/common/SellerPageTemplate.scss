@@ -1,0 +1,51 @@
+.page-template-container {
+  width: 80%;
+  height: 100vh;
+  top: 15%;
+  left: 10%;
+  padding: 0px 0px 0px 0px;
+  position: relative;
+  background-image: linear-gradient(
+    to top,
+    rgba(44, 68, 204, 0.925),
+    rgb(200, 200, 212)
+  );
+  .page-template-row {
+    height: 100%;
+  }
+}
+.sidenav-left {
+  width: 90%;
+  height: 90%;
+  top: 10%;
+  padding-bottom: 1%;
+  color: rgba(68, 65, 65, 0.726);
+  border-bottom: 2px solid #333;
+  text-align: center;
+  position: relative;
+}
+
+.sidenav-left a {
+  width: 100%;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 25px;
+  color: #101111;
+  display: block;
+}
+
+.sidenav-left a:hover {
+  color: #064579;
+}
+
+.main-right {
+  width: 60%;
+  height: 95%;
+  top: 5%;
+  padding-bottom: 1%;
+  color: rgba(68, 65, 65, 0.726);
+  border-bottom: 2px solid #333;
+  text-align: center;
+  position: relative;
+}

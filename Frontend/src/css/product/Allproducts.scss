@@ -1,0 +1,24 @@
+.grid {
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  overflow: scroll;
+}
+
+.allproducts-container {
+  height: 100vh;
+}
+
+.allproducts-control {
+  height: 100vh;
+}
+
+.catagory-container {
+  background-image: linear-gradient(
+    to left,
+    rgba(245, 220, 109, 0.925),
+    rgb(214, 106, 33)
+  );
+  height: 100vh;
+}

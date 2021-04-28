@@ -1,60 +1,39 @@
-// @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+.info-item {
+  font-size: 1rem;
+  text-align: center;
+}
+.order-list-item {
+  height: 40%;
+  position: relative;
+  top: 40px;
+  left: 40px;
+}
 
-// h1 {
-//   position: relative;
-//   top: 50px;
-//   left: 35%;
-//   font-weight: bold;
-//   margin: 0;
-//   font-size: 25px;
-//   font-weight: 600;
-//   color: #15181b;
-//   text-transform: uppercase;
-//   width: 100%;
-//   // text-align: center;
-// }
-// h2 {
-//   position: relative;
-//   top: 30px;
-//   width: 100%;
-//   font-size: 30px;
-//   text-align: center;
-// }
-// p {
-//   position: relative;
-//   top: 10px;
-//   font-size: 14px;
-//   font-weight: 100;
-//   line-height: 20px;
-//   letter-spacing: 0.5px;
-//   margin: 20px 0 30px;
-// }
-
-// span {
-//   font-size: 12px;
-// }
-
-// a {
-//   color: #333;
-//   font-size: 14px;
-//   text-decoration: none;
-//   margin: 15px 0;
-// }
+.order-list-title {
+  position: relative;
+  background-color: #fff;
+  height: 10%;
+  font-size: 2rem;
+  color: black;
+  text-align: center;
+}
 
 .order-info-container {
+  background-color: #fff;
+  position: relative;
+
   width: 100%;
 }
 
 button {
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
+  border: 1px solid #535050;
+  background-color: #e69328;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
   padding: 12px 45px;
   letter-spacing: 1px;
-  text-transform: uppercase;
   transition: transform 80ms ease-in;
 }
 
@@ -72,14 +51,17 @@ button.ghost {
   margin: 10px;
 }
 
-.content-container {
+.scroll-container {
+  position: relative;
+  top: 0%;
   background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
+  // padding: 0 50px;
+  height: 80%;
+  width: 100%;
   text-align: center;
 }
 
@@ -101,32 +83,40 @@ input {
   height: 100%;
 }
 
-.form-container {
+.review-container {
   position: absolute;
   top: 0;
   height: 100%;
   transition: all 1.5s ease-in-out;
 }
 
-.sign-in-container {
-  left: 0;
+.order-detail-container {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  margin: 0;
+  font-size: 25px;
+  color: #15181b;
+  // text-transform: uppercase;
+  width: 100%;
+  text-align: center;
   width: 50%;
   z-index: 2;
 }
 
-.container.right-panel-active .sign-in-container {
+.container.right-panel-active .order-detail-container {
   transform: translateX(100%);
   width: 50%;
 }
 
-.sign-up-container {
+.order-list-container {
   left: 0;
   width: 50%;
   opacity: 0;
   z-index: 1;
 }
 
-.container.right-panel-active .sign-up-container {
+.container.right-panel-active .order-list-container {
   transform: translateX(100%);
   opacity: 1;
   z-index: 5;

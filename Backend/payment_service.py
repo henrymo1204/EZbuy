@@ -82,7 +82,7 @@ def addPayment(userID, orderID):
 @app.route('/payment/<orderID>', methods=['GET'])
 def getPayment(orderID):
 
-    payment = None
+    paymentDetail = None
 
     try:
         db_connection = get_db()
@@ -99,13 +99,19 @@ def getPayment(orderID):
 
         rows = cur.fetchall()
 
-        payment = rows[0]
+        paymentMethod = rows[0][3]
+        paymentCardNumber = rows[0][5]
+
+        paymentDetail = {
+            'payment_method': paymentMethod,
+            'payment_card_number': paymentCardNumber
+        }
 
     except Exception as e:
         # return status code 500 when database operation fails
         return internal_server_error(500, str(e))
 
-    return jsonify({'success': True, 'payment': payment})
+    return jsonify({'success': True, 'payment': paymentDetail})
 
 
 # @app.route('/payment/getPaymentID', methods=['POST'])
