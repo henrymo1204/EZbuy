@@ -40,7 +40,7 @@ class AllProducts extends Component {
     return (
       <PageTemplate>
         <Row className="allproducts-container">
-          <Col md='auto' className="allproducts-control">
+          <Col md='auto' className="allproducts-control catagory-container">
             <div className="radio-buttons">
               <Filter />
             </div>

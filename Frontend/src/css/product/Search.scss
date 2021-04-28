@@ -6,12 +6,18 @@
   overflow: scroll;
 }
 
-.allproducts-container {
+.search-result-container {
   height: 100vh;
 }
 
-.allproducts-control {
+.search-result-control {
   height: 100vh;
+}
+
+.no-search-result-control {
+  font-size: 3rem;
+  text-align: center;
+  padding-top: 7rem;
 }
 
 .catagory-container {

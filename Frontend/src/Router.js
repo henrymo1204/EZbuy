@@ -16,7 +16,6 @@ import OrderReview from './components/orderService/OrderReview';
 // import OrderDetail from './components/orderService/OrderDetail';
 
 // import DetailItem from './components/orderService/DetailItem';
-import Auction from './components/auction/auction';
 
 import AllProducts from './components/AllProducts';
 import XRViewer from './components/XRViewer';
@@ -25,6 +24,7 @@ import SellerInfo from './components/SellerInfo';
 import SellerInventory from './components/SellerInventory';
 import SellerProduct from './components/SellerProduct';
 import SellerOrders from './components/SellerOrders';
+import Search from './components/Search';
 
 const Router = () => (
   <BrowserRouter>
@@ -44,14 +44,13 @@ const Router = () => (
 
       {/* <Route path="/itemdetail" component={DetailItem} /> */}
 
-      <Route path="/auction" component={Auction} />
-
       <Route path="/allproducts" component={AllProducts} />
       <Route path="/3dviewer" component={XRViewer} />
       <Route path="/sellerinfo" component={SellerInfo} />
       <Route path="/sellerinventory" component={SellerInventory} />
       <Route path="/addproduct" component={SellerProduct} />
       <Route path="/sellerorders" component={SellerOrders} />
+      <Route path="/search" component={Search} />
       <Route component = {NotFound} />
     </Switch>
     
