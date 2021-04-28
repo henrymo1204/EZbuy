@@ -6,14 +6,13 @@ import React, { Component } from 'react';
 //Import components
 import Products from './Products';
 import Filter from './Filter';
-
 //Import render styling from react bootstrap
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import PageTemplate from './PageTemplate'
 import axios from './commons/axios';
 
-import '../css/styles.css';
+import '../css/product/Allproducts.scss';
 
 class AllProducts extends Component {
 
@@ -40,16 +39,16 @@ class AllProducts extends Component {
 
     return (
       <PageTemplate>
-        <Row>
-          <Col md='auto'>
-            <div classNane="radio-buttons">
+        <Row className="allproducts-container">
+          <Col md='auto' className="allproducts-control">
+            <div className="radio-buttons">
               <Filter />
             </div>
           </Col>
-          <Col>
-            <div className="products">
+          <Col className="allproducts-control">
+            <div className="products grid allproducts-control">
               {
-                products.map(p => <Products productDetail={p} updatePage={this.updatePage}/>)
+                products.map((p, index) => <Products key={index} productDetail={p} updatePage={this.updatePage}/>)
               }
             </div>
           </Col>

@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from './commons/axios';
 import { toast } from 'react-toastify';
 
 const SellerOrderItems = (props) => {
 
-  const productID = props.productDetail['ProductID']
-  const quantity = props.productDetail['Quantity']
+  const productID = props.productDetail['ProductID'];
+  const quantity = props.productDetail['Quantity'];
+  const [productName, setProductName] = useState();
+  const [img, setImg] = useState();
 
-  // const deleteProduct = () => {
-  //   axios.delete(`/shops/${shopID}/${productID}`).then((res) => {console.log(res)});
-  //   window.location.reload();
-  // }
 
-  // const editProduct = () => {
-  //   window.location.href=`/addProduct?productID=${productID}`
-  // }
+  axios.get(`/products/${productID}`)
+  .then((res) => {
+    console.log(res);
+    setProductName(res['data']['product'][0]['productName']);
+    setImg(res['data']['product'][0]['productImage']);
+  })
+  .catch((error) => {
+    console.log(error)
+  });
 
   return (
     <div>
-      <label>Product: {productID}</label>
+      <label>Product: {productName}</label>
+      <img src={img}></img>
       <label>Quantity: {quantity}</label>
     </div>
   );

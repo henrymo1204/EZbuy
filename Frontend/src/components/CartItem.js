@@ -46,17 +46,17 @@ const CartItem = (props) => {
     return (
       <div className="columns is-vcentered">
         <div className="column is-narrow" onClick={handleDelete}>
-          <span className="close">X</span>
+          <span className="close"><i class="far fa-times-circle"></i></span>
         </div>
         <div className="column is-narrow">
           <img src ={productImage} alt={productName} width="100" />
         </div>
-        <div className="column cart-name is-narrow">{productName}</div>
-        <div className="column cart-descript is-narrow">{productDescription}</div>
-        <div className="column">
+        <div className="column cart-name is-narrow has-text-centered">{productName}</div>
+        <div className="column cart-descript is-narrow has-text-centered">{productDescription}</div>
+        <div className="column has-text-centered">
           <span className="price">{formatPrice(productPrice)}</span>
         </div>
-        <div className="column">
+        <div className="column has-text-centered">
           <input 
             type="number" 
             className="input num-input" 
@@ -64,7 +64,7 @@ const CartItem = (props) => {
             value={productQuantity} 
             onChange={handleUpdate}/>
         </div>
-        <div className="column">
+        <div className="column has-text-centered">
           <span className="sum-price">{sumPrice}</span>
         </div>
       </div>

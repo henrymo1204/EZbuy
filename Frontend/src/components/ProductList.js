@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from './commons/axios';
 import { toast } from 'react-toastify';
+import '../css/common/PageTemplate.scss';
+import '../css/common/SellerPageTemplate.scss';
 
 const ProductList = (props) => {
 
@@ -22,7 +24,7 @@ const ProductList = (props) => {
   }
 
   return (
-    <div>
+    <div className ="product-list-container">
       <label>{name}</label>
       <img src={img}></img>
       <label>{price}</label>

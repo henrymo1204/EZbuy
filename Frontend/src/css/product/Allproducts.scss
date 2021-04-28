@@ -1,0 +1,15 @@
+.grid {
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  overflow: scroll;
+}
+
+.allproducts-container {
+  height: 100vh;
+}
+
+.allproducts-control {
+  height: 100vh;
+}

@@ -10,7 +10,6 @@ import Col from "react-bootstrap/Col";
 import PageTemplate from './PageTemplate'
 import axios from './commons/axios';
 
-import '../css/styles.css';
 import SellerPageTemplate from './SellerPageTemplate';
 
 class SellerInventory extends Component {

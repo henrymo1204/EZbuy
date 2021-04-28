@@ -23,7 +23,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
-import '../css/styles.css';
 import { Jumbotron } from 'react-bootstrap';
 
 const welcome = {

@@ -10,7 +10,7 @@ export default function Logout(props) {
     };
 
     const handleNoBtn = () => {
-        props.history.push('/');
+        props.history.goBack();
     };
 
     return (

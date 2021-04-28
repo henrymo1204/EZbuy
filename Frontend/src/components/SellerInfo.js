@@ -10,15 +10,45 @@ import Col from "react-bootstrap/Col";
 import PageTemplate from './PageTemplate'
 import axios from './commons/axios';
 
-import '../css/styles.css';
 import SellerPageTemplate from './SellerPageTemplate';
 
 class SellerInfo extends Component {
 
+  getShop = () => {
+    const user = global.auth.getUser();
+    const shopID = user['shopID'];
+    axios.get(`/shops/${shopID}`)
+    .then((res) => {
+      console.log(res);
+      var shopName = document.getElementById('ShopName');
+      shopName.value = res['data']['shop']
+    })
+  }
+
+  editShop = () => {
+    const user = global.auth.getUser();
+    const shopID = user['shopID'];
+    axios.get(`/shops/${shopID}`)
+    .then((res) => {
+      console.log(res);
+      var shopName = document.getElementById('ShopName');
+      shopName.value = res['data']['shop']
+    })
+  }
+
   render() {
+    this.getShop();
     return (
         <SellerPageTemplate>
-            <label>Test</label>
+            <label><h2>Account Info</h2></label>
+            <br></br>
+            <br></br>
+            <br></br>
+            <label>Shop Name</label>
+            <input id='ShopName'></input>
+            <label>About Us</label>
+            <input></input>
+            <button>Save</button>
         </SellerPageTemplate>
     );
   }

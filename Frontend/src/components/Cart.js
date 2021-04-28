@@ -71,7 +71,7 @@ const Cart = () => {
             Total:
               <span className="total-price is-vcentered" >{totalPrice}</span>
           </div>
-          <Row>
+          <Row className="cart-btn-container">
             <Col>
               <Nav.Link href="allproducts" className="cart-button">
                 <button className="common-button">Continue Shopping</button>

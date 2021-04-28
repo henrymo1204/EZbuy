@@ -104,103 +104,110 @@ const Checkout = (props) => {
 
   return (
      <PageTemplate>
-          <Container fluid={true}>
+        <Container fluid={true}>
           <div className="body-wrapper"> 
-          <div className={isActive}>
-
-          <form action="#" onSubmit={handleSubmit(onSubmitPayment)}>
-
+            <div className={isActive}>
+              <form action="#" onSubmit={handleSubmit(onSubmitPayment)}>
             <h1>Payment Information</h1>
-              <div className = "form_list_payment">
-                <div className="control">
-                  <input
-                    className={`input ${errors.payment_method && 'text-warn'}`}
-                    type="text"
-                    placeholder="Payment Method"
-                    name="payment_method"
-                    ref={register({
-                      required: 'Payment method is required',
-                    })}
-                  />
-                    {errors.payment_method && (
-                      <p className="helper has-text-danger">{errors.payment_method.message}</p>
-                    )}
-                </div>
-                <div className="control">
-                  <input
-                    className={`input ${errors.name_on_card && 'text-warn'}`}
-                    type="text"
-                    placeholder="Name on Card"
-                    name="name_on_card"
-                    ref={register({
-                      required: 'Name on card is required',
-                      minLength: {
-                        value: 6,
-                        message: 'Minimum length for recipient is 6'
-                      }
-                    })}
-                  />
-                  {errors.name_on_card && (
-                    <p className="helper has-text-danger">{errors.name_on_card.message}</p>
+            <div className = "form_list_payment">
+              <div className="control">
+                <select 
+                  name="payment_method" 
+                  ref={register({
+                    required: "select one option"
+                  })}>
+                  <option value=""></option>
+                  <option value="1">Visa</option>
+                  <option value="2">MasterCard</option>
+                  <option value="3">Discover</option>
+                  <option value="3">American Express</option>
+                </select>
+                {/* <input
+                  className={`input ${errors.payment_method && 'text-warn'}`}
+                  type="text"
+                  placeholder="Payment Method"
+                  name="payment_method"
+                  ref={register({
+                    required: 'Payment method is required',
+                  })}
+                /> */}
+                  {errors.payment_method && (
+                    <p className="helper has-text-danger">{errors.payment_method.message}</p>
                   )}
-                </div>
-                <div className="control">
-                  <input
-                    className={`input ${errors.card_number && 'text-warn'}`}
-                    type="text"
-                    placeholder="Card Number"
-                    name="card_number"
-                    ref={register({
-                      required: 'Card number is required',
-                      pattern: {
-                        value: /^[0-9]{16}$/,
-                        message: 'invalid card number, format XXXX XXXX XXXX XXXX'
-                      }
-                    })}
-                  />
-                  {errors.card_number && (
-                    <p className="helper has-text-danger">{errors.card_number.message}</p>
-                  )}
-                </div>
-                <div className="control">
-                  <input
-                    className={`input ${errors.expire_date && 'text-warn'}`}
-                    type="Month"
-                    placeholder="Month"
-                    name="expire_date"
-                    ref={register({
-                      required: 'Expire date is required',
-                    })}
-                  />
-                  {errors.expire_date && (
-                    <p className="helper has-text-danger">{errors.expire_date.message}</p>
-                  )}
-                </div>
-                <div className="control">
-                  <input
-                    className={`input ${errors.CVV && 'text-warn'}`}
-                    type="text"
-                    placeholder="CVV"
-                    name="CVV"
-                    ref={register({
-                      required: 'CVV is required, format XXX',
-                      pattern: {
-                        value: /^[0-9]{3}$/,
-                        message: 'invalid CVV'
-                      }
-                    })}
-                  />
-                  {errors.CVV && (
-                    <p className="helper has-text-danger">{errors.CVV.message}</p>
-                  )}
-                </div>
-                <button className="checkout-btn">checkout</button>
               </div>
-            
-            </form>
-                  
-            <div className="sub-cont">
-              <div className="img">
+              <div className="control">
+                <input
+                  className={`input ${errors.name_on_card && 'text-warn'}`}
+                  type="text"
+                  placeholder="Name on Card"
+                  name="name_on_card"
+                  ref={register({
+                    required: 'Name on card is required',
+                    minLength: {
+                      value: 6,
+                      message: 'Minimum length for recipient is 6'
+                    }
+                  })}
+                />
+                {errors.name_on_card && (
+                  <p className="helper has-text-danger">{errors.name_on_card.message}</p>
+                )}
+              </div>
+              <div className="control">
+                <input
+                  className={`input ${errors.card_number && 'text-warn'}`}
+                  type="text"
+                  placeholder="Card Number"
+                  name="card_number"
+                  ref={register({
+                    required: 'Card number is required',
+                    pattern: {
+                      value: /^[0-9]{16}$/,
+                      message: 'invalid card number, format XXXX XXXX XXXX XXXX'
+                    }
+                  })}
+                />
+                {errors.card_number && (
+                  <p className="helper has-text-danger">{errors.card_number.message}</p>
+                )}
+              </div>
+              <div className="control">
+                <input
+                  className={`input ${errors.expire_date && 'text-warn'}`}
+                  type="Month"
+                  placeholder="Month"
+                  name="expire_date"
+                  ref={register({
+                    required: 'Expire date is required',
+                  })}
+                />
+                {errors.expire_date && (
+                  <p className="helper has-text-danger">{errors.expire_date.message}</p>
+                )}
+              </div>
+              <div className="control">
+                <input
+                  className={`input ${errors.CVV && 'text-warn'}`}
+                  type="text"
+                  placeholder="CVV"
+                  name="CVV"
+                  ref={register({
+                    required: 'CVV is required, format XXX',
+                    pattern: {
+                      value: /^[0-9]{3}$/,
+                      message: 'invalid CVV'
+                    }
+                  })}
+                />
+                {errors.CVV && (
+                  <p className="helper has-text-danger">{errors.CVV.message}</p>
+                )}
+              </div>
+              <button className="checkout-btn">checkout</button>
+            </div>
+          </form>
+              <div className="sub-cont">
+                <div className="img">
                 <div className="img-text m-up">
                   <h2>Address Info here</h2>
                   <p>Back to Address!</p>
@@ -214,125 +221,124 @@ const Checkout = (props) => {
                   <span className="m-in">To Payment</span>
                 </div>
               </div>
-
-             <form action="#" ref={shipmentForm} onSubmit={handleSubmit(onSubmitShipment)}>
-                <h1>Shipment Information</h1>
-                    <div className ="form_list_address">
-                      <div className="field">
-                        <div className="control">
-                          <input
-                            className={`input ${errors.recipient && 'text-warn'}`}
-                            type="text"
-                            placeholder="Name to ship"
-                            name="recipient"
-                            ref={register({
-                              required: 'Recipient is required',
-                              minLength: {
-                                value: 6,
-                                message: 'Minimum length for recipient is 6'
-                              }
-                            })}
-                          />
-                          {errors.recipient && (
-                            <p className="helper has-text-danger">{errors.recipient.message}</p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="field">
-                        <div className="control">
-                          <input
-                            className={`input ${errors.phone_number && 'text-warn'}`}
-                            type="text"
-                            placeholder="Phone Number"
-                            name="phone_number"
-                            ref={register({
-                              required: 'Phone numbner is required',
-                              pattern: {
-                                value: /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/,
-                                message: 'Invalid phone number, require XXX-XXX-XXX'
-                              }
-                            })}
-                          />
-                          {errors.phone_number && (
-                            <p className="helper has-text-danger">{errors.phone_number.message}</p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="field">
-                        <div className="control">
-                          <input
-                            className={`input ${errors.addr_street && 'text-warn'}`}
-                            type="text"
-                            placeholder="Street, Apartment #"
-                            name="addr_street"
-                            ref={register({
-                              required: 'Street is required for address',
-                            })}
-                          />
-                          {errors.addr_street && (
-                            <p className="helper has-text-danger">{errors.addr_street.message}</p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="field">
-                        <div className="control">
-                          <input
-                            className={`input ${errors.addr_city && 'text-warn'}`}
-                            type="text"
-                            placeholder="City"
-                            name="addr_city"
-                            ref={register({
-                              required: 'City is required for address',
-                            })}
-                          />
-                          {errors.addr_city && (
-                            <p className="helper has-text-danger">{errors.addr_city.message}</p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="field">
-                        <div className="control">
-                          <input
-                            className={`input ${errors.addr_state && 'text-warn'}`}
-                            type="text"
-                            placeholder="State"
-                            name="addr_state"
-                            ref={register({
-                              required: 'State is required for address',
-                            })}
-                          />
-                          {errors.addr_state && (
-                            <p className="helper has-text-danger">{errors.addr_state.message}</p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="field">
-                        <div className="control">
-                          <input
-                            className={`input ${errors.zipcode && 'text-warn'}`}
-                            type="text"
-                            placeholder="zipcode"
-                            name="zipcode"
-                            ref={register({
-                              required: 'Zipcode is required for address',
-                              pattern: {
-                                value: /^[0-9]{5}$/,
-                                message: 'invalid zipcode'
-                              }
-                            })}
-                          />
-                          {errors.zipcode && (
-                            <p className="helper has-text-danger">{errors.zipcode.message}</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>                  
-                  </form>
+                <form action="#" ref={shipmentForm} onSubmit={handleSubmit(onSubmitShipment)}>
+              <h1>Shipment Information</h1>
+              <div className ="form_list_address">
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className={`input ${errors.recipient && 'text-warn'}`}
+                      type="text"
+                      placeholder="Name to ship"
+                      name="recipient"
+                      ref={register({
+                        required: 'Recipient is required',
+                        minLength: {
+                          value: 6,
+                          message: 'Minimum length for recipient is 6'
+                        }
+                      })}
+                    />
+                    {errors.recipient && (
+                      <p className="helper has-text-danger">{errors.recipient.message}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className={`input ${errors.phone_number && 'text-warn'}`}
+                      type="text"
+                      placeholder="Phone Number"
+                      name="phone_number"
+                      ref={register({
+                        required: 'Phone numbner is required',
+                        pattern: {
+                          value: /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/,
+                          message: 'Invalid phone number, require XXX-XXX-XXX'
+                        }
+                      })}
+                    />
+                    {errors.phone_number && (
+                      <p className="helper has-text-danger">{errors.phone_number.message}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className={`input ${errors.addr_street && 'text-warn'}`}
+                      type="text"
+                      placeholder="Street, Apartment #"
+                      name="addr_street"
+                      ref={register({
+                        required: 'Street is required for address',
+                      })}
+                    />
+                    {errors.addr_street && (
+                      <p className="helper has-text-danger">{errors.addr_street.message}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className={`input ${errors.addr_city && 'text-warn'}`}
+                      type="text"
+                      placeholder="City"
+                      name="addr_city"
+                      ref={register({
+                        required: 'City is required for address',
+                      })}
+                    />
+                    {errors.addr_city && (
+                      <p className="helper has-text-danger">{errors.addr_city.message}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className={`input ${errors.addr_state && 'text-warn'}`}
+                      type="text"
+                      placeholder="State"
+                      name="addr_state"
+                      ref={register({
+                        required: 'State is required for address',
+                      })}
+                    />
+                    {errors.addr_state && (
+                      <p className="helper has-text-danger">{errors.addr_state.message}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="field">
+                    <div className="control">
+                      <input
+                        className={`input ${errors.zipcode && 'text-warn'}`}
+                        type="text"
+                        placeholder="zipcode"
+                        name="zipcode"
+                        ref={register({
+                          required: 'Zipcode is required for address',
+                          pattern: {
+                            value: /^[0-9]{5}$/,
+                            message: 'invalid zipcode'
+                          }
+                        })}
+                      />
+                      {errors.zipcode && (
+                        <p className="helper has-text-danger">{errors.zipcode.message}</p>
+                      )}
+                    </div>
+                  </div>
+              </div>                  
+            </form>
               </div>
             </div>
           </div>
-          </Container>
-        </PageTemplate>
+        </Container>
+      </PageTemplate>
     );
   };
   
