@@ -65,7 +65,8 @@ VALUES
 -- password for user test_user1 is test_pass1
 ("test_user1", "test_user1@gmail.com", "seller", "pbkdf2:sha256:150000$lH8ajOSR$e42203b64a5717d2a159b90889f7116b3966fed9cf7c8c7d6ccf2468c5116ef3"),
 -- password for user test_user2 is test_pass2
-("test_user2", "test_user2@gmail.com", "buyer", "pbkdf2:sha256:150000$btzisI0Z$136431abb9af39b52f1297e32d266a95d25133b069d44cc683dd3ecb7bf5195b");
+("test_user2", "test_user2@gmail.com", "buyer", "pbkdf2:sha256:150000$btzisI0Z$136431abb9af39b52f1297e32d266a95d25133b069d44cc683dd3ecb7bf5195b"),
+("henrymo", "henrymo1204@gmail.com", "seller", "pbkdf2:sha256:150000$fXwEXAE9$ae35b0d52add1ea0af33ffec0f40793fc3065d0b227704b8303e33610435fdd0");
 
 -- ################################################################
 --            End Users table setup
@@ -95,7 +96,8 @@ INSERT INTO Shops (UserID, Shopname)
 VALUES 
 (1, "shop1"),
 (2, "shop2"),
-(3, "shop3");
+(3, "shop3"),
+(6, "shop of henrymo");
 
 -- ################################################################
 --                     End Shops table setup
@@ -170,7 +172,8 @@ INSERT INTO Carts (UserID, TotalPrice, LastUpdateTime)
 VALUES 
 (1, 100, "2019-01-01 10:00:00"),
 (2, 200, "2020-01-01 10:00:00"),
-(3, 300, "2021-01-01 10:00:00");
+(3, 300, "2021-01-01 10:00:00"),
+(6, 0, "2021-04-01 10:00:00");
 
 -- ################################################################
 --                      End Carts table setup
@@ -234,7 +237,8 @@ INSERT INTO Orders (UserID, CreateTime, TotalPrice)
 VALUES 
 (1, "2019-01-01 10:00:00", 100),
 (2, "2020-01-01 10:00:00", 200),
-(3, "2021-01-01 10:00:00", 300);
+(3, "2021-01-01 10:00:00", 300),
+(1, "2021-05-01 10:00:00", 300);
 -- ################################################################
 --                       End Orders table setup
 -- ################################################################
@@ -267,7 +271,9 @@ VALUES
 (1, 1, 1),
 (2, 2, 2),
 (3, 3, 3),
-(1, 4, 4);
+(1, 4, 4),
+(4, 25, 3),
+(4, 26, 2);
 
 -- ################################################################
 --                   End Order_Items table setup

@@ -40,10 +40,6 @@ class SellerInfo extends Component {
     this.getShop();
     return (
         <SellerPageTemplate>
-            <label><h2>Account Info</h2></label>
-            <br></br>
-            <br></br>
-            <br></br>
             <label>Shop Name</label>
             <input id='ShopName'></input>
             <label>About Us</label>
