@@ -5,7 +5,7 @@ import decode from 'jwt-decode';
 const updateLocalCartNum = async () => {
     const remoteCartNum = await getRemoteCartNum();
     localStorage.setItem('Cart_Num', remoteCartNum);
-  };
+};
   
 const getLocalCartNum = () => {
     return localStorage.getItem('Cart_Num');
@@ -32,8 +32,26 @@ const getUserID = () => {
   return userID;
 };
 
+//Search related application state
+const updateSearchResult = async (keyword) => {
+  try {
+    let inventoryServiceResponse = await axios.get(`/products/search/${keyword}`);
+    let searchResultList = inventoryServiceResponse.data['product'];
+    localStorage.setItem('Search_Result', JSON.stringify(searchResultList));
+    console.log(inventoryServiceResponse);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+const getSearchResult = () => {
+  return JSON.parse(localStorage.getItem('Search_Result'));
+}
+
 global.appState = {
     updateLocalCartNum,
     getLocalCartNum,
-    getUserID
+    getUserID,
+    getSearchResult,
+    updateSearchResult
 };

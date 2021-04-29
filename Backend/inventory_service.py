@@ -56,28 +56,85 @@ def getAllProducts():
     :raises Exception: on database queries failure.
 
     """
-    try:
-        db_connection = get_db()
+    dataDict = request.args.getlist('options[]')
+    
+    if not dataDict:
+        try:
+             db_connection = get_db()
 
-        search_query = f"SELECT ProductID, ProductName, ProductDescription, Price, ProductImage FROM Products"
+             search_query = f"SELECT ProductID, ProductName, ProductDescription, Price, ProductImage FROM Products"
 
-        cur = db_connection.cursor()
-        cur.execute(search_query)
-        db_connection.commit()
+             cur = db_connection.cursor()
+             cur.execute(search_query)
+             db_connection.commit()
 
-        rows = cur.fetchall()
-    except Exception as e:
-        # return status code 500 when database operation fails
-        return internal_server_error(500, str(e))
+             rows = cur.fetchall()
+        except Exception as e:
+             # return status code 500 when database operation fails
+             return internal_server_error(500, str(e))
 
-    products = []
-    for row in rows:
-        # image is bytes, need to encode as json does not support bytes
-        products.append({'productID': row[0], 'productName': row[1],
+        products = []
+        for row in rows:
+             # image is bytes, need to encode as json does not support bytes
+             products.append({'productID': row[0], 'productName': row[1],
+                         'productDescription': row[2], 'productPrice': row[3], 'productImage': row[4]})
+                         
+        try:
+             db_connection = get_db()
+
+             search_query = f"SELECT DISTINCT ProductCategory FROM Products"
+
+             cur = db_connection.cursor()
+             cur.execute(search_query)
+             db_connection.commit()
+
+             rows = cur.fetchall()
+        except Exception as e:
+             # return status code 500 when database operation fails
+             return internal_server_error(500, str(e))
+        
+        options = []
+        for row in rows:
+             # image is bytes, need to encode as json does not support bytes
+             options.append({'name': row[0]})
+
+        return jsonify({'success': True, 'products': products, 'options': options})
+    
+    else:
+        dataDict = request.args.getlist('options[]')
+    
+    
+        sqlString = ''
+    
+        for option in dataDict:
+             if sqlString == '':
+                 sqlString += " ProductCategory='" + str(option) + "'"
+             else:
+                 sqlString += " OR ProductCategory='" + str(option) + "'"
+        
+   
+        
+        try:
+             db_connection = get_db()
+
+             search_query = f"SELECT ProductID, ProductName, ProductDescription, Price, ProductImage FROM Products WHERE" + sqlString
+
+             cur = db_connection.cursor()
+             cur.execute(search_query)
+             db_connection.commit()
+
+             rows = cur.fetchall()
+        except Exception as e:
+             # return status code 500 when database operation fails
+             return internal_server_error(500, str(e))
+
+        products = []
+        for row in rows:
+             # image is bytes, need to encode as json does not support bytes
+             products.append({'productID': row[0], 'productName': row[1],
                          'productDescription': row[2], 'productPrice': row[3], 'productImage': row[4]})
 
-    return jsonify({'success': True, 'products': products})
-
+        return jsonify({'success': True, 'products': products})
 
 @app.route('/products/<pid>', methods=['GET'])
 def getProduct(pid):
