@@ -200,10 +200,10 @@ def getAllCartItems():
             product_detail = rows[0]
             productName = product_detail[2]
             productDescription = product_detail[3]
-            productPrice = product_detail[4]
-            productImage = product_detail[6]
-            product3DImage = product_detail[7]
-            isAuctionProduct = product_detail[8]
+            productPrice = product_detail[5]
+            productImage = product_detail[7]
+            product3DImage = product_detail[8]
+            isAuctionProduct = product_detail[9]
 
             items.append(
                 {'cartItemID': cartItemID, 'cartID': cartID, 'productID': productID, 'productQuantity': quantity,

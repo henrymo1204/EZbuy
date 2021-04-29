@@ -184,8 +184,8 @@ def getOrderItems(orderID):
             productDetail = rows[0]
             productName = productDetail[2]
             productDescription = productDetail[3]
-            productPrice = productDetail[4]
-            productImage = productDetail[6]
+            productPrice = productDetail[5]
+            productImage = productDetail[7]
 
             # assemble order item detail
             itemDetail = {'quantity': quantity, 'productName': productName,

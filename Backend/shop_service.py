@@ -91,7 +91,7 @@ def addProduct(sid):
             return bad_request(400, f"missing {productImage_key} field in request")
         elif isAuctionItem_key not in dataDict:
             return bad_request(400, f"missing {isAuctionItem_key} field in request")
-    
+
         productName = dataDict['productName']
         productDescription = dataDict['productDescription']
         productCategory = dataDict['productCategory']
@@ -142,9 +142,10 @@ def addProduct(sid):
             return bad_request(400, f"missing {product3DImage_key} field in request")
         elif isAuctionItem_key not in dataDict:
             return bad_request(400, f"missing {isAuctionItem_key} field in request")
-    
+
         productName = dataDict['productName']
         productDescription = dataDict['productDescription']
+        productCategory = dataDict['productCategory']
         price = dataDict['price']
         quantity = dataDict['quantity']
         productImage = dataDict['productImage']
@@ -202,12 +203,12 @@ def getShop(sid):
 
         shopName_key = 'shopName'
         aboutUs_key = 'aboutUs'
-   
+
         if shopName_key not in dataDict:
             return bad_request(400, f"missing {shopName_key} field in request")
         elif aboutUs_key not in dataDict:
             return bad_request(400, f"missing {aboutUs_key} field in request")
-    
+
         shopName = dataDict['shopName']
         aboutUs = dataDict['aboutUs']
 
@@ -216,10 +217,11 @@ def getShop(sid):
             return bad_request(400, f"{shopName_key} field is empty")
         elif aboutUs == None:
             return bad_request(400, f"{aboutUs_key} field is empty")
-            
+
         try:
             db_connection = get_db()
-            update_query = "UPDATE Shops SET ShopName = '" + shopName + "', AboutUs = '" + aboutUs + "' WHERE ShopID=" + sid + ";"
+            update_query = "UPDATE Shops SET ShopName = '" + shopName + \
+                "', AboutUs = '" + aboutUs + "' WHERE ShopID=" + sid + ";"
 
             cur = db_connection.cursor()
             cur.execute(update_query)
@@ -229,8 +231,8 @@ def getShop(sid):
             return internal_server_error(500, str(e))
 
         return jsonify({'success': True})
-        
-    
+
+
 @app.route('/shops/<sid>/', methods=['GET'])
 def getProducts(sid):
     """ Add a new product. Parameters are from HTTP POST requests.
@@ -249,7 +251,6 @@ def getProducts(sid):
 
     """
 
-
     try:
         db_connection = get_db()
         search_query = f"SELECT ProductID, ProductName, Price, Quantity, ProductImage FROM Products WHERE ShopID = '{sid}'"
@@ -267,7 +268,40 @@ def getProducts(sid):
         products.append({'productID': row[0], 'productName': row[1],
                          'productImage': row[4], 'productPrice': row[2], 'productQuantity': row[3]})
 
-    return jsonify({'success': True, 'products': products})
+    try:
+        db_connection = get_db()
+
+        search_query = f"SELECT DISTINCT ProductCategory FROM Products WHERE ShopID = '{sid}'"
+
+        cur = db_connection.cursor()
+        cur.execute(search_query)
+        db_connection.commit()
+
+        rows = cur.fetchall()
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+
+    options = []
+    for row in rows:
+        # image is bytes, need to encode as json does not support bytes
+        options.append({'name': row[0]})
+
+    try:
+        db_connection = get_db()
+
+        search_query = f"SELECT ShopName, AboutUs FROM Shops WHERE ShopID = '{sid}'"
+
+        cur = db_connection.cursor()
+        cur.execute(search_query)
+        db_connection.commit()
+
+        rows = cur.fetchall()
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+
+    return jsonify({'success': True, 'products': products, 'options': options, 'shop': rows})
 
 
 @app.route('/shops/<sid>/<pid>', methods=['PATCH', 'DELETE'])
@@ -363,8 +397,8 @@ def modifyProduct(sid, pid):
             return internal_server_error(500, str(e))
 
         return jsonify({'success': True})
-        
-       
+
+
 @app.route('/shops/<sid>/<pid>/', methods=['GET'])
 def getProduct(sid, pid):
     """ Add a new product. Parameters are from HTTP POST requests.
@@ -383,7 +417,6 @@ def getProduct(sid, pid):
 
     """
 
-
     try:
         db_connection = get_db()
         search_query = f"SELECT ProductName, ProductDescription, ProductCategory, Price, Quantity, ProductImage, Product3DImage FROM Products WHERE ShopID = '{sid}' AND ProductID = '{pid}';"
@@ -398,9 +431,11 @@ def getProduct(sid, pid):
     products = []
     for row in rows:
         # image is bytes, need to encode as json does not support bytes
-        products.append({'productName': row[0], 'productDescription': row[1], 'productCategory': row[2], 'productPrice': row[3], 'productQuantity': row[4], 'productImage': row[5], 'product3DImage': row[6]})
+        products.append({'productName': row[0], 'productDescription': row[1], 'productCategory': row[2],
+                         'productPrice': row[3], 'productQuantity': row[4], 'productImage': row[5], 'product3DImage': row[6]})
 
     return jsonify({'success': True, 'products': products})
+
 
 @ app.errorhandler(401)
 def unauthorized(e, message):

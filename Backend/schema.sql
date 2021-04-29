@@ -121,8 +121,8 @@ CREATE TABLE Products (
     ProductCategory VARCHAR(255),
     Price INTEGER NOT NULL,
     Quantity INTEGER NOT NULL,
-    ProductImage BLOB,
-    Product3DImage BLOB,
+    ProductImage VARCHAR,
+    Product3DImage VARCHAR,
     IsAuctionItem INTEGER NOT NULL,
     FOREIGN KEY (ShopID) REFERENCES Shops(ShopID) ON DELETE CASCADE
 );
