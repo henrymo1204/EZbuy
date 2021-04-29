@@ -11,6 +11,7 @@ class MyNavbar extends Component {
         var keyword = search_key.substring(0, 10)
         if (keyword) {
             await global.appState.updateSearchResult(keyword);
+            await global.appState.updateProductCatagory();
             window.location.href=`/search?keyword=` + document.getElementById('search_key').value;
         } else {
             toast.info('Please search with a keyword.');

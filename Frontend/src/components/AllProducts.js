@@ -14,7 +14,7 @@ import PageTemplate from './PageTemplate'
 import axios from './commons/axios';
 import { Form } from 'react-bootstrap';
 
-import '../css/styles.css';
+import '../css/product/Allproducts.scss'
 
 class AllProducts extends Component {
 
@@ -69,67 +69,71 @@ class AllProducts extends Component {
 
   render() {
     const { products, options, shopName, aboutUs } = this.state;
-    const shopID = window.location.search.slice(8);
-    if (shopID) {
-      if (products === null && options === null & shopName === null & aboutUs === null) {
-        return <div></div>
-      }
+    // const shopID = window.location.search.slice(8);
+    // if (shopID) {
+    //   if (products === null && options === null & shopName === null & aboutUs === null) {
+    //     return <div></div>
+    //   }
 
-      return (
-        <PageTemplate>
-          <Row>
-            <Col>
-              <div className='filter'>
-                <label>{shopName}</label>
-              </div>
-              <div className='filter'>
-                <label>{aboutUs}</label>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col md='auto'>
-              <div className='filter'>
-                {
-                  options.map(option => 
-                    <label>
-                      <input type="checkbox" value={option.name} onChange={e => this.selected(option.name)}/>
-                        {option.name}
-                    </label>)
-                }
-              </div>
-            </Col>
-            <Col>
-              <div className="products">
-                {
-                  products.map(p => <Products productDetail={p} updatePage={this.updatePage}/>)
-                }
-              </div>
-            </Col>
-          </Row>
-        </PageTemplate>
-      );
-    }
+    //   return (
+    //     <PageTemplate>
+    //       <Row>
+    //         <Col className='filter-container'>
+    //           <div className='filter'>
+    //             <label>{shopName}</label>
+    //           </div>
+    //           <div className='filter'>
+    //             <label>{aboutUs}</label>
+    //           </div>
+    //         </Col>
+    //       </Row>
+    //       <Row>
+    //         <Col md='auto'>
+    //           <div className='filter'>
+    //             {
+    //               options.map(option => 
+    //                 <label>
+    //                   <input type="checkbox" value={option.name} onChange={e => this.selected(option.name)}/>
+    //                     {option.name}
+    //                 </label>)
+    //             }
+    //           </div>
+    //         </Col>
+    //         <Col>
+    //           <div className="products">
+    //             {
+    //               products.map(p => <Products productDetail={p} updatePage={this.updatePage}/>)
+    //             }
+    //           </div>
+    //         </Col>
+    //       </Row>
+    //     </PageTemplate>
+    //   );
+    // }
+
     if (products === null && options === null) {
       return <div></div>
     }
 
     return (
       <PageTemplate>
-        <Row>
-          <Col md='auto'>
+        <Row className="allproducts-container">
+          {/* <Col className='filter-container'> */}
+          <Col md='auto' className="allproducts-control filter-container">
             <div className='filter'>
               {
-                options.map(option => 
+                options.map(option =>
+                  <div> 
                   <label>
                     <input type="checkbox" value={option.name} onChange={e => this.selected(option.name)}/>
                       {option.name}
-                  </label>)
+                  </label></div> )
               }
             </div>
           </Col>
-          <Col>
-            <div className="products">
+          {/* <Col className='products-container'> */}
+          <Col className="allproducts-control">
+            <div className="products grid allproducts-control">
               {
                 products.map(p => <Products productDetail={p} updatePage={this.updatePage}/>)
               }

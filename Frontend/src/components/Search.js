@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 
 //Import components
 import Products from './Products';
-import Filter from './Filter';
 
 //Import render styling from react bootstrap
 import Row from "react-bootstrap/Row";
@@ -17,41 +16,60 @@ import '../css/product/Search.scss';
 
 class Search extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { products: null};
-  // }
-
-  // componentDidMount() {
-  //   var keyword = window.location.search.slice(9)
-  //   if (keyword) {
-  //       axios.get(`/products/search/${keyword}`)
-  //       .then((res) => {
-  //       this.setState({ products: res.data['product'], state: 0})
-  //       console.log(res);
-  //       })
-  //       .catch((error) => {
-  //           console.log(error);
-  //       });
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {options: null, selected: []};
+  }
 
   updatePage = () => {
     this.forceUpdate();
   }
 
+  selected = (name) => {
+    var { selected } = this.state;
+    if (selected.includes(name)) {
+      for (var i = 0; i < selected.length; i++) {
+        if (selected[i] === name) {
+          selected.splice(i, 1);
+        }
+      }
+    }
+    else {
+      selected.push(name);
+    }
+    if (selected.length === 0) {
+      axios.get('/products/').then((res) => {
+        global.appState.setSearchResult(res.data['products']);
+        this.setState({options: res.data['options'], state: 0})
+      });
+    }
+    else {
+      axios.get('/products/', {params: {options: selected}}).then((res) => {
+        global.appState.setSearchResult(res.data['products']);
+        this.updatePage();
+      });
+    }
+  }
+
   render() {
-    // const { products } = this.state;
 
     let products = global.appState.getSearchResult();
+    let options = global.appState.getProductCatagory();
 
     if (products.length === 0) {
         return (
           <PageTemplate>
             <Row className="search-result-container">
-              <Col md='auto' className="search-result-control catagory-container">
-                <div className="radio-buttons">
-                  <Filter />
+              <Col md='auto' className="search-result-control filter-container">
+                <div className='filter'>
+                  {
+                    options.map(option =>
+                      <div> 
+                      <label>
+                        <input type="checkbox" value={option.name} onChange={e => this.selected(option.name)}/>
+                          {option.name}
+                      </label></div> )
+                  }
                 </div>
               </Col>
               <Col className="search-result-control">
@@ -67,10 +85,17 @@ class Search extends Component {
         return (
         <PageTemplate>
           <Row className="search-result-container">
-            <Col md='auto' className="search-result-control catagory-container">
-              <div className="radio-buttons">
-                <Filter />
-              </div>
+            <Col md='auto' className="search-result-control filter-container">
+                <div className='filter'>
+                  {
+                    options.map(option =>
+                      <div> 
+                      <label>
+                        <input type="checkbox" value={option.name} onChange={e => this.selected(option.name)}/>
+                          {option.name}
+                      </label></div> )
+                  }
+                </div>
             </Col>
             <Col className="search-result-control">
               <div className="products grid search-result-control">

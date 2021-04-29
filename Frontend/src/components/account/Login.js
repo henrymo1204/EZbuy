@@ -82,10 +82,10 @@ export default function Login(props) {
             </div>
             <div className="footer-container text-center">
               <button className="account-button">Login</button>
-            <div className="footer-middle text-center">OR</div>
-            <Nav className="justify-content-center">
-                <Nav.Link href="/register">Create account</Nav.Link>
-            </Nav>
+              <div className="footer-middle text-center">OR</div>
+              <Nav className="justify-content-center">
+                  <Nav.Link href="/register">Create account</Nav.Link>
+              </Nav>
             </div>
           </form>
         </div>

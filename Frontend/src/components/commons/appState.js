@@ -48,10 +48,32 @@ const getSearchResult = () => {
   return JSON.parse(localStorage.getItem('Search_Result'));
 }
 
+const setSearchResult = (searchResultList) => {
+  localStorage.setItem('Search_Result', JSON.stringify(searchResultList));
+}
+
+const updateProductCatagory = async () => {
+  try {
+    let inventoryServiceResponse = await axios.get('/products/')
+    let catagoryList = inventoryServiceResponse.data['options'];
+    localStorage.setItem('Product_Catagory', JSON.stringify(catagoryList));
+    console.log(inventoryServiceResponse);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+const getProductCatagory = () => {
+  return JSON.parse(localStorage.getItem('Product_Catagory'));
+}
+
 global.appState = {
     updateLocalCartNum,
     getLocalCartNum,
     getUserID,
     getSearchResult,
-    updateSearchResult
+    setSearchResult,
+    updateSearchResult,
+    updateProductCatagory,
+    getProductCatagory
 };

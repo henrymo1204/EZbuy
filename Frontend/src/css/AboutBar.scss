@@ -1,7 +1,13 @@
 .about-bar {
   // position: fixed;
+  background-color: #535978;
   width: 100vw;
   // bottom: 0px;
   left: 0px;
   z-index: 999;
+  .about-bar-row {
+    height: 50%;
+    text-align: center;
+    color: white;
+  }
 }
