@@ -1,0 +1,40 @@
+.grid {
+    min-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: scroll;
+  }
+  
+  .product-container {
+    height: auto;
+  }
+  
+  .product-control {
+    height: auto;
+  }
+
+  .product-detail-card{
+    width: 40rem;
+    height: 30rem;
+  }
+
+  .box-detail {
+    margin: 40px;
+    padding: 0.5rem;
+  }
+
+  .product-detail-image {
+    width: 70%;
+    height: 150px;
+    margin-left: 15%;
+  }
+  
+  .product_detail {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
+    padding-top: 10px;
+    position: relative;
+  }
