@@ -25,12 +25,12 @@ const ProductList = (props) => {
 
   return (
     <div className ="product-list-container">
-      <label>{name}</label>
-      <img src={img}></img>
-      <label>{price}</label>
-      <label>{quantity}</label>
-      <button onClick={editProduct}>Edit</button>
-      <button onClick={deleteProduct}>Delete</button>
+      <img class='attribute' src={img}></img>
+      <label class='attribute' >Product Name {name}</label>
+      <label class='attribute' >Price {price}</label>
+      <label class='attribute' >Quantity {quantity}</label>
+      <button class='attribute' onClick={editProduct}>Edit</button>
+      <button class='attribute' onClick={deleteProduct}>Delete</button>
     </div>
   );
 };

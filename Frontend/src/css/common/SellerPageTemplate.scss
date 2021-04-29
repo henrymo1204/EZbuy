@@ -49,3 +49,23 @@
   text-align: center;
   position: relative;
 }
+
+.product-list-container {
+  display: flex;
+  float: left;
+  margin: 20px;
+  background-color: aliceblue;
+  align-items: center;
+  width: 1000px;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0;
+  float: left;
+}
+
+.attribute {
+  margin: 10px;
+}
