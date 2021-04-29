@@ -10,9 +10,10 @@ import Col from "react-bootstrap/Col";
 import PageTemplate from './PageTemplate'
 import axios from './commons/axios';
 
-import '../css/SellerProduct.scss'
+import '../css/styles.css';
 import SellerPageTemplate from './SellerPageTemplate';
 import {useForm} from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 class SellerProduct extends Component {
 
@@ -26,64 +27,71 @@ class SellerProduct extends Component {
       const shopID = user['shopID'];
       var productName = document.getElementById('productName').value;
       var productDescription = document.getElementById('productDescription').value;
+      var productCategory = document.getElementById('productCategory').value;
       var price = document.getElementById('price').value;
       var quantity = document.getElementById('quantity').value;
       var image = document.getElementById('productImage').files[0];
       var image3D = document.getElementById('3DProductImage').files[0];
-      console.log(image3D)
       var auction = 0;
 
-      if (image3D !== undefined) {
-        var r1 = new FileReader;
-        r1.readAsDataURL(image)
-        r1.onload = function(e) {
-          var imageB64 = r1.result;
-          var r2 = new FileReader;
-          r2.readAsDataURL(image3D)
-          r2.onload = function(e) {
-              var image3DB64 = r2.result;
+     
+      if (!productName || !productDescription || !productCategory || !price || !quantity || !image) {
+        toast.error('Missing information.');
+      }
+      else {
+        if (image3D !== undefined) {
+            var r1 = new FileReader;
+            r1.readAsDataURL(image);
+            r1.onload = function(e) {
+                var imageB64 = r1.result;
+                var r2 = new FileReader;
+                r2.readAsDataURL(image3D);
+                r2.onload = function(e) {
+                    var image3DB64 = r2.result;
+                    axios.post(`/shops/${shopID}`, { 
+                        'productName': productName, 
+                        'productDescription': productDescription, 
+                        'productCategory': productCategory,
+                        'price': price, 
+                        'quantity': quantity, 
+                        'productImage': imageB64, 
+                        'product3DImage': image3DB64, 
+                        'isAuctionItem': auction 
+                    })
+                    .then((res) => {
+                        console.log(res);
+                        window.location.href = '/sellerinventory'
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
+            }
+          }
+          else {
+            var r1 = new FileReader;
+            r1.readAsDataURL(image);
+            r1.onload = function(e) {
+                var imageB64 = r1.result;
                 axios.post(`/shops/${shopID}`, { 
                     'productName': productName, 
                     'productDescription': productDescription, 
+                    'productCategory': productCategory,
                     'price': price, 
                     'quantity': quantity, 
                     'productImage': imageB64, 
-                    'product3DImage': image3DB64, 
                     'isAuctionItem': auction 
                 })
                 .then((res) => {
                 console.log(res);
-                window.location.href = '/sellerinventory'
+                    window.location.href = '/sellerinventory'
                 })
                 .catch((error) => {
-                console.log(error);
+                    console.log(error);
                 });
             }
-        }
+          }
       }
-      else {
-        var r1 = new FileReader;
-        r1.readAsDataURL(image);
-        r1.onload = function(e) {
-            var imageB64 = r1.result;
-            axios.post(`/shops/${shopID}`, { 
-                'productName': productName, 
-                'productDescription': productDescription, 
-                'price': price, 
-                'quantity': quantity, 
-                'productImage': imageB64, 
-                'isAuctionItem': auction 
-            })
-            .then((res) => {
-            console.log(res);
-                window.location.href = '/sellerinventory'
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        }
-      }
-
   }
 
   getProduct = () => {
@@ -93,11 +101,13 @@ class SellerProduct extends Component {
 
     axios.get(`/shops/${shopID}/${productID}`)
     .then((res) => {
+
         var data = res['data']['products'][0]
         var productName = document.getElementById('productName');
         productName.value = data['productName'];
         var productDescription = document.getElementById('productDescription');
         productDescription.value = data['productDescription'];
+        document.getElementById(data['productCategory']).selected = 'selected';
         var price = document.getElementById('price');
         price.value = data['productPrice'];
         var quantity = document.getElementById('quantity');
@@ -117,90 +127,45 @@ class SellerProduct extends Component {
 
     var productName = document.getElementById('productName').value;
     var productDescription = document.getElementById('productDescription').value;
+    var productCategory = document.getElementById('productCategory').value;
     var price = document.getElementById('price').value;
     var quantity = document.getElementById('quantity').value;
     var image = document.getElementById('productImage').files[0];
     var image3D = document.getElementById('3DProductImage').files[0];
-    console.log(image);
-    console.log(image3D);
 
-    if(image === undefined && image3D === undefined) {
-        axios.patch(`/shops/${shopID}/${productID}`, {
-            'productName': productName,
-            'productDescription': productDescription,
-            'price': price,
-            'quantity': quantity
-        })
-        .then((res) => {
-            console.log(res);
-            window.location.href = '/sellerinventory'
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    }
-    else if (image !== undefined && image3D === undefined) {
-        var r1 = new FileReader;
-        r1.readAsDataURL(image);
-        r1.onload = function(e) {
-            var imageB64 = r1.result;
-            console.log(imageB64);
-            axios.patch(`/shops/${shopID}/${productID}`, { 
-                'productName': productName, 
-                'productDescription': productDescription, 
-                'price': price, 
-                'quantity': quantity, 
-                'productImage': imageB64, 
+    if (!productName || !productDescription || !productCategory || !price || !quantity ) {
+        toast.error('Missing information.');
+      }
+    else{ 
+        if(image === undefined && image3D === undefined) {
+            axios.patch(`/shops/${shopID}/${productID}`, {
+                'productName': productName,
+                'productDescription': productDescription,
+                'productCategory': productCategory,
+                'price': price,
+                'quantity': quantity
             })
             .then((res) => {
-            console.log(res);
+                console.log(res);
                 window.location.href = '/sellerinventory'
             })
             .catch((error) => {
                 console.log(error);
             });
         }
-    }
-    else if (image === undefined && image3D !== undefined) {
-        var r1 = new FileReader;
-        r1.readAsDataURL(image3D);
-        r1.onload = function(e) {
-            var image3DB64 = r1.result;
-            console.log(image3DB64);
-            axios.patch(`/shops/${shopID}/${productID}`, { 
-                'productName': productName, 
-                'productDescription': productDescription, 
-                'price': price, 
-                'quantity': quantity, 
-                'product3DImage': image3DB64, 
-            })
-            .then((res) => {
-            console.log(res);
-                window.location.href = '/sellerinventory'
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        }
-    }
-    else {
-        var r1 = new FileReader;
-        r1.readAsDataURL(image);
-        r1.onload = function(e) {
-            var imageB64 = r1.result;
-            var r2 = new FileReader;
-            r2.readAsDataURL(image3D);
-            r2.onload = function(e) {
-                var image3DB64 = r2.result;
+        else if (image !== undefined && image3D === undefined) {
+            var r1 = new FileReader;
+            r1.readAsDataURL(image);
+            r1.onload = function(e) {
+                var imageB64 = r1.result;
                 console.log(imageB64);
-                console.log(image3DB64);
                 axios.patch(`/shops/${shopID}/${productID}`, { 
                     'productName': productName, 
                     'productDescription': productDescription, 
+                    'productCategory': productCategory,
                     'price': price, 
                     'quantity': quantity, 
                     'productImage': imageB64, 
-                    'product3DImage': image3DB64
                 })
                 .then((res) => {
                 console.log(res);
@@ -209,6 +174,59 @@ class SellerProduct extends Component {
                 .catch((error) => {
                     console.log(error);
                 });
+            }
+        }
+        else if (image === undefined && image3D !== undefined) {
+            var r1 = new FileReader;
+            r1.readAsDataURL(image3D);
+            r1.onload = function(e) {
+                var image3DB64 = r1.result;
+                console.log(image3DB64);
+                axios.patch(`/shops/${shopID}/${productID}`, { 
+                    'productName': productName, 
+                    'productDescription': productDescription, 
+                    'productCategory': productCategory,
+                    'price': price, 
+                    'quantity': quantity, 
+                    'product3DImage': image3DB64, 
+                })
+                .then((res) => {
+                console.log(res);
+                    window.location.href = '/sellerinventory'
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            }
+        }
+        else {
+            var r1 = new FileReader;
+            r1.readAsDataURL(image);
+            r1.onload = function(e) {
+                var imageB64 = r1.result;
+                var r2 = new FileReader;
+                r2.readAsDataURL(image3D);
+                r2.onload = function(e) {
+                    var image3DB64 = r2.result;
+                    console.log(imageB64);
+                    console.log(image3DB64);
+                    axios.patch(`/shops/${shopID}/${productID}`, { 
+                        'productName': productName, 
+                        'productDescription': productDescription, 
+                        'productCategory': productCategory,
+                        'price': price, 
+                        'quantity': quantity, 
+                        'productImage': imageB64, 
+                        'product3DImage': image3DB64
+                    })
+                    .then((res) => {
+                    console.log(res);
+                        window.location.href = '/sellerinventory'
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
             }
         }
     }
@@ -232,7 +250,7 @@ class SellerProduct extends Component {
         }
         return (
             <SellerPageTemplate>
-                <form className="add-product-form">
+               <form className="add-product-form">
                     <Row>
                         <Col>
                         <div className="add-product-field">
@@ -242,6 +260,16 @@ class SellerProduct extends Component {
                         <div className="add-product-field">
                         <label className="add-product-label">Price</label>
                         <input className="add-product-input" id='price'></input>
+                        </div>
+                        <div>
+                        <label>Product Category</label>
+                        <select id='productCategory'>
+                            <option></option>
+                            <option value='Shoes' id='Shoes'>Shoes</option>
+                            <option value='Clothes' id='Clothes'>Clothes</option>
+                            <option value='Some product' id='Some product'>Some product</option>
+                            <option value='Random stuff' id='Random stuff'>Random stuff</option>
+                        </select>
                         </div>
                         </Col>
                         
@@ -290,6 +318,16 @@ class SellerProduct extends Component {
                             <label className='add-product-label'>Product Image</label>
                             <input className="add-product-input" type='file' id='productImage' onChange={this.onImageChange}></input>
                             <img id='img' src={file}/>
+                        </div>
+                        <div>
+                        <label>Product Category</label>
+                        <select id='productCategory'>
+                            <option></option>
+                            <option value='Shoes' id='Shoes'>Shoes</option>
+                            <option value='Clothes' id='Clothes'>Clothes</option>
+                            <option value='Some product' id='Some product'>Some product</option>
+                            <option value='Random stuff' id='Random stuff'>Random stuff</option>
+                        </select>
                         </div>
                         </Col>
                         <Col>

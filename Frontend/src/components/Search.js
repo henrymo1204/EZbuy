@@ -17,33 +17,35 @@ import '../css/product/Search.scss';
 
 class Search extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { products: null};
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { products: null};
+  // }
 
-  componentDidMount() {
-    var keyword = window.location.search.slice(9)
-    if (keyword) {
-        axios.get(`/products/search/${keyword}`)
-        .then((res) => {
-        this.setState({ products: res.data['product'], state: 0})
-        console.log(res);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    }
-  }
+  // componentDidMount() {
+  //   var keyword = window.location.search.slice(9)
+  //   if (keyword) {
+  //       axios.get(`/products/search/${keyword}`)
+  //       .then((res) => {
+  //       this.setState({ products: res.data['product'], state: 0})
+  //       console.log(res);
+  //       })
+  //       .catch((error) => {
+  //           console.log(error);
+  //       });
+  //   }
+  // }
 
   updatePage = () => {
     this.forceUpdate();
   }
 
   render() {
-    const { products } = this.state;
+    // const { products } = this.state;
 
-    if (products === null) {
+    let products = global.appState.getSearchResult();
+
+    if (products.length === 0) {
         return (
           <PageTemplate>
             <Row className="search-result-container">
