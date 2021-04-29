@@ -103,7 +103,6 @@ def getProduct(pid):
     for row in rows:
         # image is bytes, need to encode as json does not support bytes
         product.append({'productID': row[0], 'shopID': row[1], 'productName': row[2], 'productDescription': row[3],'productCategory': row[4], 'productPrice': row[5], 'productImage': row[7], 'product3DImage': row[8]})
-[12:35 PM]
 
     return jsonify({'success': True, 'product': product})
     

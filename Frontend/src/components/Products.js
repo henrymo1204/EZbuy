@@ -50,7 +50,9 @@ const Products = (props) => {
 
   return (
       <Card className="product-card box">
-        <Card.Img variant="top" src={img} className="product-image"/>
+        <a href={ `/productdetail?productID=${productID}` }>
+        <Card.Img variant="top" src={img} className="product-image" />
+        </a>
         <Card.Body>
           <Card.Title className="product-detail">{name}</Card.Title>
           <Card.Text className="product-detail">{description}</Card.Text>
