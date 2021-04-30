@@ -67,6 +67,24 @@ const getProductCatagory = () => {
   return JSON.parse(localStorage.getItem('Product_Catagory'));
 }
 
+
+const setRandomProducts = async () => {
+  try {
+    let response = await axios.get('/products/random/');
+    let result = response.data['products'];
+    localStorage.setItem('Random_Products', JSON.stringify(result));
+    console.log(response);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+
+const getRandomProducts = () => {
+  return JSON.parse(localStorage.getItem('Random_Products'));
+}
+
+
 global.appState = {
     updateLocalCartNum,
     getLocalCartNum,
@@ -75,5 +93,7 @@ global.appState = {
     setSearchResult,
     updateSearchResult,
     updateProductCatagory,
-    getProductCatagory
+    getProductCatagory,
+    setRandomProducts,
+    getRandomProducts
 };
