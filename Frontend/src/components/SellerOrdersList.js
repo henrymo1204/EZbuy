@@ -11,15 +11,15 @@ const SellerOrdersList = (props) => {
   const products = props.productDetail.Products;
 
   return (
-    <div class='product-list-container'>
-      <label class='attribute'>Order {orderID}</label>
+    <div className='product-list-container'>
+      <label className='attribute'>Order {orderID}</label>
         <div>
           {
             products.map(p => <SellerOrderItems productDetail={p}/>)
           }
         </div>
-      <label class='attribute'>Create Time {createTime}</label>
-      <label class='attribute'>Total Price {totalPrice}</label>
+      <label className='attribute'>Create Time {createTime}</label>
+      <label className='attribute'>Total Price {totalPrice}</label>
     </div>
   );
 };

@@ -46,7 +46,7 @@ const CartItem = (props) => {
     return (
       <div className="columns is-vcentered">
         <div className="column is-narrow" onClick={handleDelete}>
-          <span className="close"><i class="far fa-times-circle"></i></span>
+          <span className="close"><i className="far fa-times-circle"></i></span>
         </div>
         <div className="column is-narrow">
           <img src ={productImage} alt={productName} width="100" />

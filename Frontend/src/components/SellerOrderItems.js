@@ -21,9 +21,9 @@ const SellerOrderItems = (props) => {
 
   return (
     <div>
-      <img class='attribute' src={img}></img>
-      <label class='attribute'>Product: {productName}</label>
-      <label class='attribute'>Quantity: {quantity}</label>
+      <img className='attribute' src={img}></img>
+      <label className='attribute'>Product: {productName}</label>
+      <label className='attribute'>Quantity: {quantity}</label>
     </div>
   );
 };

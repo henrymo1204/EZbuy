@@ -58,9 +58,9 @@ const App = props => {
           <Row>
             <Col className="home-video-container">
               <div className="home-video">
-               <h1><i class="fas fa-shopping-cart"></i> Welcome to EZ Buy</h1>
+               <h1><i className="fas fa-shopping-cart"></i> Welcome to EZ Buy</h1>
                 <div className="home-video-part"></div>
-                <div class="color-overlay">
+                <div className="color-overlay">
                 <video muted autoPlay loop className="home-video">
                   <source src={V02} type="video/mp4" />
                 </video>

@@ -13,7 +13,7 @@ class XRViwer extends Component {
 
     render() {
         return (
-            <a-scene class="aframebox" embedded>
+            <a-scene className="aframebox" embedded>
                 <a-box
                     position="-1 0.5 -3"
                     rotation="0 45 0"

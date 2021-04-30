@@ -145,24 +145,24 @@ export default function Login(props) {
         </div>
       
         <div className="footer-container text-center">
-          <div class="field is-horizontal checkbox-container">
-            <div class="field-label">
-              <label class="label checkbox-title">Register as:</label>
+          <div className="field is-horizontal checkbox-container">
+            <div className="field-label">
+              <label className="label checkbox-title">Register as:</label>
             </div>
-            <div class="field-body">
-              <div class="field is-narrow">
-                <div class="control">
-                  <label class="radio">
+            <div className="field-body">
+              <div className="field is-narrow">
+                <div className="control">
+                  <label className="radio">
                     <input type="radio" name="member" id="buyer-check" onChange={handleBuyerChecked}/> Buyer
                   </label>
-                  <label class="radio">
+                  <label className="radio">
                     <input type="radio" name="member" id="seller-check" onChange={handleSellerChecked}/> Seller
                   </label>
                 </div>
               </div>
             </div>
           </div>
-          <p class="helper has-text-danger" id="checkbox-warn">Please select one of above</p>
+          <p className="helper has-text-danger" id="checkbox-warn">Please select one of above</p>
           <div className="footer-container text-center">
               <button className="account-button">Register</button> 
               <div className="footer-middle text-center">Already have an account?</div>

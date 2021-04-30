@@ -7,6 +7,7 @@ export default function UserProfile(props) {
   const logout = () => {
     global.auth.logout();
     props.close('logout');
+    window.location.href='/';
   };
 
   return (

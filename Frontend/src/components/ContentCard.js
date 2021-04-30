@@ -32,7 +32,7 @@ const ContentCard = (props) => {
                 <Card.Text className="ad-detail">{productDescription}</Card.Text>
                 <Card.Text className="ad-detail">{timeLeft}</Card.Text>
                 <Nav.Link className="ad-detail">
-                    <i class="far fa-hand-point-right"></i>
+                    <i className="far fa-hand-point-right"></i>
                     <span> Buy Now</span>
                 </Nav.Link>  
             </Card.Body>
