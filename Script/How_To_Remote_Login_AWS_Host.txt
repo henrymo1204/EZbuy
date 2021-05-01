@@ -1,0 +1,38 @@
+AWS EC2 host: 18.223.187.69
+User at AWS EC2 host: ubuntu@18.223.187.69
+public key path: /Users/Ying_Luo/Desktop/ezbuy.pem
+local file to upload to AWS EC2 host: /Users/Ying_Luo/Desktop/test.txt
+AWS EC2 host path to store local file: /home/ubuntu/rsync_test
+
+
+Login remote host——>  sync local file to remote host ————> Log out remote host
+
+Step 0: Download public key from Github: ezbuy.pem
+
+Step 1: Change local public key permission
+> chmod 600 /Users/Ying_Luo/Desktop/ezbuy.pem
+
+Step 2: Add public key to ssh agent
+> ssh-add /Users/Ying_Luo/Desktop/ezbuy.pem
+
+step3: Login (remote host)
+> ssh ubuntu@18.223.187.69
+
+Step 4: Find the path in remote host as destination to store local file
+
+step 5: Logout (remote host)
+> logout
+
+step 6: Sync local file to remote host
+command format
+rsync -avze "ssh -i public key path" local file to upload to AWS EC2 host User at AWS EC2 host:/home/ubuntu/rsync_test
+
+> rsync -avze "ssh -i /Users/Ying_Luo/Desktop/ezbuy.pem" /Users/Ying_Luo/Desktop/test.txt ubuntu@18.223.187.69:/home/ubuntu/rsync_test
+
+step7: Login (remote host)
+> ssh ubuntu@18.223.187.69
+
+step 8: Check if the file is synced to remote host
+
+step 9: Logout (remote host)
+> logout
