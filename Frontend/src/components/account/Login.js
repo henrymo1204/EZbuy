@@ -15,7 +15,7 @@ export default function Login(props) {
       // handle login
       try {
         const { username, password } = data;
-        const res = await axios.post('/login', { username, password });
+        const res = await axios.post('/api/v1/login', { username, password });
         const jwToken = res.data['jwt_token'];
         console.log(jwToken);
         global.auth.setToken(jwToken);

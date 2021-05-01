@@ -47,7 +47,7 @@ def ShopsService():
     return 'Welcome to Shops Service!'
 
 
-@app.route('/shops/<sid>', methods=['POST'])
+@app.route('/api/v1/shops/<sid>', methods=['POST'])
 def addProduct(sid):
     """ Add a new product. Parameters are from HTTP POST requests.
 
@@ -183,7 +183,7 @@ def addProduct(sid):
     return jsonify({'success': True})
 
 
-@app.route('/shops/<sid>', methods=['GET', 'PATCH'])
+@app.route('/api/v1/shops/<sid>', methods=['GET', 'PATCH'])
 def getShop(sid):
     if request.method == 'GET':
         try:
@@ -233,7 +233,7 @@ def getShop(sid):
         return jsonify({'success': True})
 
 
-@app.route('/shops/<sid>/', methods=['GET'])
+@app.route('/api/v1/shops/<sid>/', methods=['GET'])
 def getProducts(sid):
     """ Add a new product. Parameters are from HTTP POST requests.
 
@@ -304,7 +304,7 @@ def getProducts(sid):
     return jsonify({'success': True, 'products': products, 'options': options, 'shop': rows})
 
 
-@app.route('/shops/<sid>/<pid>', methods=['PATCH', 'DELETE'])
+@app.route('/api/v1/shops/<sid>/<pid>', methods=['PATCH', 'DELETE'])
 def modifyProduct(sid, pid):
     if request.method == 'PATCH':
         """ Edit the information of the product. Parameters are from HTTP POST requests.
@@ -399,7 +399,7 @@ def modifyProduct(sid, pid):
         return jsonify({'success': True})
 
 
-@app.route('/shops/<sid>/<pid>/', methods=['GET'])
+@app.route('/api/v1/shops/<sid>/<pid>/', methods=['GET'])
 def getProduct(sid, pid):
     """ Add a new product. Parameters are from HTTP POST requests.
 

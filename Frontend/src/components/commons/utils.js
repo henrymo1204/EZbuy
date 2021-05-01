@@ -10,7 +10,7 @@ const formatPrice = price => {
 const clearUserCart = () => {
   const userID = global.appState.getUserID();
   try {
-    axios.delete(`/cart/items/${userID}`).then(res => {
+    axios.delete(`/api/v1/cart/items/${userID}`).then(res => {
       if (res.data['success'] == true) {
         toast.success('cart delete success.');
       } else {

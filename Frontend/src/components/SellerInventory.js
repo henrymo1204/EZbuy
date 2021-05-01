@@ -21,7 +21,7 @@ class SellerInventory extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/shops/${this.shopID}/`).then((res) => {
+    axios.get(`/api/v1/shops/${this.shopID}/`).then((res) => {
       this.setState({ products: res.data['products'], state: 0})
     });
   }

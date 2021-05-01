@@ -18,7 +18,7 @@ export default function Login(props) {
     try {
       const { username, email, password } = data;
       const userRole = isBuyer ? 'buyer' : 'seller'
-      const res = await axios.post('/register', {
+      const res = await axios.post('/api/v1/register', {
         username,
         email,
         password,

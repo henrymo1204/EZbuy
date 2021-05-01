@@ -13,11 +13,6 @@ import axios from '../commons/axios';
 import {clearUserCart} from '../commons/utils'
 const Checkout = (props) => {
 
-  // const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-
-  // const [, updateState] = React.useState();
-  // const forceUpdate = React.useCallback(() => updateState({}), []);
-
   //reference for shipment form
   const shipmentForm = useRef(null);
   const [currentOrderID, setOrderID] = useState();
@@ -42,9 +37,9 @@ const Checkout = (props) => {
     let cart_res = null, payment_res = null;
     try {
       //step1. create order and get orderID
-      const car_service_response = await axios.get(`/cart/items?userID=${userID}`);
+      const car_service_response = await axios.get(`/api/v1/cart/items?userID=${userID}`);
       const cartItems = car_service_response.data['items'] || []
-      const order_service_response = await axios.post(`/order/${userID}`, {
+      const order_service_response = await axios.post(`/api/v1/order/${userID}`, {
         'order_items': cartItems
       });
       const orderID = order_service_response.data['orderID'];
@@ -54,7 +49,7 @@ const Checkout = (props) => {
       const expire_year = expiration_info[0];
       const expire_month = expiration_info[1];
 
-      payment_res = await axios.post(`/payment/${userID}/${orderID}`, {
+      payment_res = await axios.post(`/api/v1/payment/${userID}/${orderID}`, {
         payment_method: data['payment_method'],
         name_on_card: data['name_on_card'],
         card_number: data['card_number'],
@@ -83,7 +78,7 @@ const Checkout = (props) => {
     const userID = global.appState.getUserID();
 
     try {
-      shipment_res = await axios.post(`/shipment/${userID}/${currentOrderID}`, {
+      shipment_res = await axios.post(`/api/v1/shipment/${userID}/${currentOrderID}`, {
         addr_city: data['addr_city'],
         addr_state: data['addr_state'],
         addr_street: data['addr_street'],

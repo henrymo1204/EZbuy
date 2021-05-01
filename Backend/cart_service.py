@@ -47,7 +47,7 @@ def cartService():
     return 'Welcome to Cart Service!'
 
 
-@app.route('/cart', methods=['POST'])
+@app.route('/api/v1/cart', methods=['POST'])
 def addCartItem():
 
     dataDict = json.loads(request.data)
@@ -78,7 +78,7 @@ def addCartItem():
     return jsonify({'success': True})
 
 
-@app.route('/cart/<cartItemID>', methods=['PATCH', 'DELETE'])
+@app.route('/api/v1/cart/<cartItemID>', methods=['PATCH', 'DELETE'])
 def updateCartItem(cartItemID):
 
     if request.method == 'PATCH':
@@ -119,7 +119,7 @@ def updateCartItem(cartItemID):
     return jsonify({'success': True})
 
 
-@app.route('/cart/item', methods=['GET'])
+@app.route('/api/v1/cart/item', methods=['GET'])
 def getCartItem():
     userID = request.args.get('userID')
     productID = request.args.get('productID')
@@ -155,7 +155,7 @@ def getCartItem():
     return jsonify({'success': True, 'items': items})
 
 
-@app.route('/cart/items', methods=['GET'])
+@app.route('/api/v1/cart/items', methods=['GET'])
 def getAllCartItems():
 
     userID = request.args.get('userID')
@@ -233,7 +233,7 @@ def _getCartIDWithUserID(userID):
     return rows[0][0]
 
 
-@app.route('/cart/items/<userID>', methods=['DELETE'])
+@app.route('/api/v1/cart/items/<userID>', methods=['DELETE'])
 def deleteAllCartItems(userID):
 
     try:

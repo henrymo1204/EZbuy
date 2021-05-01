@@ -47,7 +47,7 @@ def orderService():
     return 'Welcome to Order Service!'
 
 
-@app.route('/order/<userID>', methods=['POST'])
+@app.route('/api/v1/order/<userID>', methods=['POST'])
 def addOrder(userID):
 
     dataDict = json.loads(request.data)
@@ -113,7 +113,7 @@ def addOrder(userID):
     return jsonify({'success': True, 'orderID': orderID})
 
 
-@app.route('/order/items/<userID>', methods=['GET'])
+@app.route('/api/v1/order/items/<userID>', methods=['GET'])
 def getUserOrders(userID):
 
     orders = []
@@ -145,7 +145,7 @@ def getUserOrders(userID):
     return jsonify({'success': True, 'orders': orders})
 
 
-@app.route('/order/detail/<orderID>', methods=['GET'])
+@app.route('/api/v1/order/detail/<orderID>', methods=['GET'])
 def getOrderItems(orderID):
 
     orderItems = []
@@ -200,7 +200,7 @@ def getOrderItems(orderID):
     return jsonify({'success': True, 'orderItems': orderItems})
 
 
-@app.route('/order/<shopID>/', methods=['GET'])
+@app.route('/api/v1/order/<shopID>/', methods=['GET'])
 def getOrdersByShop(shopID):
     result = []
     try:
@@ -217,8 +217,9 @@ def getOrdersByShop(shopID):
         return internal_server_error(500, str(e))
 
     for row in rows:
-        result.append({'OrderID': row[0], 'UserID': row[1], 'CreateTime': row[2], 'TotalPrice': row[3]})
-        
+        result.append(
+            {'OrderID': row[0], 'UserID': row[1], 'CreateTime': row[2], 'TotalPrice': row[3]})
+
     try:
         db_connection = get_db()
 
@@ -231,15 +232,15 @@ def getOrdersByShop(shopID):
 
     except Exception as e:
         return internal_server_error(500, str(e))
-        
-    
+
     for row in rows:
         for r in result:
             if row[0] == r['OrderID']:
                 if 'Products' in r:
-                     r['Products'].append({'ProductID': row[1], 'Quantity': row[2]})
+                    r['Products'].append(
+                        {'ProductID': row[1], 'Quantity': row[2]})
                 else:
-                     r['Products'] = [{'ProductID': row[1], 'Quantity': row[2]}]
+                    r['Products'] = [{'ProductID': row[1], 'Quantity': row[2]}]
 
     return jsonify({'orders': result})
 

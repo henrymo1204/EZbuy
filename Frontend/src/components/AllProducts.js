@@ -26,12 +26,12 @@ class AllProducts extends Component {
   componentDidMount() {
     var shopID = window.location.search.slice(8);
     if (shopID) {
-      axios.get(`/shops/${shopID}/`).then((res) => {
+      axios.get(`/api/v1/shops/${shopID}/`).then((res) => {
         this.setState({ products: res.data['products'], options: res.data['options'], shopName: res.data['shop'][0][0], aboutUs: res.data['shop'][0][1], state: 0})
       });
     }
     else {
-      axios.get('/products/').then((res) => {
+      axios.get('/api/v1/products/').then((res) => {
         this.setState({ products: res.data['products'], options: res.data['options'], state: 0})
       });
     }
@@ -55,12 +55,12 @@ class AllProducts extends Component {
       selected.push(name);
     }
     if (selected.length === 0) {
-      axios.get('/products/').then((res) => {
+      axios.get('/api/v1/products/').then((res) => {
         this.setState({ products: res.data['products'], options: res.data['options'], state: 0})
       });
     }
     else {
-      axios.get('/products/', {params: {options: selected}}).then((res) => {
+      axios.get('/api/v1/products/', {params: {options: selected}}).then((res) => {
         this.setState({ products: res.data['products'], state: 0})
       });
     }

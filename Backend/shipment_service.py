@@ -47,7 +47,7 @@ def shipmentService():
     return 'Welcome to Shipment Service!'
 
 
-@app.route('/shipment/<userID>/<orderID>', methods=['POST'])
+@app.route('/api/v1/shipment/<userID>/<orderID>', methods=['POST'])
 def addShipment(userID, orderID):
 
     dataDict = json.loads(request.data)
@@ -78,7 +78,7 @@ def addShipment(userID, orderID):
     return jsonify({'success': True})
 
 
-@app.route('/shipment/<orderID>', methods=['GET'])
+@app.route('/api/v1/shipment/<orderID>', methods=['GET'])
 def getShipment(orderID):
 
     shipmentDetail = None

@@ -38,13 +38,13 @@ class Search extends Component {
       selected.push(name);
     }
     if (selected.length === 0) {
-      axios.get('/products/').then((res) => {
+      axios.get('/api/v1/products/').then((res) => {
         global.appState.setSearchResult(res.data['products']);
         this.setState({options: res.data['options'], state: 0})
       });
     }
     else {
-      axios.get('/products/', {params: {options: selected}}).then((res) => {
+      axios.get('/api/v1/products/', {params: {options: selected}}).then((res) => {
         global.appState.setSearchResult(res.data['products']);
         this.updatePage();
       });

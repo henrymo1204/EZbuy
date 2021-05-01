@@ -48,7 +48,7 @@ class SellerProduct extends Component {
                 r2.readAsDataURL(image3D);
                 r2.onload = function(e) {
                     var image3DB64 = r2.result;
-                    axios.post(`/shops/${shopID}`, { 
+                    axios.post(`/api/v1/shops/${shopID}`, { 
                         'productName': productName, 
                         'productDescription': productDescription, 
                         'productCategory': productCategory,
@@ -73,7 +73,7 @@ class SellerProduct extends Component {
             r1.readAsDataURL(image);
             r1.onload = function(e) {
                 var imageB64 = r1.result;
-                axios.post(`/shops/${shopID}`, { 
+                axios.post(`/api/v1/shops/${shopID}`, { 
                     'productName': productName, 
                     'productDescription': productDescription, 
                     'productCategory': productCategory,
@@ -99,7 +99,7 @@ class SellerProduct extends Component {
     const shopID = user['shopID'];
     const productID = window.location.search.slice(11);
 
-    axios.get(`/shops/${shopID}/${productID}`)
+    axios.get(`/api/v1/shops/${shopID}/${productID}`)
     .then((res) => {
 
         var data = res['data']['products'][0]
@@ -138,7 +138,7 @@ class SellerProduct extends Component {
       }
     else{ 
         if(image === undefined && image3D === undefined) {
-            axios.patch(`/shops/${shopID}/${productID}`, {
+            axios.patch(`/api/v1/shops/${shopID}/${productID}`, {
                 'productName': productName,
                 'productDescription': productDescription,
                 'productCategory': productCategory,
@@ -159,7 +159,7 @@ class SellerProduct extends Component {
             r1.onload = function(e) {
                 var imageB64 = r1.result;
                 console.log(imageB64);
-                axios.patch(`/shops/${shopID}/${productID}`, { 
+                axios.patch(`/api/v1/shops/${shopID}/${productID}`, { 
                     'productName': productName, 
                     'productDescription': productDescription, 
                     'productCategory': productCategory,
@@ -182,7 +182,7 @@ class SellerProduct extends Component {
             r1.onload = function(e) {
                 var image3DB64 = r1.result;
                 console.log(image3DB64);
-                axios.patch(`/shops/${shopID}/${productID}`, { 
+                axios.patch(`/api/v1/shops/${shopID}/${productID}`, { 
                     'productName': productName, 
                     'productDescription': productDescription, 
                     'productCategory': productCategory,
@@ -210,7 +210,7 @@ class SellerProduct extends Component {
                     var image3DB64 = r2.result;
                     console.log(imageB64);
                     console.log(image3DB64);
-                    axios.patch(`/shops/${shopID}/${productID}`, { 
+                    axios.patch(`/api/v1/shops/${shopID}/${productID}`, { 
                         'productName': productName, 
                         'productDescription': productDescription, 
                         'productCategory': productCategory,

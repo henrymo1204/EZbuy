@@ -47,7 +47,7 @@ def ProductsService():
     return 'Welcome to Products Service!'
 
 
-@app.route('/products/', methods=['GET'])
+@app.route('/api/v1/products/', methods=['GET'])
 def getAllProducts():
     """ Get all products from the database. Parameters are from HTTP POST requests.
 
@@ -57,86 +57,84 @@ def getAllProducts():
 
     """
     dataDict = request.args.getlist('options[]')
-    
+
     if not dataDict:
         try:
-             db_connection = get_db()
+            db_connection = get_db()
 
-             search_query = f"SELECT ProductID, ProductName, ProductDescription, Price, ProductImage FROM Products"
+            search_query = f"SELECT ProductID, ProductName, ProductDescription, Price, ProductImage FROM Products"
 
-             cur = db_connection.cursor()
-             cur.execute(search_query)
-             db_connection.commit()
+            cur = db_connection.cursor()
+            cur.execute(search_query)
+            db_connection.commit()
 
-             rows = cur.fetchall()
+            rows = cur.fetchall()
         except Exception as e:
-             # return status code 500 when database operation fails
-             return internal_server_error(500, str(e))
+            # return status code 500 when database operation fails
+            return internal_server_error(500, str(e))
 
         products = []
         for row in rows:
-             # image is bytes, need to encode as json does not support bytes
-             products.append({'productID': row[0], 'productName': row[1],
-                         'productDescription': row[2], 'productPrice': row[3], 'productImage': row[4]})
-                         
+            # image is bytes, need to encode as json does not support bytes
+            products.append({'productID': row[0], 'productName': row[1],
+                             'productDescription': row[2], 'productPrice': row[3], 'productImage': row[4]})
+
         try:
-             db_connection = get_db()
+            db_connection = get_db()
 
-             search_query = f"SELECT DISTINCT ProductCategory FROM Products"
+            search_query = f"SELECT DISTINCT ProductCategory FROM Products"
 
-             cur = db_connection.cursor()
-             cur.execute(search_query)
-             db_connection.commit()
+            cur = db_connection.cursor()
+            cur.execute(search_query)
+            db_connection.commit()
 
-             rows = cur.fetchall()
+            rows = cur.fetchall()
         except Exception as e:
-             # return status code 500 when database operation fails
-             return internal_server_error(500, str(e))
-        
+            # return status code 500 when database operation fails
+            return internal_server_error(500, str(e))
+
         options = []
         for row in rows:
-             # image is bytes, need to encode as json does not support bytes
-             options.append({'name': row[0]})
+            # image is bytes, need to encode as json does not support bytes
+            options.append({'name': row[0]})
 
         return jsonify({'success': True, 'products': products, 'options': options})
-    
+
     else:
         dataDict = request.args.getlist('options[]')
-    
-    
+
         sqlString = ''
-    
+
         for option in dataDict:
-             if sqlString == '':
-                 sqlString += " ProductCategory='" + str(option) + "'"
-             else:
-                 sqlString += " OR ProductCategory='" + str(option) + "'"
-        
-   
-        
+            if sqlString == '':
+                sqlString += " ProductCategory='" + str(option) + "'"
+            else:
+                sqlString += " OR ProductCategory='" + str(option) + "'"
+
         try:
-             db_connection = get_db()
+            db_connection = get_db()
 
-             search_query = f"SELECT ProductID, ProductName, ProductDescription, Price, ProductImage FROM Products WHERE" + sqlString
+            search_query = f"SELECT ProductID, ProductName, ProductDescription, Price, ProductImage FROM Products WHERE" + sqlString
 
-             cur = db_connection.cursor()
-             cur.execute(search_query)
-             db_connection.commit()
+            cur = db_connection.cursor()
+            cur.execute(search_query)
+            db_connection.commit()
 
-             rows = cur.fetchall()
+            rows = cur.fetchall()
         except Exception as e:
-             # return status code 500 when database operation fails
-             return internal_server_error(500, str(e))
+            # return status code 500 when database operation fails
+            return internal_server_error(500, str(e))
 
         products = []
         for row in rows:
-             # image is bytes, need to encode as json does not support bytes
-             products.append({'productID': row[0], 'productName': row[1],
-                         'productDescription': row[2], 'productPrice': row[3], 'productImage': row[4]})
+            # image is bytes, need to encode as json does not support bytes
+            products.append({'productID': row[0], 'productName': row[1],
+                             'productDescription': row[2], 'productPrice': row[3], 'productImage': row[4]})
 
         return jsonify({'success': True, 'products': products})
 
-@app.route('/products/<pid>', methods=['GET'])
+
+@app.route('/api/v1/products/<pid>', methods=['GET'])
 def getProduct(pid):
     """ Get a product with product id of <pid> from the database. Parameters are from HTTP POST requests.
 
@@ -159,23 +157,24 @@ def getProduct(pid):
     product = []
     for row in rows:
         # image is bytes, need to encode as json does not support bytes
-        product.append({'productID': row[0], 'shopID': row[1], 'productName': row[2], 'productDescription': row[3],'productCategory': row[4], 'productPrice': row[5], 'productImage': row[7], 'product3DImage': row[8]})
+        product.append({'productID': row[0], 'shopID': row[1], 'productName': row[2], 'productDescription': row[3],
+                        'productCategory': row[4], 'productPrice': row[5], 'productImage': row[7], 'product3DImage': row[8]})
 
     return jsonify({'success': True, 'product': product})
-    
-    
-@app.route('/products/search/<keyword>', methods=['GET'])
+
+
+@app.route('/api/v1/products/search/<keyword>', methods=['GET'])
 def search(keyword):
     '''dataDict = json.loads(request.data)
 
     keyword_key = 'keyword'
     if keyword_key not in dataDict:
         return bad_request(400, f"missing {keyword_key} field in request")
-            
+
     keyword = dataDict['keyword']
     if keyword == None:
         return bad_request(400, f"{keyword_key} field is empty")'''
-    
+
     try:
         db_connection = get_db()
         search_query = f"SELECT * FROM Products WHERE ProductName LIKE '%{keyword}%' OR ProductDescription LIKE '%{keyword}%';"
@@ -190,7 +189,8 @@ def search(keyword):
     product = []
     for row in rows:
         # image is bytes, need to encode as json does not support bytes
-        product.append({'productID': row[0], 'shopID': row[1], 'productName': row[2], 'productDescription': row[3],'productPrice': row[4], 'productImage': row[6], 'product3DImage': row[7]})
+        product.append({'productID': row[0], 'shopID': row[1], 'productName': row[2], 'productDescription': row[3],
+                        'productPrice': row[4], 'productImage': row[6], 'product3DImage': row[7]})
 
     return jsonify({'success': True, 'product': product})
 

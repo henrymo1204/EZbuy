@@ -1,6 +1,4 @@
 
-// import axios from 'commons/axios';
-// import { formatPrice } from 'commons/helper';
 import React from 'react';
 
 const OrderDetailItem = (props) => {

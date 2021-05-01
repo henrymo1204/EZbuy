@@ -25,7 +25,7 @@ const OrderReview = () => {
 
   useEffect( async () => {
     const userID = global.appState.getUserID();
-    const orderServiceResponse = await axios.get(`/order/items/${userID}`);
+    const orderServiceResponse = await axios.get(`/api/v1/order/items/${userID}`);
     setOrderItems(orderServiceResponse.data['orders']);
   }, []);
 
@@ -50,19 +50,19 @@ const OrderReview = () => {
   };
 
   const reloadOrderDetails = async (orderID) => {
-    const orderServiceResponse = await axios.get(`/order/detail/${orderID}`);
+    const orderServiceResponse = await axios.get(`/api/v1/order/detail/${orderID}`);
     const orderDetails = orderServiceResponse.data['orderItems']
     setOrderDetails(orderDetails);
   };
 
   const reloadShipmentDetail = async (orderID) => {
-    const shipmentServiceResponse = await axios.get(`/shipment/${orderID}`);
+    const shipmentServiceResponse = await axios.get(`/api/v1/shipment/${orderID}`);
     const shipmentDetail = shipmentServiceResponse.data['shipment']
     setShipmentDetail(shipmentDetail);
   };
 
   const reloadPaymentDetail = async (orderID) => {
-    const paymentServiceResponse = await axios.get(`/payment/${orderID}`);
+    const paymentServiceResponse = await axios.get(`/api/v1/payment/${orderID}`);
     const paymentDetail = paymentServiceResponse.data['payment']
     setPaymentDetail(paymentDetail);
   };

@@ -20,13 +20,16 @@ sudo a2enmod proxy_http
 
 cd /etc/apache2
 
+ sudo vim /etc/apache2/apache2.conf 
 sudo vim /var/log/apache2/access.log
 sudo vim /etc/apache2/sites-enabled/000-default.conf
 
 <VirtualHost *:80>
   ProxyRequests Off
-  ProxyPass / http://localhost:8080/
-  ProxyPassReverse / http://localhost:8080/
+  ProxyPass ^/api/v1/.* http://localhost:5000/
+  ProxyPassReverse ^/api/v1/.* http://localhost:5000/
+  ProxyPass ^/.* http://localhost:3000/
+  ProxyPassReverse ^/.* http://localhost:3000/
 </VirtualHost>
 
 sudo service apache2 restart
