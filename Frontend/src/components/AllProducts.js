@@ -133,7 +133,7 @@ class AllProducts extends Component {
           </Col>
           {/* <Col className='products-container'> */}
           <Col className="allproducts-control">
-            <div className="products grid allproducts-control">
+            <div className="products allproducts-control">
               {
                 products.map(p => <Products productDetail={p} updatePage={this.updatePage}/>)
               }

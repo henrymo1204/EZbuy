@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 //Import components
 import ProductDetailItemCarousel from './ProductDetailItemCarousel';
 import PageTemplate from './PageTemplate'
-import XRViwer from './XRViewer';
+import XRViewer from './XRViewer';
 import axios from './commons/axios';
 
 //Import render styling from react bootstrap
@@ -36,22 +36,25 @@ class ProductDetailItem extends Component {
             });
     }
 
+    updatePage = () => {
+        this.forceUpdate();
+    }
+
     render() {
         const { products } = this.state;
-        console.log(products);
-        if (products === null) {
-            return <div></div>
-        }
 
+        if (products === null) {
+            return (<div></div>);
+        }
         return (
             <PageTemplate>
                 <Row className="product-container">
                     <Col className="product-control">
                         <div className="product_detail">
                             <Card className="product-detail-card box-detail">
-                                <ProductDetailItemCarousel />
+                                <ProductDetailItemCarousel image={products.productImage} />
                                 <Card.Body>
-                                    <Card.Title className="product_detail">{products.productName}</Card.Title>
+                                    <Card.Title className="product_detail">{products.productDetail}</Card.Title>
                                     <Card.Text id="productDescription">{products.productDescription}</Card.Text>
                                     <Card.Text id="price">{products.price}</Card.Text>
                                     <Button variant="primary">Add to cart</Button>
@@ -59,8 +62,10 @@ class ProductDetailItem extends Component {
                             </Card>
 
                             <Card className="product-detail-card box-detail">
+                                <Card.Title>3D Product Viewer</Card.Title>
                                 <Card.Body>
-                                    <XRViwer/>
+                                    {console.log(products.product3DImage)}
+                                    <XRViewer prop={products.product3DImage} updatePage={this.updatePage} />
                                 </Card.Body>
                             </Card>
                         </div>
@@ -70,5 +75,6 @@ class ProductDetailItem extends Component {
         );
     }
 }
+
 
 export default ProductDetailItem;
