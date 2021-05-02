@@ -68,6 +68,11 @@ class ProductDetailItem extends Component {
                                     {/* <XRViewer prop={products.product3DImage} updatePage={this.updatePage} /> */}
                                 </Card.Body>
                             </Card>
+                            <Card className="product-detail-card box-detail">
+                                <Card.Body>
+                                    <Card.Link href={ `/allproducts?shopID=${products.shopID}` }>{products.shopName}</Card.Link>
+                                </Card.Body>
+                            </Card>
                         </div>
                     </Col>
                 </Row>

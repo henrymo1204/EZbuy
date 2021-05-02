@@ -147,7 +147,7 @@ def getProduct(pid):
     """
     try:
         db_connection = get_db()
-        search_query = f"SELECT * FROM Products WHERE ProductID = '{pid}'"
+        search_query = f"SELECT Products.*, Shops.Shopname FROM Products, Shops WHERE Products.ProductID = '{pid}' AND Shops.ShopID In (SELECT ShopID FROM Products WHERE ProductID = '{pid}')"
         cur = db_connection.cursor()
         cur.execute(search_query)
         db_connection.commit()
@@ -157,9 +157,10 @@ def getProduct(pid):
 
     rows = cur.fetchall()
     product = []
+    print(rows)
     for row in rows:
         # image is bytes, need to encode as json does not support bytes
-        product.append({'productID': row[0], 'shopID': row[1], 'productName': row[2], 'productDescription': row[3],'productCategory': row[4], 'productPrice': row[5], 'productImage': row[7], 'product3DImage': row[8]})
+        product.append({'productID': row[0], 'shopID': row[1], 'productName': row[2], 'productDescription': row[3],'productCategory': row[4], 'productPrice': row[5], 'productImage': row[7], 'product3DImage': row[8], 'shopName': row[10]})
 
     return jsonify({'success': True, 'product': product})
     
