@@ -65,7 +65,7 @@ class ProductDetailItem extends Component {
                                 <Card.Title>3D Product Viewer</Card.Title>
                                 <Card.Body>
                                     {console.log(products.product3DImage)}
-                                    <XRViewer prop={products.product3DImage} updatePage={this.updatePage} />
+                                    {/* <XRViewer prop={products.product3DImage} updatePage={this.updatePage} /> */}
                                 </Card.Body>
                             </Card>
                         </div>
