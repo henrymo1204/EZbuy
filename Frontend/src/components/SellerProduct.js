@@ -254,7 +254,60 @@ class SellerProduct extends Component {
                 this.setState({ file3d: reader.result })
             }
         }
+<<<<<<< HEAD
         reader.readAsDataURL(e.target.files[0])
+=======
+        return (
+            <SellerPageTemplate>
+               <form className="add-product-form">
+                    <Row>
+                        <Col>
+                        <div className="add-product-field">
+                            <label className='add-product-label'>Product Name</label>
+                            <input className="add-product-input" id='productName'></input>
+                        </div>
+                        <div className="add-product-field">
+                        <label className="add-product-label">Price</label>
+                        <input className="add-product-input" id='price'></input>
+                        </div>
+                        <div>
+                        <label>Product Category</label>
+                        <select id='productCategory'>
+                            <option></option>
+                            <option value='Shoes' id='Shoes'>Shoes</option>
+                            <option value='Clothes' id='Clothes'>Clothes</option>
+                            <option value='Some product' id='Some product'>Some product</option>
+                            <option value='Random stuff' id='Random stuff'>Random stuff</option>
+                        </select>
+                        </div>
+                        </Col>
+                        
+                        <Col>
+                        <div className="add-product-field">
+                        <label className="add-product-label">Product Description</label>
+                        <input className="add-product-input" id='productDescription'></input>
+                        </div>
+                    
+                        <div className="add-product-field">
+                        <label className="add-product-label">Quantity</label>
+                        <input className="add-product-input" id='quantity'></input>
+                        </div>
+                        </Col>
+                    </Row>                   
+                    <div className="add-product-field-wide">
+                        <label>Product Image</label>
+                        <input type='file' id='productImage' onChange={this.onImageChange}></input>
+                        <img id='img' src={file}/>
+                    </div>
+                    <div className="add-product-field">
+                        <label className="add-product-label">3D Product Image</label>
+                        <input className="add-product-input" type='file' id='3DProductImage'></input>
+                    </div>
+                    <button type="button" className="add-product" onClick={this.editProduct}>Save</button>
+                </form>
+            </SellerPageTemplate>
+        );
+>>>>>>> dcffb69577ffe9d5edc3c0fd2c36cccdebb8744a
     }
 
     render() {
@@ -316,6 +369,7 @@ class SellerProduct extends Component {
                                 <XRViewer prop={file3d} />
                             </Card>
                         </div>
+<<<<<<< HEAD
                         <button type="button" class="add-product" onClick={this.editProduct}>Save</button>
                     </form>
                 </SellerPageTemplate>
@@ -377,6 +431,15 @@ class SellerProduct extends Component {
                 </SellerPageTemplate>
             );
         }
+=======
+                        
+                        </Col>
+                    </Row>
+                    <button type="button" className="add-product" onClick={this.addProduct}>Add Product</button>
+                </form>
+            </SellerPageTemplate>
+        );
+>>>>>>> dcffb69577ffe9d5edc3c0fd2c36cccdebb8744a
     }
 }
 

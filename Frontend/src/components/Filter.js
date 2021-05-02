@@ -8,7 +8,7 @@ class Filter extends Component {
             <Form className="filter">
 
                 <Form.Group>
-                <div class="filter-radio">
+                <div className="filter-radio">
                     <label>
                         <input type="radio" />
                         Brand1
@@ -16,7 +16,7 @@ class Filter extends Component {
                 </div>
                 </Form.Group>
                 <Form.Group>
-                <div class="filter-radio">
+                <div className="filter-radio">
                     <label>
                         <input type="radio"/>
                         Brand2(3D)
@@ -24,7 +24,7 @@ class Filter extends Component {
                 </div>
                 </Form.Group>
                 <Form.Group>
-                <div class="filter-radio">
+                <div className="filter-radio">
                     <label>
                         <input type="radio" />
                         Brand3(auction)

@@ -18,6 +18,7 @@ import image1 from "../src/images/2.jpg";
 import image2 from "../src/images/3.jpg";
 import image3 from "../src/images/4.jpg";
 import image4 from "../src/images/5.jpg";
+import axios from './components/commons/appState';
 
 const App = props => {
 
@@ -42,25 +43,38 @@ const App = props => {
     { width: 1200, itemsToShow: 4 },
   ];
 
-  const ads = [
-    {productName:'name', productDescription:'description', imageurl:image1, productURL: 'productURL', timeLeft: "24 hrs"},
-    {productName:'name', productDescription:'description', imageurl:image2, productURL: 'productURL', timeLeft: "24 hrs"},
-    {productName:'name', productDescription:'description', imageurl:image3, productURL: 'productURL', timeLeft: "24 hrs"},
-    {productName:'name', productDescription:'description', imageurl:image4, productURL: 'productURL', timeLeft: "24 hrs"},
-    {productName:'name', productDescription:'description', imageurl:image2, productURL: 'productURL', timeLeft: "24 hrs"},
-    {productName:'name', productDescription:'description', imageurl:image4, productURL: 'productURL', timeLeft: "24 hrs"},
-    {productName:'name', productDescription:'description', imageurl:image3, productURL: 'productURL', timeLeft: "24 hrs"},
-    {productName:'name', productDescription:'description', imageurl:image1, productURL: 'productURL', timeLeft: "24 hrs"}
-  ]
+  // const ads = [
+  //   {productName:'name', productDescription:'description', imageurl:image1, productURL: 'productURL', timeLeft: "24 hrs"},
+  //   {productName:'name', productDescription:'description', imageurl:image2, productURL: 'productURL', timeLeft: "24 hrs"},
+  //   {productName:'name', productDescription:'description', imageurl:image3, productURL: 'productURL', timeLeft: "24 hrs"},
+  //   {productName:'name', productDescription:'description', imageurl:image4, productURL: 'productURL', timeLeft: "24 hrs"},
+  //   {productName:'name', productDescription:'description', imageurl:image2, productURL: 'productURL', timeLeft: "24 hrs"},
+  //   {productName:'name', productDescription:'description', imageurl:image4, productURL: 'productURL', timeLeft: "24 hrs"},
+  //   {productName:'name', productDescription:'description', imageurl:image3, productURL: 'productURL', timeLeft: "24 hrs"},
+  //   {productName:'name', productDescription:'description', imageurl:image1, productURL: 'productURL', timeLeft: "24 hrs"}
+  // ]
+
+    const ads = global.appState.getRandomProducts();
+    
+    if (ads === null) {
+      global.appState.setRandomProducts();
+      const ads = global.appState.getRandomProducts();
+    }
+
+    if (ads === null) {
+      return (
+        <div></div>
+      )
+    }
 
     return (
       <PageTemplate>
           <Row>
             <Col className="home-video-container">
               <div className="home-video">
-               <h1><i class="fas fa-shopping-cart"></i> Welcome to EZ Buy</h1>
+               <h1><i className="fas fa-shopping-cart"></i> Welcome to EZ Buy</h1>
                 <div className="home-video-part"></div>
-                <div class="color-overlay">
+                <div className="color-overlay">
                 <video muted autoPlay loop className="home-video">
                   <source src={V02} type="video/mp4" />
                 </video>

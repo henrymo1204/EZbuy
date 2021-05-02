@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 
 //Import A-Frame library for viewing XR content in browser
 import 'aframe';
+import { render } from 'react-dom';
 
 const XRViewer = (prop) => {
 
@@ -17,7 +18,7 @@ const XRViewer = (prop) => {
     var entityEl = document.createElement('a-entity');
     sceneEl.appendChild(entityEl);
     entityEl.setAttribute('gltf-model', srcObjectURL);
-        
+
     return (
         <a-scene embedded>
         </a-scene>

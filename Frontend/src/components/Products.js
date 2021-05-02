@@ -59,7 +59,7 @@ const Products = (props) => {
           <Card.Text className="product-detail">{price}</Card.Text>
           <Card.Text className="product-detail">
             <Nav.Link onClick={addCart}>
-            <i class="fas fa-cart-plus"></i>
+            <i className="fas fa-cart-plus"></i>
             <span>Add</span>
           </Nav.Link>  
           </Card.Text>

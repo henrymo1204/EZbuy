@@ -30,7 +30,7 @@ const NavBarEnd = props => {
             <Nav className="mr-auto2">
                 {userInfo.username ? (
                     <Nav.Link className="username" onClick={toProfile}>
-                        <i class="fas fa-user"></i>
+                        <i className="fas fa-user"></i>
                         {" Hi, " + userInfo.username}
                     </Nav.Link>
                 ) : (

@@ -195,6 +195,27 @@ def search(keyword):
     return jsonify({'success': True, 'product': product})
 
 
+@app.route('/products/random/', methods=['GET'])
+def getRandomProducts():
+    try:
+        db_connection = get_db()
+        search_query = f"SELECT ProductID, ProductName, Price, ProductImage FROM Products ORDER BY random() LIMIT 8;"
+        cur = db_connection.cursor()
+        cur.execute(search_query)
+        db_connection.commit()
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+
+    rows = cur.fetchall()
+    products = []
+    for row in rows:
+        # image is bytes, need to encode as json does not support bytes
+        products.append({'productID': row[0], 'productName': row[1], 'productPrice': row[2], 'productImage': row[3]})
+
+    return jsonify({'success': True, 'products': products})
+    
+
 @ app.errorhandler(401)
 def unauthorized(e, message):
     """ Error handler on status code 401

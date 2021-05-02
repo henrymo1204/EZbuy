@@ -1,8 +1,7 @@
 .page-template-container {
-  width: 80%;
+  width: 100%;
   height: 100vh;
   top: 15%;
-  left: 10%;
   padding: 0px 0px 0px 0px;
   position: relative;
   background-image: linear-gradient(
@@ -20,7 +19,6 @@
   top: 10%;
   padding-bottom: 1%;
   color: rgba(68, 65, 65, 0.726);
-  border-bottom: 2px solid #333;
   text-align: center;
   position: relative;
 }
@@ -45,7 +43,6 @@
   top: 5%;
   padding-bottom: 1%;
   color: rgba(68, 65, 65, 0.726);
-  border-bottom: 2px solid #333;
   text-align: center;
   position: relative;
 }

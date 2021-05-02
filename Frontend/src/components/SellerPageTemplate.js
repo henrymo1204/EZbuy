@@ -21,14 +21,14 @@ const SellerPageTemplate = props => {
       <div className="page-template-container">
         <Row className="page-template-row">
           <Col>
-            <div class="sidenav-left">
+            <div className="sidenav-left">
               <a href="/sellerinfo">Account</a>
               <a href="/sellerinventory">Inventory</a>
               <a href="/sellerorders">Orders</a>
               <a href="/logout">Log Out</a>
             </div>
           </Col>
-            <div class="main-right">
+            <div className="main-right">
             {props.children}
             </div>
           <Col>
