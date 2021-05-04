@@ -8,7 +8,7 @@
 #     Juheng Mo,           henrymo@csu.fullerton.edu
 #     Mohammad Mirwais,    mirwais.88@csu.fullerton.edu
 
-from flask import Flask, request, g, jsonify
+from flask import Flask, request, g, jsonify, url_for, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils import jwt_token_required
 import datetime
@@ -17,6 +17,8 @@ import click
 import json
 import jwt
 from flask_cors import CORS
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 
 app = Flask(__name__)
 app.config.from_envvar('APP_CONFIG')
@@ -28,6 +30,16 @@ TOKEN_SIGN_KEY = app.config.get("TOKEN_SIGN_KEY")
 TOKEN_VERIFY_KEY = app.config.get("TOKEN_VERIFY_KEY")
 CORS(app)
 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'youremail@email.com' #enter the email username here
+app.config['MAIL_PASSWORD'] = 'yourpassword.' #enter the email password here
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
+
+s = URLSafeTimedSerializer('Thisisasecret!')
 
 @app.cli.command('init')
 def init_db():
@@ -114,22 +126,44 @@ def createUser():
 
     # generate hashed password to store in database
     hashedPass = generate_password_hash(password)
-
-    try:
-        _create_user(username, email, userRole, hashedPass)
-
-        userID = _get_userID(username)
-
-        _create_user_cart(userID)
-
-        if userRole == 'seller':
-            _create_user_shop(userID, username)
-    except Exception as e:
-        # return status code 500 when database operation fails
-        return internal_server_error(500, str(e))
+    
+    token = s.dumps({'username': username, 'email': email, 'hashedPass': hashedPass, 'userRole': userRole}, salt='email-confirm')
+    
+    msg = Message('Confirm Email', sender='youremail@email.com', recipients=[email])
+    #need to change sender email
+    
+    link = url_for('confirm_email', token=token, _external=True)
+    
+    msg.body = 'Your email confirmation link is {} \n\nThe link will expire in 10 minutes.'.format(link)
+    
+    mail.send(msg)
 
     return jsonify({'success': True})
+    
+    
+@app.route('/register/<token>')
+def confirm_email(token):
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=600)
+    	
+        try:
+            _create_user(email['username'], email['email'], email['userRole'], email['hashedPass'])
 
+            userID = _get_userID(email['username'])
+
+            _create_user_cart(userID)
+
+            if email['userRole'] == 'seller':
+                _create_user_shop(userID, email['username'])
+        except Exception as e:
+            # return status code 500 when database operation fails
+            return internal_server_error(500, str(e))
+            
+    except SignatureExpired:
+        return '<h1>The token is expired!<h1>'
+    
+    return '<h1>Email confirmed<h1>'
+    
 
 def _create_user(username, email, userRole, hashedPass):
     db_connection = get_db()
@@ -281,6 +315,80 @@ def loginUser():
 
     return jsonify({'success': True, 'jwt_token': jwt_token})
 
+
+@app.route('/reset_password', methods=['POST'])
+def sendResetPassowrdEmail():
+    dataDict = json.loads(request.data)
+
+    email_key = 'email'
+    
+    # return status code 400 if email is not passed from the HTTP request.
+    if email_key not in dataDict:
+        return bad_request(400, f"missing {email_key} field in request")
+    
+    email = dataDict['email']
+
+    # return status code 400 if email value is not valid
+    if email == None:
+        return bad_request(400, f"{email_key} field is empty")
+     
+    token = s.dumps({'email': email}, salt='password-reset')
+    
+    msg = Message('Reset password', sender='youremail@email.com', recipients=[email])
+    # need to change sender email
+    
+    link = 'http://localhost:3000/reset_password/' + str(token)
+    
+    msg.body = 'Your reset password link is {} \n\nThe link will expire in 10 minutes.'.format(link)
+    
+    mail.send(msg)
+
+    return jsonify({'success': True})
+ 
+   
+@app.route('/reset_password/<token>', methods=['PATCH'])
+def reset_password(token):
+    dataDict = json.loads(request.data)
+
+    password_key = 'password'
+    
+    '''# return status code 400 if email is not passed from the HTTP request.
+    if password_key not in dataDict:
+        return bad_request(400, f"missing {password_key} field in request")
+    
+    password = dataDict['password']
+
+    # return status code 400 if email value is not valid
+    if password == None:
+        return bad_request(400, f"{password_key} field is empty")'''
+        
+    # generate hashed password to store in database
+    hashedPass = generate_password_hash(password)    
+    
+    try:
+        email = s.loads(token, salt='password-reset', max_age=300)
+    	if password:
+            try:
+                # generate hashed password to store in database
+                hashedPass = generate_password_hash(password) 
+            
+                db_connection = get_db()
+
+                update_query = f"UPDATE Users SET HashedPass='{hashedPass}' WHERE Email='{email['email']}';"
+
+                cur = db_connection.cursor()
+                cur.execute(update_query)
+                db_connection.commit()
+            
+            except Exception as e:
+                # return status code 500 when database operation fails
+                return internal_server_error(500, str(e))
+            
+    except SignatureExpired:
+        return internal_server_error(500, f"Token expired")
+    
+    return jsonify({'success': True})
+   
 
 @ app.errorhandler(401)
 def unauthorized(e, message):
