@@ -6,14 +6,10 @@ kill $(ps aux | grep '[f]lask run' | awk '{print $2}')
 
 #kill frontend before start if necessary
 echo "Stoping frontend processes..."
-kill $(ps aux | grep '[n]ode .*EZbuy.*' | awk '{print $2}')
+kill $(ps aux | grep '[s]erve -s' | awk '{print $2}')
 
 #restart backend
 pushd ../Backend
-echo "Remove DB file..."
-rm ./ezbuy.db
-echo "Init DB file..."
-sh init.sh
 echo "Restart backend process..."
 exec sh run.sh &
 popd

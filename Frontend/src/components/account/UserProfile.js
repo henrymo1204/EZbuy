@@ -40,17 +40,15 @@ export default function UserProfile(props) {
       <br />
       <br />
       {props.user['userRole'] === 'seller' ? 
-        <div className="shop-btn-container" ><Button href="/sellerinfo">Open Seller Shop</Button></div> : <br />}
+        <div className="shop-btn-container" ><Button className ="shop-button" href="/sellerinfo">Open Seller Shop</Button></div> : <br />}
         <br />
       <br />
-        <div className="shop-btn-container" ><Button href="/orderreview">Review Orders</Button></div> : <br />
-      <br />
-      <br />
+        <div className="shop-btn-container" ><Button className ="shop-button" href="/orderreview">Review Orders</Button></div> : <br />
       <br />
       <br />
       <div className="field is-grouped is-grouped-centered profile-button-container">
         <div className="control profile-button-control">
-          <button className="button is-danger profile-button" type="button" onClick={logout}>
+          <button className="button profile-button" type="button" onClick={logout}>
             Logout
           </button>
         </div>

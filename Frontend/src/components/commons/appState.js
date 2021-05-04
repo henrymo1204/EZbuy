@@ -13,7 +13,7 @@ const getLocalCartNum = () => {
 
 const getRemoteCartNum = async () => {
     const userID = getUserID();
-    const response = await axios.get(`/cart/items?userID=${userID}`);
+    const response = await axios.get(`/api/v1/cart/items?userID=${userID}`);
     const cartItems = response.data['items'] || []
     const cartNum = cartItems.map(item => item['productQuantity']).reduce((sum, change) => sum + change, 0); 
     return cartNum;
@@ -35,7 +35,7 @@ const getUserID = () => {
 //Search related application state
 const updateSearchResult = async (keyword) => {
   try {
-    let inventoryServiceResponse = await axios.get(`/products/search/${keyword}`);
+    let inventoryServiceResponse = await axios.get(`/api/v1/products/search/${keyword}`);
     let searchResultList = inventoryServiceResponse.data['product'];
     localStorage.setItem('Search_Result', JSON.stringify(searchResultList));
     console.log(inventoryServiceResponse);
@@ -54,7 +54,7 @@ const setSearchResult = (searchResultList) => {
 
 const updateProductCatagory = async () => {
   try {
-    let inventoryServiceResponse = await axios.get('/products/')
+    let inventoryServiceResponse = await axios.get('/api/v1/products/')
     let catagoryList = inventoryServiceResponse.data['options'];
     localStorage.setItem('Product_Catagory', JSON.stringify(catagoryList));
     console.log(inventoryServiceResponse);
@@ -70,7 +70,7 @@ const getProductCatagory = () => {
 
 const setRandomProducts = async () => {
   try {
-    let response = await axios.get('/products/random/');
+    let response = await axios.get('/api/v1/products/random/');
     let result = response.data['products'];
     localStorage.setItem('Random_Products', JSON.stringify(result));
     console.log(response);

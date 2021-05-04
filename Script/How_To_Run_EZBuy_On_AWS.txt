@@ -1,0 +1,47 @@
+sudo apt install yarn
+sudo apt install npm
+sudo gem install foreman
+sudo apt install sqlite3
+sudo apt autoremove
+sudo snap install node --classic --channel=14
+
+in /Frontend, run npm install
+
+https://create-react-app.dev/docs/deployment/
+
+npm run build
+npm install -g serve
+serve -s build -l 3000
+
+https://stackoverflow.com/questions/41246261/react-routing-is-able-to-handle-different-url-path-but-tomcat-returns-404-not-av/41249464#41249464
+https://stackoverflow.com/questions/43729896/how-to-deploy-the-react-app-on-aws-ec2-instance
+
+sudo a2enmod proxy_http
+
+cd /etc/apache2
+
+ sudo vim /etc/apache2/apache2.conf 
+sudo vim /var/log/apache2/access.log
+sudo vim /etc/apache2/sites-enabled/000-default.conf
+
+<VirtualHost *:80>
+  ProxyRequests Off
+  ProxyPass ^/api/v1/.* http://localhost:5000/
+  ProxyPassReverse ^/api/v1/.* http://localhost:5000/
+  ProxyPass ^/.* http://localhost:3000/
+  ProxyPassReverse ^/.* http://localhost:3000/
+</VirtualHost>
+
+sudo service apache2 restart
+
+rsync -avze "ssh -i /Users/Ying_Luo/Desktop/ezbuy.pem" /Users/Ying_Luo/Desktop/Github/CPSC462_Project_EZbuy_Group6 ubuntu@18.223.187.69:/home/ubuntu/code_ezbuy
+
+cd ~/code_ezbuy/CPSC462_Project_EZbuy_Group6/Script/
+
+sh start_ezbuy_with_db_init.sh
+
+Dynamic DNS:
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dynamic-dns.html
+
+DNS:
+https://www.youtube.com/watch?v=lnPPdYexf4E

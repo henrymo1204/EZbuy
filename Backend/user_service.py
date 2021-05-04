@@ -79,7 +79,7 @@ def userService():
     return 'Welcome to User Service!'
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/api/v1/register', methods=['POST'])
 def createUser():
     """ Create a new user. Parameters are from HTTP POST requests.
 
@@ -224,7 +224,7 @@ def _create_user_shop(userID, username):
     db_connection.commit()
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/v1/login', methods=['POST'])
 def loginUser():
     """ Authenticate a user by checking if the password matches what the database stores.
         Parameters are from HTTP POST requests.

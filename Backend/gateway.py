@@ -20,13 +20,13 @@ service_request_counter_dict = dict(
 )
 
 service_request_pattern_dict = dict(
-    user_service='(.*/user.*)|(.*/register.*)|(.*/login.*)',
-    cart_service='.*/cart.*',
-    order_service='.*/order.*',
-    shipment_service='.*/shipment.*',
-    payment_service='.*/payment.*',
-    inventory_service='.*/products.*',
-    shop_service='.*/shop.*'
+    user_service='(.*/api/v1/user.*)|(.*/api/v1/register.*)|(.*/api/v1/login.*)',
+    cart_service='.*/api/v1/cart.*',
+    order_service='.*/api/v1/order.*',
+    shipment_service='.*/api/v1/shipment.*',
+    payment_service='.*/api/v1/payment.*',
+    inventory_service='.*/api/v1/products.*',
+    shop_service='.*/api/v1/shop.*'
 )
 
 service_upstream_dict = dict(

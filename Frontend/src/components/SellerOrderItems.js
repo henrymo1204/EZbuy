@@ -9,7 +9,7 @@ const SellerOrderItems = (props) => {
   const [img, setImg] = useState();
 
   if (productName === undefined & img === undefined) {
-    axios.get(`/products/${productID}`)
+    axios.get(`/api/v1/products/${productID}`)
     .then((res) => {
       setProductName(res['data']['product'][0]['productName']);
       setImg(res['data']['product'][0]['productImage']);

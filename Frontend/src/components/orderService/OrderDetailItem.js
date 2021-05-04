@@ -1,6 +1,4 @@
 
-// import axios from 'commons/axios';
-// import { formatPrice } from 'commons/helper';
 import React from 'react';
 
 const OrderDetailItem = (props) => {
@@ -16,9 +14,9 @@ const OrderDetailItem = (props) => {
           <img src={productImage} alt= "" width="100" />
         </div>
         <div className="column is-narrow">{productName}</div>
-        <div className="column is-narrow">{quantity}</div>
-        <div className="column is-narrow">{productPrice}</div>
-        <div className="column is-narrow">{totalPrice}</div>
+        <div className="column is-narrow">Num:{quantity}</div>
+        <div className="column is-narrow">${productPrice}</div>
+        <div className="column is-narrow">total:${totalPrice}</div>
       </div>
     );
   };

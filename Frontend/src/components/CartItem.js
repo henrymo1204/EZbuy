@@ -22,7 +22,7 @@ const CartItem = (props) => {
       ...props.cartItem,
       productQuantity: newQuantity
     };
-    axios.patch(`/cart/${cartItemID}`, {quantity: newQuantity}).then(res => {
+    axios.patch(`/api/v1/cart/${cartItemID}`, {quantity: newQuantity}).then(res => {
       if (res.data['success'] == true) {
         toast.success('cart update success.');
       } else {
@@ -33,7 +33,7 @@ const CartItem = (props) => {
   };
 
   const handleDelete = () => {
-    axios.delete(`/cart/${cartItemID}`).then(res => {
+    axios.delete(`/api/v1/cart/${cartItemID}`).then(res => {
       if (res.data['success'] == true) {
         toast.success('cart update success.');
       } else {

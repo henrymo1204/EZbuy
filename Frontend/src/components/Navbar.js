@@ -3,6 +3,8 @@ import { Navbar, Nav, Form, Button, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBarEnd from './NavBarEnd'
 import { toast } from 'react-toastify';
+import '../css/home.scss'
+
 
 class MyNavbar extends Component {
 
@@ -20,7 +22,7 @@ class MyNavbar extends Component {
 
     render() {
         return (
-            <Navbar bg="light" expand="lg">
+            <Navbar className="navbar" bg="light" expand="lg">
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

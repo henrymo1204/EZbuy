@@ -47,7 +47,7 @@ def paymentService():
     return 'Welcome to Payment Service!'
 
 
-@app.route('/payment/<userID>/<orderID>', methods=['POST'])
+@app.route('/api/v1/payment/<userID>/<orderID>', methods=['POST'])
 def addPayment(userID, orderID):
 
     dataDict = json.loads(request.data)
@@ -79,7 +79,7 @@ def addPayment(userID, orderID):
     return jsonify({'success': True})
 
 
-@app.route('/payment/<orderID>', methods=['GET'])
+@app.route('/api/v1/payment/<orderID>', methods=['GET'])
 def getPayment(orderID):
 
     paymentDetail = None

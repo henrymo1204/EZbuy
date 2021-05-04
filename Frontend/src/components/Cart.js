@@ -22,7 +22,7 @@ const Cart = () => {
 
   useEffect(async () => {
     const userID = global.appState.getUserID();
-    axios.get(`/cart/items?userID=${userID}`).then(res => setCartItems(res.data['items']));
+    axios.get(`/api/v1/cart/items?userID=${userID}`).then(res => setCartItems(res.data['items']));
   }, []);
 
   const totalPrice = useMemo(() => {

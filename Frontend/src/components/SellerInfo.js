@@ -20,7 +20,7 @@ class SellerInfo extends Component {
   getShop = () => {
     const user = global.auth.getUser();
     const shopID = user['shopID'];
-    axios.get(`/shops/${shopID}`)
+    axios.get(`/api/v1/shops/${shopID}`)
     .then((res) => {
       var shopName = document.getElementById('ShopName');
       shopName.value = res['data']['shop'][0][0]
@@ -34,7 +34,7 @@ class SellerInfo extends Component {
     const shopID = user['shopID'];
     var shopName = document.getElementById('ShopName').value
     var aboutUs = document.getElementById('AboutUs').value
-    axios.patch(`/shops/${shopID}`, {
+    axios.patch(`/api/v1/shops/${shopID}`, {
       'shopName': shopName,
       'aboutUs': aboutUs
     })

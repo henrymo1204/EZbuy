@@ -21,7 +21,7 @@ const ContentCard = (props) => {
         try {
           const userID = global.appState.getUserID();
           //get cart item from backend if existing
-          const response = await axios.get(`/cart/item?productID=${productID}&&userID=${userID}`)
+          const response = await axios.get(`/api/v1/cart/item?productID=${productID}&&userID=${userID}`)
     
           const items = response.data['items']
     
@@ -34,10 +34,10 @@ const ContentCard = (props) => {
               quantity : previousQuantity + 1
             };
     
-            await axios.patch(`/cart/${cartItemID}`, item_updates);
+            await axios.patch(`/api/v1/cart/${cartItemID}`, item_updates);
           } else {
             //if item not existing, need to insert new cart item in backend
-            await axios.post('/cart', {
+            await axios.post('/api/v1/cart', {
               userID : userID,
               productID : productID,
               quantity : 1

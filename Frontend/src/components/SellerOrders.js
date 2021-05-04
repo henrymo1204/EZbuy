@@ -21,7 +21,7 @@ class SellerOrders extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/order/${this.shopID}/`).then((res) => {
+    axios.get(`/api/v1/order/${this.shopID}/`).then((res) => {
       this.setState({ products: res.data['orders'], state: 0})
     });
   }

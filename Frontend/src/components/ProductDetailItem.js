@@ -28,7 +28,7 @@ class ProductDetailItem extends Component {
     componentDidMount() {
         const productID = window.location.search.slice(11);
 
-        axios.get(`/products/${productID}`).then((res) => {
+        axios.get(`/api/v1/products/${productID}`).then((res) => {
             this.setState({ products: res.data['product'][0] })
         })
             .catch((error) => {

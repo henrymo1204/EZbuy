@@ -15,7 +15,7 @@ const ProductList = (props) => {
   const shopID = user['shopID'];
 
   const deleteProduct = () => {
-    axios.delete(`/shops/${shopID}/${productID}`).then((res) => {console.log(res)});
+    axios.delete(`/api/v1/shops/${shopID}/${productID}`).then((res) => {console.log(res)});
     window.location.reload();
   }
 
