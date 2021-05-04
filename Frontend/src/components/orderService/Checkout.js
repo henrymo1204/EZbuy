@@ -45,7 +45,9 @@ const Checkout = (props) => {
       const car_service_response = await axios.get(`/cart/items?userID=${userID}`);
       const cartItems = car_service_response.data['items'] || []
       const order_service_response = await axios.post(`/order/${userID}`, {
-        'order_items': cartItems
+        'order_items': cartItems,
+        'emailAddress': global.auth.getUser()['email'],
+        'userName': global.auth.getUser()['username']
       });
       const orderID = order_service_response.data['orderID'];
 
@@ -71,6 +73,7 @@ const Checkout = (props) => {
     } catch (error) {
       if (cart_res == null || cart_res.data['success'] !== 'success') {
         console.log("failed to create order");
+        console.log(error)
       } else if (payment_res == null || payment_res.data['success'] !== 'success') {
 
       }

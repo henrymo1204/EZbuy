@@ -3,15 +3,14 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  overflow: scroll;
 }
 
 .allproducts-container {
-  height: 100vh;
+  height: auto;
 }
 
 .allproducts-control {
-  height: 100vh;
+  height: auto;
 }
 
 .filter-container {
