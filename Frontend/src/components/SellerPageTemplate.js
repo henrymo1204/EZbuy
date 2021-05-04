@@ -20,7 +20,7 @@ const SellerPageTemplate = props => {
     <PageTemplate>
       <div className="page-template-container">
         <Row className="page-template-row">
-          <Col>
+          <Col className="seller-navbar">
             <div className="sidenav-left">
               <a href="/sellerinfo">Account</a>
               <a href="/sellerinventory">Inventory</a>

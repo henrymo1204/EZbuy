@@ -39,3 +39,9 @@ rsync -avze "ssh -i /Users/Ying_Luo/Desktop/ezbuy.pem" /Users/Ying_Luo/Desktop/G
 cd ~/code_ezbuy/CPSC462_Project_EZbuy_Group6/Script/
 
 sh start_ezbuy_with_db_init.sh
+
+Dynamic DNS:
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dynamic-dns.html
+
+DNS:
+https://www.youtube.com/watch?v=lnPPdYexf4E

@@ -1,6 +1,11 @@
 .about-bar {
   // position: fixed;
-  background-color: #535978;
+  background-color: #22344e;
+  // background-image: linear-gradient(
+  //   to top,
+  //   rgba(230, 230, 230, 0.925),
+  //   rgb(161, 141, 114)
+  // );
   width: 100vw;
   // bottom: 0px;
   left: 0px;
@@ -8,6 +13,7 @@
   .about-bar-row {
     height: 50%;
     text-align: center;
-    color: white;
+    // color: rgb(27, 27, 27);
+    color: blanchedalmond;
   }
 }
