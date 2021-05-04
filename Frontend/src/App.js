@@ -23,9 +23,11 @@ import axios from './components/commons/appState';
 const App = props => {
 
   useEffect(async () => {
-    await global.appState.updateLocalCartNum();
-    console.log("test");
-    // this.forceUpdate();
+    if (global.appState.getUserID() != null) {
+      await global.appState.updateLocalCartNum();
+    } else {
+      global.appState.setLocalCartNum(0);
+    }
   }, []);
 
   const settings = {

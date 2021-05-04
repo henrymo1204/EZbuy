@@ -7,6 +7,10 @@ const updateLocalCartNum = async () => {
     localStorage.setItem('Cart_Num', remoteCartNum);
 };
   
+const setLocalCartNum = (cart_num) => {
+  localStorage.setItem('Cart_Num', cart_num);
+};
+
 const getLocalCartNum = () => {
     return localStorage.getItem('Cart_Num');
 };
@@ -88,6 +92,7 @@ const getRandomProducts = () => {
 global.appState = {
     updateLocalCartNum,
     getLocalCartNum,
+    setLocalCartNum,
     getUserID,
     getSearchResult,
     setSearchResult,

@@ -6,14 +6,15 @@ import NotFound from './components/NotFound';
 import Login from './components/account/Login';
 import Register from './components/account/Register';
 import Logout from './components/account/Logout';
+// import ForgetPassword from './components/account/ForgetPassword';
+// import ResetPassword from './components/account/ResetPassword';
 
 import Cart from './components/Cart';
 import Checkout from './components/orderService/Checkout';
 
 
 import OrderReview from './components/orderService/OrderReview';
-// import OrderHis from './components/orderService/OrderHis';
-// import OrderDetail from './components/orderService/OrderDetail';
+
 
 import ProductDetailItem from './components/ProductDetailItem';
 import AllProducts from './components/AllProducts';
@@ -34,6 +35,8 @@ const Router = () => (
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/logout" component={Logout} />
+      {/* <Route path="/forgetpassword" component={ForgetPassword} /> */}
+      {/* <Route path="/resetpassword" component={ResetPassword} /> */}
 
       <Route path="/cart" component={Cart} />
 
