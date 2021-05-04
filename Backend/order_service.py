@@ -14,11 +14,23 @@ import sqlite3
 import json
 from utils import jwt_token_required
 from flask_cors import CORS
+from flask_mail import Mail, Message
+
 
 app = Flask(__name__)
 app.config.from_envvar('APP_CONFIG')
 DATABASE_PATH = app.config.get("DATABASE")
 CORS(app)
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'youremail@email.com' #enter the email username here
+app.config['MAIL_PASSWORD'] = 'password' #enter the email password here
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
+
 
 
 def get_db():
@@ -53,8 +65,11 @@ def addOrder(userID):
     dataDict = json.loads(request.data)
 
     order_items = dataDict['order_items']
+    email_address = dataDict['emailAddress']
+    username = dataDict['userName']
 
     totalPrice = 0
+    message = ''
     for item in order_items:
         quantity = item['productQuantity']
         price = item['productPrice']
@@ -88,6 +103,8 @@ def addOrder(userID):
 
         orderID_index = 0
         orderID = rows[0][orderID_index]
+        
+        seller_message = dict()
 
         # add each cart_item to Order_Items table with orderID
         for item in order_items:
@@ -106,10 +123,60 @@ def addOrder(userID):
             cur = db_connection.cursor()
             cur.execute(db_query)
             db_connection.commit()
+            
+            product_query = f"SELECT ProductName, Price, ShopID FROM Products WHERE ProductID = '{productID}';"
+
+            # get product information to database
+            cur = db_connection.cursor()
+            cur.execute(product_query)
+            db_connection.commit()
+            
+            rows = cur.fetchall()
+            
+            total = float(rows[0][1]) * float(quantity)
+            
+            msg = str(rows[0][0]) + "\nItem Number: " + str(productID) + "\nQuantity: " + str(quantity) + "\nPrice: $" + str(total) + "\n\n"
+            
+            if rows[0][2] not in seller_message.keys():
+                seller_message[rows[0][2]] = msg
+            else:
+                seller_message[rows[0][2]] += msg
+            
+            message += msg
+            
     except Exception as e:
         # return status code 500 when database operation fails
         return internal_server_error(500, str(e))
 
+        
+    buyer_msg = Message('Order Confirmation', sender = 'youremail@email.com', recipients = [email_address])
+    # need to change sender email
+    buyer_msg.body = "Dear " + str(username) + ",\n\nThank you for ordering from the EZ-Buy online store.\n\
+Your order has been placed.\n\n------------------------------------------------------------\nORDER ID: " + str(orderID) + "\nSUBTOTAL: $" + str(totalPrice) + "\n------------------------------------------------------------\nItems:\n\n" + message
+    mail.send(buyer_msg)
+
+    try:
+        db_connection = get_db()
+        
+        for seller in seller_message:
+
+            db_query = f"SELECT Users.Email, Shops.Shopname FROM Users, Shops WHERE Users.UserID IN (SELECT UserID FROM Shops WHERE ShopID = '{seller}') AND Users.UserID = Shops.UserID;"
+
+            cur = db_connection.cursor()
+            cur.execute(db_query)
+            db_connection.commit()
+            
+            rows = cur.fetchall()
+            
+            seller_msg = Message('Order Confirmation', sender = 'youremail@email.com', recipients = [rows[0][0]])
+            # need to change sender email
+            seller_msg.body = buyer_msg.body = "Dear " + str(rows[0][1]) + ",\n\nYou have received an order.\n\n------------------------------------------------------------\nORDER ID: " + str(orderID) + "\n------------------------------------------------------------\nItems:\n\n" + seller_message[seller]
+            mail.send(seller_msg)
+            
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+        
     return jsonify({'success': True, 'orderID': orderID})
 
 

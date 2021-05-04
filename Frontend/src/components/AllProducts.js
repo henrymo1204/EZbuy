@@ -69,47 +69,47 @@ class AllProducts extends Component {
 
   render() {
     const { products, options, shopName, aboutUs } = this.state;
-    // const shopID = window.location.search.slice(8);
-    // if (shopID) {
-    //   if (products === null && options === null & shopName === null & aboutUs === null) {
-    //     return <div></div>
-    //   }
+    const shopID = window.location.search.slice(8);
+    if (shopID) {
+      if (products === null && options === null & shopName === null & aboutUs === null) {
+        return <div></div>
+      }
 
-    //   return (
-    //     <PageTemplate>
-    //       <Row>
-    //         <Col className='filter-container'>
-    //           <div className='filter'>
-    //             <label>{shopName}</label>
-    //           </div>
-    //           <div className='filter'>
-    //             <label>{aboutUs}</label>
-    //           </div>
-    //         </Col>
-    //       </Row>
-    //       <Row>
-    //         <Col md='auto'>
-    //           <div className='filter'>
-    //             {
-    //               options.map(option => 
-    //                 <label>
-    //                   <input type="checkbox" value={option.name} onChange={e => this.selected(option.name)}/>
-    //                     {option.name}
-    //                 </label>)
-    //             }
-    //           </div>
-    //         </Col>
-    //         <Col>
-    //           <div className="products">
-    //             {
-    //               products.map(p => <Products productDetail={p} updatePage={this.updatePage}/>)
-    //             }
-    //           </div>
-    //         </Col>
-    //       </Row>
-    //     </PageTemplate>
-    //   );
-    // }
+      return (
+        <PageTemplate>
+          <Row className="allproducts-container">
+            <Col className='filter-container'>
+              <div className='filter'>
+                <label>{shopName}</label>
+              </div>
+              <div className='filter'>
+                <label>{aboutUs}</label>
+              </div>
+            </Col>
+          </Row>
+          <Row className="allproducts-container">
+            <Col md="auto allproducts-control filter-container">
+              <div className='filter'>
+                {
+                  options.map(option => 
+                    <label>
+                      <input type="checkbox" value={option.name} onChange={e => this.selected(option.name)}/>
+                        {option.name}
+                    </label>)
+                }
+              </div>
+            </Col>
+            <Col className="allproducts-control">
+              <div className="products allproducts-control">
+                {
+                  products.map(p => <Products productDetail={p} updatePage={this.updatePage}/>)
+                }
+              </div>
+            </Col>
+          </Row>
+        </PageTemplate>
+      );
+    }
 
     if (products === null && options === null) {
       return <div></div>
@@ -133,7 +133,7 @@ class AllProducts extends Component {
           </Col>
           {/* <Col className='products-container'> */}
           <Col className="allproducts-control">
-            <div className="products grid allproducts-control">
+            <div className="products allproducts-control">
               {
                 products.map(p => <Products productDetail={p} updatePage={this.updatePage}/>)
               }

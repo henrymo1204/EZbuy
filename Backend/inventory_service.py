@@ -145,7 +145,7 @@ def getProduct(pid):
     """
     try:
         db_connection = get_db()
-        search_query = f"SELECT * FROM Products WHERE ProductID = '{pid}'"
+        search_query = f"SELECT Products.*, Shops.Shopname FROM Products, Shops WHERE Products.ProductID = '{pid}' AND Shops.ShopID In (SELECT ShopID FROM Products WHERE ProductID = '{pid}')"
         cur = db_connection.cursor()
         cur.execute(search_query)
         db_connection.commit()
@@ -155,10 +155,11 @@ def getProduct(pid):
 
     rows = cur.fetchall()
     product = []
+    print(rows)
     for row in rows:
         # image is bytes, need to encode as json does not support bytes
         product.append({'productID': row[0], 'shopID': row[1], 'productName': row[2], 'productDescription': row[3],
-                        'productCategory': row[4], 'productPrice': row[5], 'productImage': row[7], 'product3DImage': row[8]})
+                        'productCategory': row[4], 'productPrice': row[5], 'productImage': row[7], 'product3DImage': row[8], 'shopName': row[10]})
 
     return jsonify({'success': True, 'product': product})
 
@@ -193,6 +194,28 @@ def search(keyword):
                         'productPrice': row[4], 'productImage': row[6], 'product3DImage': row[7]})
 
     return jsonify({'success': True, 'product': product})
+
+
+@app.route('/api/v1/products/random/', methods=['GET'])
+def getRandomProducts():
+    try:
+        db_connection = get_db()
+        search_query = f"SELECT ProductID, ProductName, Price, ProductImage FROM Products ORDER BY random() LIMIT 8;"
+        cur = db_connection.cursor()
+        cur.execute(search_query)
+        db_connection.commit()
+    except Exception as e:
+        # return status code 500 when database operation fails
+        return internal_server_error(500, str(e))
+
+    rows = cur.fetchall()
+    products = []
+    for row in rows:
+        # image is bytes, need to encode as json does not support bytes
+        products.append({'productID': row[0], 'productName': row[1],
+                         'productPrice': row[2], 'productImage': row[3]})
+
+    return jsonify({'success': True, 'products': products})
 
 
 @ app.errorhandler(401)
