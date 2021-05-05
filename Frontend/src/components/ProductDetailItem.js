@@ -2,11 +2,11 @@
 //create a react-based website that functions as a unique web store.
 //
 import React, { Component } from 'react';
+import 'aframe';
 
 //Import components
 import ProductDetailItemCarousel from './ProductDetailItemCarousel';
 import PageTemplate from './PageTemplate'
-// import './XRViewer';
 import axios from './commons/axios';
 
 //Import render styling from react bootstrap
@@ -65,8 +65,12 @@ class ProductDetailItem extends Component {
                                 <Card.Title>3D Product Viewer</Card.Title>
                                 <Card.Body>
                                     <a-scene embedded>
+                                        <a-assets>
+                                            <a-asset-item id="model" src={products.product3DImage}></a-asset-item>
+                                        </a-assets>
+
                                         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-                                        <a-gltf-model id="model" src={products.product3DImage}></a-gltf-model>
+                                        <a-gltf-model src="#model"></a-gltf-model>
                                         <a-sky color="#ECECEC"></a-sky>
                                         <a-camera position="0 1 4"></a-camera>
                                     </a-scene>

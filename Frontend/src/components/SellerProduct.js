@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'aframe';
 
 //Import components
 import Products from './Products';
@@ -15,7 +16,6 @@ import '../css/styles.css';
 import SellerPageTemplate from './SellerPageTemplate';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import XRViewer from './XRViewer';
 
 class SellerProduct extends Component {
 
@@ -102,7 +102,7 @@ class SellerProduct extends Component {
         const shopID = user['shopID'];
         const productID = window.location.search.slice(11);
 
-        axios.get(`/api/v1/shops/${shopID}/${productID}`)
+        axios.get(`/api/v1/shops/${shopID}/${productID}/`)
             .then((res) => {
 
                 var data = res['data']['products'][0]
@@ -117,8 +117,13 @@ class SellerProduct extends Component {
                 quantity.value = data['productQuantity'];
                 var image = document.getElementById('img');
                 image.src = data['productImage'];
-                var image3D = document.getElementById('model');
-                image3D.src = data['product3DImage'];
+
+                var aScene = document.querySelector("a-scene");
+                var img3D = document.createElement("a-gltf-model");
+                aScene.appendChild(img3D);
+                img3D.setAttribute("src", data['product3DImage']);
+                
+                
             })
             .catch((error) => {
                 console.log(error);
@@ -314,8 +319,12 @@ class SellerProduct extends Component {
                             <input className="add-product-input" type='file' id='product3DImage' onChange={this.on3dImageChange}></input>
                             <Card style={{ width: 'auto', height: '18rem', background: 'white' }}>
                                 <a-scene embedded>
+                                    <a-assets>
+                                        <a-asset-item id="model" src={file3d}></a-asset-item>
+                                    </a-assets>
+
                                     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-                                    <a-gltf-model id='model' src={file3d}></a-gltf-model>
+                                    <a-gltf-model src="#model"></a-gltf-model>
                                     <a-sky color="#ECECEC"></a-sky>
                                     <a-camera position="0 1 4"></a-camera>
                                 </a-scene>
@@ -373,8 +382,12 @@ class SellerProduct extends Component {
                                     <input className="add-product-input" type='file' id='product3DImage' onChange={this.on3dImageChange}></input>
                                     <Card style={{ width: 'auto', height: '18rem', background: 'white' }}>
                                         <a-scene embedded>
+                                            <a-assets>
+                                                <a-asset-item id="model" src={file3d}></a-asset-item>
+                                            </a-assets>
+
                                             <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-                                            <a-gltf-model id='model' src={file3d}></a-gltf-model>
+                                            <a-gltf-model src="#model"></a-gltf-model>
                                             <a-sky color="#ECECEC"></a-sky>
                                             <a-camera position="0 1 4"></a-camera>
                                         </a-scene>

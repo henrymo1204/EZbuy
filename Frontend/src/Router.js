@@ -12,13 +12,10 @@ import Logout from './components/account/Logout';
 import Cart from './components/Cart';
 import Checkout from './components/orderService/Checkout';
 
-
 import OrderReview from './components/orderService/OrderReview';
-
 
 import ProductDetailItem from './components/ProductDetailItem';
 import AllProducts from './components/AllProducts';
-import XRViewer from './components/XRViewer';
 
 import SellerInfo from './components/SellerInfo';
 import SellerInventory from './components/SellerInventory';
@@ -46,8 +43,6 @@ const Router = () => (
       <Route path="/productdetail" component={ProductDetailItem} />
       <Route path="/allproducts" component={AllProducts} />
       <Route path="/search" component={Search} />
-
-      <Route path="/3dviewer" component={XRViewer} />
 
       <Route path="/sellerinfo" component={SellerInfo} />
       <Route path="/sellerinventory" component={SellerInventory} />
