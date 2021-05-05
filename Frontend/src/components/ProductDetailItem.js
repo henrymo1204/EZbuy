@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 //Import components
 import ProductDetailItemCarousel from './ProductDetailItemCarousel';
 import PageTemplate from './PageTemplate'
-import XRViewer from './XRViewer';
+// import './XRViewer';
 import axios from './commons/axios';
 
 //Import render styling from react bootstrap
@@ -64,13 +64,17 @@ class ProductDetailItem extends Component {
                             <Card className="product-detail-card box-detail">
                                 <Card.Title>3D Product Viewer</Card.Title>
                                 <Card.Body>
-                                    {console.log(products.product3DImage)}
-                                    {/* <XRViewer prop={products.product3DImage} updatePage={this.updatePage} /> */}
+                                    <a-scene embedded>
+                                        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+                                        <a-gltf-model id="model" src={products.product3DImage}></a-gltf-model>
+                                        <a-sky color="#ECECEC"></a-sky>
+                                        <a-camera position="0 1 4"></a-camera>
+                                    </a-scene>
                                 </Card.Body>
                             </Card>
                             <Card className="product-detail-card box-detail">
                                 <Card.Body>
-                                    <Card.Link href={ `/allproducts?shopID=${products.shopID}` }>{products.shopName}</Card.Link>
+                                    <Card.Link href={`/allproducts?shopID=${products.shopID}`}>{products.shopName}</Card.Link>
                                 </Card.Body>
                             </Card>
                         </div>

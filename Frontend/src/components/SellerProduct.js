@@ -117,8 +117,8 @@ class SellerProduct extends Component {
                 quantity.value = data['productQuantity'];
                 var image = document.getElementById('img');
                 image.src = data['productImage'];
-                var image3D = document.getElementById('XRViewer');
-                image3D.prop = data['product3DImage'];
+                var image3D = document.getElementById('model');
+                image3D.src = data['product3DImage'];
             })
             .catch((error) => {
                 console.log(error);
@@ -313,7 +313,12 @@ class SellerProduct extends Component {
                             <label className="add-product-label">3D Product Image</label>
                             <input className="add-product-input" type='file' id='product3DImage' onChange={this.on3dImageChange}></input>
                             <Card style={{ width: 'auto', height: '18rem', background: 'white' }}>
-                                {/* <XRViewer prop={file3d} /> */}
+                                <a-scene embedded>
+                                    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+                                    <a-gltf-model id='model' src={file3d}></a-gltf-model>
+                                    <a-sky color="#ECECEC"></a-sky>
+                                    <a-camera position="0 1 4"></a-camera>
+                                </a-scene>
                             </Card>
                         </div>
                         <button type="button" class="add-product" onClick={this.editProduct}>Save</button>
@@ -367,7 +372,12 @@ class SellerProduct extends Component {
                                     <label className='add-product-label'>3D Product Image</label>
                                     <input className="add-product-input" type='file' id='product3DImage' onChange={this.on3dImageChange}></input>
                                     <Card style={{ width: 'auto', height: '18rem', background: 'white' }}>
-                                        <XRViewer prop={file3d} />
+                                        <a-scene embedded>
+                                            <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+                                            <a-gltf-model id='model' src={file3d}></a-gltf-model>
+                                            <a-sky color="#ECECEC"></a-sky>
+                                            <a-camera position="0 1 4"></a-camera>
+                                        </a-scene>
                                     </Card>
                                 </div>
                             </Col>

@@ -367,7 +367,7 @@ def reset_password(token):
     
     try:
         email = s.loads(token, salt='password-reset', max_age=300)
-    	if password:
+        if password:
             try:
                 # generate hashed password to store in database
                 hashedPass = generate_password_hash(password) 
