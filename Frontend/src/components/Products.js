@@ -54,13 +54,13 @@ const Products = (props) => {
         <Card.Img variant="top" src={img} className="product-image" />
         </a>
         <Card.Body>
-          <Card.Title className="product-detail">{name}</Card.Title>
+          <Card.Title className="product-detail">name:{name}</Card.Title>
           <Card.Text className="product-detail">{description}</Card.Text>
-          <Card.Text className="product-detail">{price}</Card.Text>
+          <Card.Text className="product-detail">$:{price}</Card.Text>
           <Card.Text className="product-detail">
             <Nav.Link onClick={addCart}>
             <i className="fas fa-cart-plus"></i>
-            <span>Add</span>
+            <span>  Add </span>
           </Nav.Link>  
           </Card.Text>
         </Card.Body>

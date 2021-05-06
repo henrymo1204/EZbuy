@@ -92,41 +92,9 @@ const App = props => {
                 {
                   ads.map((ad, index) => <Advertisement><ContentCard adDetail={ad} key={index} attributes="advertisement"/></Advertisement>)
                 }
-                {/* <Advertisement><ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" /></Advertisement>
-                <Advertisement><ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" /></Advertisement>
-                <Advertisement><ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" /></Advertisement>
-                <Advertisement><ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" /></Advertisement>
-                <Advertisement><ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" /></Advertisement>
-                <Advertisement><ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" /></Advertisement>
-                <Advertisement><ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" /></Advertisement>
-                <Advertisement><ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" /></Advertisement> */}
               </Carousel>
             </div>
           </Row>
-
-          {/* <Row>
-            <Col className="3D-adv">
-              <ContentCard header="Featured" imageurl={"/images/WebXR_Banner.png"} producturl={"3dviewer"} timeleft="2 days"/>
-            </Col>
-          </Row> */}
-          {/* {<br></br>} */}
-          {/* <div className="home-page-slider">
-            <Row>
-              <Col>
-                <ContentCard imageurl={"/images/model.jpg"} timeleft="3 hours" />
-              </Col>
-              <Col>
-                <ContentCard imageurl={"/images/model.jpg"} timeleft="1 day"/>
-              </Col>
-              <Col>
-                <ContentCard imageurl={"/images/model.jpg"} timeleft="4 hours"/>
-              </Col>
-            </Row>
-          </div> */}
-
-        {/* {<br></br>}
-        {<br></br>}
-        {<br></br>} */}
 
       </PageTemplate>
     );

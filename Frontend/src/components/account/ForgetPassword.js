@@ -31,14 +31,14 @@ const ForgetPassword = (props) => {
 
     return (
         <div className="register-container">
-      <div className="register-wrapper">
+      <div className="forget-wrapper">
       <form className="register-box" onSubmit={handleSubmit(resetPassword)}>
         <Nav className="justify-content-center title-container">
               <Nav.Link href="/" className="title">Reset Password by Email</Nav.Link>
         </Nav>
         <div className="field-container">
         <p className="forget-password has-text-danger">Please enter your email to reset your passworld</p>
-          <div className="field">
+          <div className="forget-field">
             <label className="label">Email</label>
             <div className="control">
               <input
