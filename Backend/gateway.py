@@ -20,7 +20,7 @@ service_request_counter_dict = dict(
 )
 
 service_request_pattern_dict = dict(
-    user_service='(.*/api/v1/user.*)|(.*/api/v1/register.*)|(.*/api/v1/login.*)',
+    user_service='(.*/api/v1/user.*)|(.*/api/v1/register.*)|(.*/api/v1/login.*)|(.*/api/v1/confirm_register.*)|(.*/api/v1/reset_password.*)',
     cart_service='.*/api/v1/cart.*',
     order_service='.*/api/v1/order.*',
     shipment_service='.*/api/v1/shipment.*',

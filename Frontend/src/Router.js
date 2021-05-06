@@ -6,8 +6,8 @@ import NotFound from './components/NotFound';
 import Login from './components/account/Login';
 import Register from './components/account/Register';
 import Logout from './components/account/Logout';
-// import ForgetPassword from './components/account/ForgetPassword';
-// import ResetPassword from './components/account/ResetPassword';
+import ForgetPassword from './components/account/ForgetPassword';
+import ResetPassword from './components/account/ResetPassword';
 
 import Cart from './components/Cart';
 import Checkout from './components/orderService/Checkout';
@@ -22,7 +22,7 @@ import SellerInventory from './components/SellerInventory';
 import SellerProduct from './components/SellerProduct';
 import SellerOrders from './components/SellerOrders';
 import Search from './components/Search';
-import ResetPassword from './components/ResetPassword';
+// import ResetPassword from './components/ResetPassword';
 
 const Router = () => (
   <BrowserRouter>
@@ -32,8 +32,8 @@ const Router = () => (
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/logout" component={Logout} />
-      {/* <Route path="/forgetpassword" component={ForgetPassword} /> */}
-      {/* <Route path="/resetpassword" component={ResetPassword} /> */}
+      <Route path="/forget_password" component={ForgetPassword} />
+      <Route path="/reset_password/(.+)" component={ResetPassword} />
 
       <Route path="/cart" component={Cart} />
 
@@ -49,7 +49,7 @@ const Router = () => (
       <Route path="/addproduct" component={SellerProduct} />
       <Route path="/sellerorders" component={SellerOrders} />
       <Route path="/search" component={Search} />
-      <Route path="/reset_password" component={ResetPassword} />
+      {/* <Route path="/reset_password" component={ResetPassword} /> */}
       <Route component = {NotFound} />
     </Switch>
     

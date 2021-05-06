@@ -3,10 +3,10 @@
 # Professor: Lidia Morrison
 
 # Team members:
-#     Ying Luo,            yingluo_holiday@csu.fullerton.edu
-#     Gabriel Magallanes,  gabe695@csu.fullerton.edu
-#     Juheng Mo,           henrymo@csu.fullerton.edu
-#     Mohammad Mirwais,    mirwais.88@csu.fullerton.edu
+#     Ying Luo,
+#     Gabriel Magallanes,
+#     Juheng Mo,
+#     Mohammad Mirwais,
 
 from flask import Flask, request, g, jsonify
 import datetime

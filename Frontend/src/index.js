@@ -13,8 +13,8 @@ ReactDOM.render(
   <div>
     <ToastContainer
       position="top-right"
-      autoClose={5000}
-      hideProgressBar
+      autoClose={3000}
+      // hideProgressBar
       newestOnTop={false}
       closeOnClick
       rtl={false}

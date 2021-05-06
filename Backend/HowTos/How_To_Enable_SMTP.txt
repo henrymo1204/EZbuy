@@ -1,0 +1,22 @@
+Install PowerShell on MacOS:
+https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-macos?view=powershell-7.1&preserve-view=true
+
+Use PowerShell to enable office 365 SMPT Auth:
+https://docs.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/authenticated-client-smtp-submission
+https://docs.microsoft.com/en-us/powershell/exchange/connect-to-exchange-online-powershell?view=exchange-ps
+
+Libraries for python email support:
+https://stackoverflow.com/questions/46160886/how-to-send-smtp-email-for-office365-with-python-using-tls-ssl
+
+Flask-Mail setup:
+https://stackoverflow.com/questions/54600601/i-am-using-office-and-flask-mail
+
+Find-Module -Name ExchangeOnlineManagement | Install-Module
+
+Install module:
+https://docs.microsoft.com/en-us/powershell/module/exchange/get-casmailbox?view=exchange-ps
+
+Get-Command
+
+$session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri “https://ps.outlook.com/powershell/” -Credential $cred -Authentication Basic -AllowRedirection
+

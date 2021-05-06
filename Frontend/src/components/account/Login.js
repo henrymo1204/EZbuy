@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import { toast } from 'react-toastify';
-import {Nav} from 'react-bootstrap';
+import {Nav, Row, Col} from 'react-bootstrap';
 import axios from '../commons/axios';
 import '../../css/account/Login.scss';
 /************************************************************
@@ -35,6 +35,12 @@ export default function Login(props) {
             <Nav className="justify-content-center title-container">
               <Nav.Link href="/" className="title">Sign In</Nav.Link>
             </Nav>
+            <div className="config-email">
+              <Row>
+                <i class="fas fa-exclamation-triangle"></i>
+                  <p class="has-text-danger"> If you are the first sign in please confirm your email before you sign in</p>
+              </Row>
+            </div>
             <div className="field-container">
               <div className="field">
                 <label className="label">Username</label>
@@ -81,10 +87,16 @@ export default function Login(props) {
               </div>
             </div>
             <div className="footer-container text-center">
+              <div className="foget-password">
+             
+                <Nav className="justify-content-center">
+                    <Nav.Link href="/forget_password"> <i class="far fa-hand-point-right"></i> Forgot password</Nav.Link>
+                </Nav>
+              </div>              
               <button className="account-button">Login</button>
               <div className="footer-middle text-center">OR</div>
               <Nav className="justify-content-center">
-                  <Nav.Link href="/register">Create account</Nav.Link>
+                  <Nav.Link href="/register"><i class="fas fa-mouse-pointer"></i> Create account</Nav.Link>
               </Nav>
             </div>
           </form>
