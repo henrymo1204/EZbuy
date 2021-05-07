@@ -287,11 +287,22 @@ class SellerProduct extends Component {
                                 <div>
                                     <label>Product Category</label>
                                     <select id='productCategory'>
-                                        <option></option>
-                                        <option value='Shoes' id='Shoes'>Shoes</option>
+                                    <option></option>
+                                        <option value='Art' id='Art'>Art</option>
+                                        <option value='Books' id='Books'>Books</option>
                                         <option value='Clothes' id='Clothes'>Clothes</option>
-                                        <option value='Some product' id='Some product'>Some product</option>
-                                        <option value='Random stuff' id='Random stuff'>Random stuff</option>
+                                        <option value='Collectibles' id='Collectibles'>Collectibles</option>
+                                        <option value='Electronics' id='Electronics'>Electronics</option>
+                                        <option value='Food' id='Food'>Electronics</option>
+                                        <option value='Games' id='Games'>Games</option>
+                                        <option value='Garden' id='Garden'>Garden</option>
+                                        <option value='Home' id='Home'>Home</option>
+                                        <option value='Music' id='Music'>Music</option>
+                                        <option value='Office Supplies' id='Office Supplies'>Office Supplies</option>
+                                        <option value='Pet Supplies' id='Pet Supplies'>Pet Supplies</option>
+                                        <option value='Shoes' id='Shoes'>Shoes</option>
+                                        <option value='Sports' id='Sports'>Sports</option>
+                                        <option value='Toys' id='Toys'>Toys</option>
                                     </select>
                                 </div>
                             </Col>
@@ -360,11 +371,22 @@ class SellerProduct extends Component {
                                 <div>
                                     <label>Product Category</label>
                                     <select id='productCategory'>
-                                        <option></option>
-                                        <option value='Shoes' id='Shoes'>Shoes</option>
+                                    <option></option>
+                                        <option value='Art' id='Art'>Art</option>
+                                        <option value='Books' id='Books'>Books</option>
                                         <option value='Clothes' id='Clothes'>Clothes</option>
-                                        <option value='Some product' id='Some product'>Some product</option>
-                                        <option value='Random stuff' id='Random stuff'>Random stuff</option>
+                                        <option value='Collectibles' id='Collectibles'>Collectibles</option>
+                                        <option value='Electronics' id='Electronics'>Electronics</option>
+                                        <option value='Food' id='Food'>Electronics</option>
+                                        <option value='Games' id='Games'>Games</option>
+                                        <option value='Garden' id='Garden'>Garden</option>
+                                        <option value='Home' id='Home'>Home</option>
+                                        <option value='Music' id='Music'>Music</option>
+                                        <option value='Office Supplies' id='Office Supplies'>Office Supplies</option>
+                                        <option value='Pet Supplies' id='Pet Supplies'>Pet Supplies</option>
+                                        <option value='Shoes' id='Shoes'>Shoes</option>
+                                        <option value='Sports' id='Sports'>Sports</option>
+                                        <option value='Toys' id='Toys'>Toys</option>
                                     </select>
                                 </div>
                             </Col>
