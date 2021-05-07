@@ -14,11 +14,11 @@ import V02 from './videos/V02.mp4'
 import './App.scss';
 import Carousel from "react-elastic-carousel";
 import Advertisement from "./Advertisement";
-import image1 from "../src/images/2.jpg";
-import image2 from "../src/images/3.jpg";
-import image3 from "../src/images/4.jpg";
-import image4 from "../src/images/5.jpg";
-import axios from './components/commons/appState';
+// import image1 from "../src/images/2.jpg";
+// import image2 from "../src/images/3.jpg";
+// import image3 from "../src/images/4.jpg";
+// import image4 from "../src/images/5.jpg";
+// import axios from './components/commons/appState';
 
 const App = props => {
 
@@ -44,17 +44,6 @@ const App = props => {
     { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 4 },
   ];
-
-  // const ads = [
-  //   {productName:'name', productDescription:'description', imageurl:image1, productURL: 'productURL', timeLeft: "24 hrs"},
-  //   {productName:'name', productDescription:'description', imageurl:image2, productURL: 'productURL', timeLeft: "24 hrs"},
-  //   {productName:'name', productDescription:'description', imageurl:image3, productURL: 'productURL', timeLeft: "24 hrs"},
-  //   {productName:'name', productDescription:'description', imageurl:image4, productURL: 'productURL', timeLeft: "24 hrs"},
-  //   {productName:'name', productDescription:'description', imageurl:image2, productURL: 'productURL', timeLeft: "24 hrs"},
-  //   {productName:'name', productDescription:'description', imageurl:image4, productURL: 'productURL', timeLeft: "24 hrs"},
-  //   {productName:'name', productDescription:'description', imageurl:image3, productURL: 'productURL', timeLeft: "24 hrs"},
-  //   {productName:'name', productDescription:'description', imageurl:image1, productURL: 'productURL', timeLeft: "24 hrs"}
-  // ]
 
     const ads = global.appState.getRandomProducts();
     

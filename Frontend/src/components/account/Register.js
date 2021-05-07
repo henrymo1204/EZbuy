@@ -1,3 +1,7 @@
+/**********************************************************************************
+ * This is the page of Register 
+ * User or seller can create their account by use the username and email andpassword
+ ***********************************************************************************/
 import React, {useState} from 'react';
 import axios from '../commons/axios';
 import {useForm, Controller, Checkbox} from 'react-hook-form';

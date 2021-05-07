@@ -53,27 +53,13 @@ const ContentCard = (props) => {
     };
 
     return (
-        // <Card className={"text-center " + props.attributes}>
-        //     <Card.Header>{productName}</Card.Header>
-        //     <Card.Img variant="top" src={imageurl} />
-        //     <Card.Body>
-        //         <Card.Text>{productDescription}</Card.Text>
-        //         <Button variant="primary" href={productURL}>Go to product</Button>
-        //     </Card.Body>
-        //     <Card.Footer className="text-muted">{timeLeft}</Card.Footer>
-        // </Card>
-
-        <Card className={"text-center " + props.attributes}>
+         <Card className={"text-center " + props.attributes}>
             <Card.Img variant="top" src={imageurl} className="ad-image"/>
             <Card.Body>
                 <Card.Title className="ad-detail">{productName}</Card.Title>
                 <Card.Title className="ad-detail">${price}</Card.Title>
                 <Button variant="primary" href={productURL}>Go to product</Button>
                 <Button variant="primary" onClick={addCart}>Add to cart</Button>
-                {/* <Nav.Link className="ad-detail">
-                    <i className="far fa-hand-point-right"></i>
-                    <span> Buy Now</span>
-                </Nav.Link>   */}
             </Card.Body>
         </Card>
     );

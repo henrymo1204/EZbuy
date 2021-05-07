@@ -1,3 +1,8 @@
+/**********************************************************
+ * This is the page of Logout 
+ * User or seller can logout 
+ ***********************************************************/
+
 import React from 'react';
 import "../../css/account/Logout.scss"
 import {Row} from 'react-bootstrap'

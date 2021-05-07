@@ -1,12 +1,8 @@
-// This app was created by group 6 for CSUF's CPSC 462 class. It is a collaborative effort to
-//create a react-based website that functions as a unique web store.
-//
+/********************************************************
+ * This is the page of Forget password
+ * Send email to confirm then reset the password
+ ********************************************************/
 import React, { Component} from 'react';
-
-//Import render styling from react bootstrap
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 import axios from '../commons/axios';
 import { Nav} from 'react-bootstrap';
 import { toast} from 'react-toastify';

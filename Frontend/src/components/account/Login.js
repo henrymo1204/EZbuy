@@ -1,12 +1,15 @@
+/**********************************************************
+ * This is the page of Login 
+ * User or seller can use the password and username login
+ ***********************************************************/
+
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import { toast } from 'react-toastify';
-import {Nav, Row, Col} from 'react-bootstrap';
+import {Nav, Row} from 'react-bootstrap';
 import axios from '../commons/axios';
 import '../../css/account/Login.scss';
-/************************************************************
-              This is the Login component                       
- *************************************************************/
+
 
 export default function Login(props) {
     const { register, handleSubmit, errors } = useForm();
