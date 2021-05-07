@@ -10,7 +10,7 @@ const axios = baseURL => {
 
   const instance = _axios.create({
     baseURL:
-      'https://18.223.187.69',
+      'https://ezbuy.site',
     timeout: 5000
   });
 
