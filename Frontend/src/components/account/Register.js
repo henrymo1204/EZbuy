@@ -148,7 +148,7 @@ export default function Login(props) {
           </div>
         </div>
       
-        <div className="footer-container text-center">
+        <div className="register-footer-container text-center">
           <div className="field is-horizontal checkbox-container">
             <div className="field-label">
               <label className="label checkbox-title">Register as:</label>

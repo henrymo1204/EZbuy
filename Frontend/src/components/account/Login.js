@@ -27,7 +27,8 @@ export default function Login(props) {
         props.history.push('/');
       } catch (error) {
         const message = error.response.data.message;
-        toast.error("Login Failed. Wrong username or password.");
+        toast.error("Login Failed.\nPlease make sure username or password are correct.");
+        toast.error("First time login please make sure confirmed from registration email.");
       }
     };
   
@@ -35,19 +36,13 @@ export default function Login(props) {
       <div className="login-container ">
         <div className="login-wrapper">
         <form className="login-box" onSubmit={handleSubmit(onSubmit)}>
-            <Nav className="justify-content-center title-container">
-              <Nav.Link href="/" className="title">Sign In</Nav.Link>
+            <Nav className="justify-content-center login-title-container">
+              <Nav.Link href="/" className="login-title">Sign In</Nav.Link>
             </Nav>
-            <div className="config-email">
-              <Row>
-                <i className="fas fa-exclamation-triangle"></i>
-                  <p className="has-text-danger"> If you are the first sign in please confirm your email before you sign in</p>
-              </Row>
-            </div>
-            <div className="field-container">
-              <div className="field">
-                <label className="label">Username</label>
-                <div className="control">
+            <div className="login-field-container">
+              <div className="login-field">
+                <label className="login-label">Username</label>
+                <div className="login-control">
                   <input
                     className={`input ${errors.username && 'text-warn'}`}
                     type="text"
@@ -67,9 +62,9 @@ export default function Login(props) {
                 </div>
               </div>
 
-              <div className="field">
-                <label className="label">Password</label>
-                <div className="control">
+              <div className="login-field password-field">
+                <label className="login-label">Password</label>
+                <div className="login-control">
                   <input
                     className={`input ${errors.password && 'text-warn'}`}
                     type="password"
@@ -89,9 +84,9 @@ export default function Login(props) {
                 </div>
               </div>
             </div>
-            <div className="footer-container text-center">
-              <button className="account-button">Login</button>
-              <div className="footer-middle text-center">OR</div>
+            <div className="login-footer-container text-center">
+              <button className="login-account-button">Login</button>
+              <div className="login-footer-middle text-center">OR</div>
               <Nav className="justify-content-center">
                   <Nav.Link href="/register"><i className="fas fa-mouse-pointer"></i> Create account</Nav.Link>
               </Nav>

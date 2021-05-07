@@ -26,7 +26,7 @@ const ForgetPassword = (props) => {
     }
 
     return (
-        <div className="register-container">
+        <div className="forget-password-container">
       <div className="forget-wrapper">
       <form className="register-box" onSubmit={handleSubmit(resetPassword)}>
         <Nav className="justify-content-center title-container">
