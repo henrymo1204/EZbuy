@@ -5,6 +5,7 @@ import '../../css/account/UserProfile.scss'
 
 export default function UserProfile(props) {
   const logout = () => {
+    global.appState.setLocalCartNum(0);
     global.auth.logout();
     props.close('logout');
     window.location.href='/';

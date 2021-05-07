@@ -11,6 +11,7 @@ import {Row} from 'react-bootstrap'
 export default function Logout(props) {
 
     const handleYesBtn = () => {
+        global.appState.setLocalCartNum(0);
         global.auth.logout();
         props.history.push('/');
     };

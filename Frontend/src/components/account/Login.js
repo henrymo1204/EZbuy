@@ -40,8 +40,8 @@ export default function Login(props) {
             </Nav>
             <div className="config-email">
               <Row>
-                <i class="fas fa-exclamation-triangle"></i>
-                  <p class="has-text-danger"> If you are the first sign in please confirm your email before you sign in</p>
+                <i className="fas fa-exclamation-triangle"></i>
+                  <p className="has-text-danger"> If you are the first sign in please confirm your email before you sign in</p>
               </Row>
             </div>
             <div className="field-container">
@@ -93,13 +93,13 @@ export default function Login(props) {
               <div className="foget-password">
              
                 <Nav className="justify-content-center">
-                    <Nav.Link href="/forget_password"> <i class="far fa-hand-point-right"></i> Forgot password</Nav.Link>
+                    <Nav.Link href="/forget_password"> <i className="far fa-hand-point-right"></i> Forgot password</Nav.Link>
                 </Nav>
               </div>              
               <button className="account-button">Login</button>
               <div className="footer-middle text-center">OR</div>
               <Nav className="justify-content-center">
-                  <Nav.Link href="/register"><i class="fas fa-mouse-pointer"></i> Create account</Nav.Link>
+                  <Nav.Link href="/register"><i className="fas fa-mouse-pointer"></i> Create account</Nav.Link>
               </Nav>
             </div>
           </form>

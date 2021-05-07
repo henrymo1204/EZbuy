@@ -341,7 +341,7 @@ class SellerProduct extends Component {
                                 </a-scene>
                             </Card>
                         </div>
-                        <button type="button" class="add-product" onClick={this.editProduct}>Save</button>
+                        <button type="button" className="add-product" onClick={this.editProduct}>Save</button>
                     </form>
                 </SellerPageTemplate>
             );
@@ -417,7 +417,7 @@ class SellerProduct extends Component {
                                 </div>
                             </Col>
                         </Row>
-                        <button type="button" class="add-product" onClick={this.addProduct}>Add Product</button>
+                        <button type="button" className="add-product" onClick={this.addProduct}>Add Product</button>
                     </form>
                 </SellerPageTemplate>
             );
