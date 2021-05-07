@@ -88,17 +88,19 @@ class AllProducts extends Component {
             </Col>
           </Row>
           <Row className="allproducts-container">
-            <Col md="auto allproducts-control filter-container">
+            <Col md='auto' className="allproducts-control filter-container">
               <div className='filter'>
                 {
-                  options.map(option => 
+                  options.map(option =>
+                    <div> 
                     <label>
                       <input type="checkbox" value={option.name} onChange={e => this.selected(option.name)}/>
                         {option.name}
-                    </label>)
+                    </label></div> )
                 }
               </div>
             </Col>
+            {/* <Col className='products-container'> */}
             <Col className="allproducts-control">
               <div className="products allproducts-control">
                 {
@@ -118,7 +120,6 @@ class AllProducts extends Component {
     return (
       <PageTemplate>
         <Row className="allproducts-container">
-          {/* <Col className='filter-container'> */}
           <Col md='auto' className="allproducts-control filter-container">
             <div className='filter'>
               {
