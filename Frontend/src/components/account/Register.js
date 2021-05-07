@@ -167,13 +167,12 @@ export default function Login(props) {
             </div>
           </div>
           <p className="helper has-text-danger" id="checkbox-warn">Please select one of above</p>
-          <div className="footer-container text-center">
+          <div className="text-center">
               <button className="account-button">Register</button> 
               <div className="footer-middle text-center">Already have an account?</div>
               <Nav className="justify-content-center">
                   <Nav.Link href="/login">Login</Nav.Link>
               </Nav>
-
           </div>
         </div>
       </form>

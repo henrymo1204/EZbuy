@@ -9,15 +9,13 @@ echo "Stoping frontend processes..."
 kill $(ps aux | grep '[s]erve -s' | awk '{print $2}')
 
 #restart backend
-pushd ../Backend
+cd ../Backend
 echo "Restart backend process..."
 exec sh run.sh &
-popd
 
 #restart frontend
-pushd ../Frontend
+cd ../Frontend
 echo "Install with Yarn..."
 yarn install
 echo "Restart frontend process..."
-exec npm start &
-popd
+exec serve -s build -l 3000 &
