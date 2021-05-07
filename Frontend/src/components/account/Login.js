@@ -90,17 +90,17 @@ export default function Login(props) {
               </div>
             </div>
             <div className="footer-container text-center">
-              <div className="foget-password">
-             
-                <Nav className="justify-content-center">
-                    <Nav.Link href="/forget_password"> <i className="far fa-hand-point-right"></i> Forgot password</Nav.Link>
-                </Nav>
-              </div>              
+         
               <button className="account-button">Login</button>
               <div className="footer-middle text-center">OR</div>
               <Nav className="justify-content-center">
                   <Nav.Link href="/register"><i className="fas fa-mouse-pointer"></i> Create account</Nav.Link>
               </Nav>
+              <div className="foget-password">
+                <Nav className="justify-content-center">
+                    <Nav.Link href="/forget_password"> <i className="far fa-hand-point-right"></i> Forgot password</Nav.Link>
+                </Nav>
+              </div>     
             </div>
           </form>
         </div>

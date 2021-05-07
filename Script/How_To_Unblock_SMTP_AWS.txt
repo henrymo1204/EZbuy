@@ -1,0 +1,12 @@
+https://admin.exchange.microsoft.com/#/messagetrace
+
+https://security.microsoft.com/quarantine
+
+https://sender.office.com/
+
+The IP address in question is not currently blocked in our system. Please refer to the email message you received from Microsoft and follow the steps it suggests.
+
+If you're trying to delist an IP address blocked in Hotmail.com/Live.com/Outlook.com, please use the following link.
+https://support.microsoft.com/en-us/getsupport?oaspworkflow=start_1.0.0.0&wfname=capsub&productkey=edfsmsbl3&locale=en-us&ccsid=635900597399910848
+
+If you're trying to delist a banned or blocked sender, please open a support ticket from your tenant.

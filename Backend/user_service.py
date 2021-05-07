@@ -30,12 +30,19 @@ TOKEN_SIGN_KEY = app.config.get("TOKEN_SIGN_KEY")
 TOKEN_VERIFY_KEY = app.config.get("TOKEN_VERIFY_KEY")
 CORS(app)
 
-app.config['MAIL_SERVER'] = 'smtp.office365.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'ezbuyofficial@ezbuy.site'
-app.config['MAIL_PASSWORD'] = 'ezbuyofficial@ezbuy'
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
+# app.config['MAIL_SERVER'] = 'smtp.office365.com'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USERNAME'] = 'ezbuyofficial@ezbuy.site'
+# app.config['MAIL_PASSWORD'] = 'ezbuyofficial@ezbuy'
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USE_SSL'] = False
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'TestEmailForClass462@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Ezbuy2021462!'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 
 
 mail = Mail(app)
@@ -138,7 +145,9 @@ def createUser():
 
     link = url_for('confirm_register', token=token, _external=True)
 
-    msg.body = 'Your email confirmation link is {} \n\nThe link will expire in 10 minutes.'.format(
+    link = "https://ezbuy.site/api/v1/confirm_register/" + token
+
+    msg.body = 'Your email confirmation link is\n{}\nThe link will expire after 10 minutes.'.format(
         link)
 
     mail.send(msg)
@@ -384,13 +393,14 @@ def sendResetPassowrdEmail():
 
     token = s.dumps({'email': email}, salt='password-reset')
 
-    msg = Message('Reset password', sender='ezbuyofficial@ezbuy.site',
+    msg = Message('Reset password', sender=('EZBuy Official', 'ezbuyofficial@ezbuy.site'),
                   recipients=[email])
     # need to change sender email
 
-    link = 'http://localhost:3000/reset_password/' + str(token)
+    # link = 'http://localhost:3000/reset_password/' + str(token)
+    link = 'https://ezbuy.site/reset_password/' + str(token)
 
-    msg.body = 'Your reset password link is {} \n\nThe link will expire in 10 minutes.'.format(
+    msg.body = 'Your reset password link is\n{}\nThe link will expire after 10 minutes.'.format(
         link)
 
     mail.send(msg)

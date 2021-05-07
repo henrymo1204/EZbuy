@@ -11,7 +11,7 @@ import axios from '../commons/axios';
 import { Nav} from 'react-bootstrap';
 import { toast} from 'react-toastify';
 import {useForm} from 'react-hook-form';
-import "../../css/account/ForgetPassword.scss";
+import "../../css/account/ResetPassword.scss";
 
 const ForgetPassword = (props) => {
     const {register, handleSubmit, errors, control} = useForm();

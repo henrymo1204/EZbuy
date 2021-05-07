@@ -1,7 +1,7 @@
 // This app was created by group 6 for CSUF's CPSC 462 class. It is a collaborative effort to
 //create a react-based website that functions as a unique web store.
 //
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 //Import components
 import PageTemplate from './components/PageTemplate'
@@ -22,11 +22,19 @@ import Advertisement from "./Advertisement";
 
 const App = props => {
 
+  const [ads, setADs] = useState([]);
+
   useEffect(async () => {
     if (global.appState.getUserID() != null) {
       await global.appState.updateLocalCartNum();
     } else {
       global.appState.setLocalCartNum(0);
+    }
+
+    if (ads.length == 0) {
+      await global.appState.setRandomProducts();
+      const ads = global.appState.getRandomProducts();
+      setADs(ads);
     }
   }, []);
 
@@ -44,19 +52,6 @@ const App = props => {
     { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 4 },
   ];
-
-    const ads = global.appState.getRandomProducts();
-    
-    if (ads === null) {
-      global.appState.setRandomProducts();
-      const ads = global.appState.getRandomProducts();
-    }
-
-    if (ads === null) {
-      return (
-        <div></div>
-      )
-    }
 
     return (
       <PageTemplate>

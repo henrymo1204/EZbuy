@@ -27,25 +27,19 @@ TOKEN_SIGN_KEY = app.config.get("TOKEN_SIGN_KEY")
 TOKEN_VERIFY_KEY = app.config.get("TOKEN_VERIFY_KEY")
 CORS(app)
 
-app.config['MAIL_SERVER'] = 'smtp.office365.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'ezbuyofficial@ezbuy.site'
-app.config['MAIL_PASSWORD'] = 'ezbuyofficial@ezbuy'
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
+# app.config['MAIL_SERVER'] = 'smtp.office365.com'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USERNAME'] = 'ezbuyofficial@ezbuy.site'
+# app.config['MAIL_PASSWORD'] = 'ezbuyofficial@ezbuy'
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USE_SSL'] = False
 
-# app = Flask(__name__)
-# app.config.from_envvar('APP_CONFIG')
-# DATABASE_PATH = app.config.get("DATABASE")
-# CORS(app)
-
-# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-# app.config['MAIL_PORT'] = 465
-# # enter the email username here
-# app.config['MAIL_USERNAME'] = 'youremail@email.com'
-# app.config['MAIL_PASSWORD'] = 'password'  # enter the email password here
-# app.config['MAIL_USE_TLS'] = False
-# app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'TestEmailForClass462@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Ezbuy2021462!'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
 
@@ -168,7 +162,7 @@ def addOrder(userID):
         return internal_server_error(500, str(e))
 
     buyer_msg = Message(
-        'Order Confirmation', sender='ezbuyofficial@ezbuy.site', recipients=[email_address])
+        'Order Confirmation', sender=('EZBuy Order Confirmation', 'ezbuyofficial@ezbuy.site'), recipients=[email_address])
     # need to change sender email
     buyer_msg.body = "Dear " + str(username) + ",\n\nThank you for ordering from the EZ-Buy online store.\n\
 Your order has been placed.\n\n------------------------------------------------------------\nORDER ID: " + str(orderID) + "\nSUBTOTAL: $" + str(totalPrice) + "\n------------------------------------------------------------\nItems:\n\n" + message
