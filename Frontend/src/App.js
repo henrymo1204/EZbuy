@@ -19,6 +19,7 @@ import Advertisement from "./Advertisement";
 // import image3 from "../src/images/4.jpg";
 // import image4 from "../src/images/5.jpg";
 // import axios from './components/commons/appState';
+import "./css/home.scss"
 
 const App = props => {
 
@@ -74,7 +75,7 @@ const App = props => {
             <div className="home-page-slick">            
               <Carousel breakPoints={breakPoints}>
                 {
-                  ads.map((ad, index) => <Advertisement><ContentCard adDetail={ad} key={index} attributes="advertisement"/></Advertisement>)
+                  ads.map((ad, index) => <Advertisement><ContentCard className="ads-card" adDetail={ad} key={index} attributes="advertisement"/></Advertisement>)
                 }
               </Carousel>
             </div>
