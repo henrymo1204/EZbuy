@@ -13,7 +13,7 @@ import axios from './commons/axios';
 import Badge from 'react-bootstrap/Badge';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Card } from "react-bootstrap";
+import { ButtonGroup, Card, CardColumns } from "react-bootstrap";
 import Button from 'react-bootstrap/Button'
 
 import '../css/product/ProductItemDetail.scss';
@@ -51,17 +51,25 @@ class ProductDetailItem extends Component {
                 <Row className="product-container">
                     <Col className="product-control">
                         <div className="product_detail">
-                            <Card className="product-detail-card box-detail">
-                                <ProductDetailItemCarousel image={products.productImage} />
+                            {/* <CardColumns> */}
+                            <Card border="primary" className="text-center" style={{ height: "fit-content", padding: "1rem"}}>
+                                <Card.Img className="card-img" variant="top" src={products.productImage} />
                                 <Card.Body>
-                                    <Card.Title className="product_detail">{products.productDetail}</Card.Title>
-                                    <Card.Text id="productDescription">{products.productDescription}</Card.Text>
-                                    <Card.Text id="price">{products.price}</Card.Text>
-                                    <Button variant="primary">Add to cart</Button>
+                                    <Card.Title>{products.productName}</Card.Title>
+                                    <Card.Text>{products.productDescription}</Card.Text>
+                                    <Card.Text>${products.productPrice}</Card.Text>
+                                </Card.Body>
+                                <br />
+                                <Card.Body>
+                                    <ButtonGroup vertical>
+                                        <Button variant="primary">Add to cart</Button>
+                                        <br />
+                                        <Button href={`/allproducts?shopID=${products.shopID}`} style={{ width: "auto" }} variant="info">{products.shopName}</Button>
+                                    </ButtonGroup>
                                 </Card.Body>
                             </Card>
 
-                            <Card className="product-detail-card box-detail">
+                            <Card border="success" className="product-detail-card box-detail">
                                 <Card.Title>3D Product Viewer</Card.Title>
                                 <Card.Body>
                                     <a-scene embedded>
@@ -69,18 +77,14 @@ class ProductDetailItem extends Component {
                                             <a-asset-item id="model" src={products.product3DImage}></a-asset-item>
                                         </a-assets>
 
-                                        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+                                        <a-plane position="0 0 -4" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
                                         <a-gltf-model src="#model"></a-gltf-model>
                                         <a-sky color="#ECECEC"></a-sky>
                                         <a-camera position="0 1 4"></a-camera>
                                     </a-scene>
                                 </Card.Body>
                             </Card>
-                            <Card className="product-detail-card box-detail">
-                                <Card.Body>
-                                    <Card.Link href={`/allproducts?shopID=${products.shopID}`}>{products.shopName}</Card.Link>
-                                </Card.Body>
-                            </Card>
+                            {/* </CardColumns> */}
                         </div>
                     </Col>
                 </Row>

@@ -287,7 +287,7 @@ class SellerProduct extends Component {
                                 <div>
                                     <label>Product Category</label>
                                     <select id='productCategory'>
-                                    <option></option>
+                                        <option></option>
                                         <option value='Art' id='Art'>Art</option>
                                         <option value='Books' id='Books'>Books</option>
                                         <option value='Clothes' id='Clothes'>Clothes</option>
@@ -334,7 +334,7 @@ class SellerProduct extends Component {
                                         <a-asset-item id="model" src={file3d}></a-asset-item>
                                     </a-assets>
 
-                                    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+                                    <a-plane position="0 0 -4" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
                                     <a-gltf-model src="#model"></a-gltf-model>
                                     <a-sky color="#ECECEC"></a-sky>
                                     <a-camera position="0 1 4"></a-camera>
@@ -371,7 +371,7 @@ class SellerProduct extends Component {
                                 <div>
                                     <label>Product Category</label>
                                     <select id='productCategory'>
-                                    <option></option>
+                                        <option></option>
                                         <option value='Art' id='Art'>Art</option>
                                         <option value='Books' id='Books'>Books</option>
                                         <option value='Clothes' id='Clothes'>Clothes</option>
@@ -408,7 +408,7 @@ class SellerProduct extends Component {
                                                 <a-asset-item id="model" src={file3d}></a-asset-item>
                                             </a-assets>
 
-                                            <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+                                            <a-plane position="0 0 -4" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
                                             <a-gltf-model src="#model"></a-gltf-model>
                                             <a-sky color="#ECECEC"></a-sky>
                                             <a-camera position="0 1 4"></a-camera>
