@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import PageTemplate from './PageTemplate'
 import axios from './commons/axios';
+import "../css/common/Shared.scss"
 
 import SellerPageTemplate from './SellerPageTemplate';
 
@@ -47,7 +48,7 @@ class SellerInventory extends Component {
                 products.map(p => <ProductList productDetail={p} updatePage={this.updatePage}/>)
               }
             </div>
-            <a href='/addProduct'><button>Add</button></a>
+            <a href='/addProduct' className="common-button"><button >Add</button></a>
         </SellerPageTemplate>
     );
   }

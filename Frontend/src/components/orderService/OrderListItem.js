@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../css/orderService/OrderReview.scss';
 
 const OrderListItem = (props) => {
 
@@ -17,7 +18,7 @@ const OrderListItem = (props) => {
         </div>
         <div className="column cart-name is-narrow">{createTime}</div>
         <div className="column cart-name is-narrow">{orderTotal}</div>
-        <button onClick={handleReviewDetail}>Review Detail</button>
+        <button className="order-review-btn" onClick={handleReviewDetail}>Review Detail</button>
         
       </div>
     );

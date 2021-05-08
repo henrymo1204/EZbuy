@@ -28,10 +28,10 @@ const SellerPageTemplate = props => {
               <a href="/logout">Log Out</a>
             </div>
           </Col>
-            <div className="main-right">
-            {props.children}
-            </div>
           <Col>
+            <div className="main-right">
+              {props.children}
+            </div>
           </Col> 
         </Row>
       </div>
