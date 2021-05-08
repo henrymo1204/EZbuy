@@ -5,7 +5,7 @@
 
 import React from 'react';
 import "../../css/account/Logout.scss"
-import {Row} from 'react-bootstrap'
+import {Row, Col} from 'react-bootstrap'
 
 
 export default function Logout(props) {
@@ -25,9 +25,9 @@ export default function Logout(props) {
             <div className="logout-wrapper">
                 <div className="text-center logout-title">Logout?</div>
                 <div className="text-center logout-buttons">
-                    <Row>
-                    <button className="account-button logout-yes" onClick={handleYesBtn}>YES</button>
-                    <button className="account-button logout-no" onClick={handleNoBtn}>NO</button>
+                    <Row className="justify-content-md-center">
+                    <Col xs="auto"><button className="account-button logout-yes" onClick={handleYesBtn}>YES</button></Col>
+                    <Col xs="auto"><button className="account-button logout-no" onClick={handleNoBtn}>NO</button></Col>
                     </Row>                    
                 </div>
             </div>

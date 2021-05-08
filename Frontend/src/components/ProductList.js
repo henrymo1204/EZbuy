@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from './commons/axios';
-import { toast } from 'react-toastify';
 import '../css/common/PageTemplate.scss';
 import '../css/common/SellerPageTemplate.scss';
+import '../css/common/Shared.scss'
 
 const ProductList = (props) => {
 
@@ -26,11 +26,11 @@ const ProductList = (props) => {
   return (
     <div className ="product-list-container">
       <img className='attribute' src={img}></img>
-      <label className='attribute' >Product Name {name}</label>
-      <label className='attribute' >Price {price}</label>
-      <label className='attribute' >Quantity {quantity}</label>
-      <button className='attribute' onClick={editProduct}>Edit</button>
-      <button className='attribute' onClick={deleteProduct}>Delete</button>
+      <label className='attribute' >Product Name: {name}</label>
+      <label className='attribute' >Price: {price}</label>
+      <label className='attribute' >Quantity: {quantity}</label>
+      <button className='attribute common-button' onClick={editProduct}>Edit</button>
+      <button className='attribute  common-button' onClick={deleteProduct}>Delete</button>
     </div>
   );
 };

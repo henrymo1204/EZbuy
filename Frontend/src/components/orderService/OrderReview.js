@@ -122,10 +122,10 @@ const OrderReview = () => {
                   <div className="overlay">
                     <div className="overlay-panel overlay-left">
                       <h2>Your Order Has Been Placed!</h2>
-                      <div className ="finish-order-nav-bar">
-                        <button className="ghost order-review-btn" ><a href="/allproducts">Contiue Shopping</a></button>
-                        <button className="ghost order-review-btn" ><a href="/logout">Logout and exit</a></button>
-                      </div>
+                      <Row className ="finish-order-nav-bar justify-content-md-center">
+                        <Col xs='6'><button className="ghost order-review-btn" ><a href="/allproducts">ShopMore</a></button></Col>
+                        <Col xs='6'><button className="ghost order-review-btn" ><a href="/logout">Logout</a></button></Col>
+                      </Row>
                     </div>
                     <div className="overlay-panel overlay-right">
                       <h2>Hi, here is your orders detail </h2>
