@@ -10,7 +10,7 @@ class HomeButton extends Component {
         return (
             <div className="home-button-container">
                 {/* TODO: change link */}
-                <a href="http://localhost:3000/">
+                <a href="https://ezbuy.site/">
                     <Image src="./images/ez_buy_logo.jpg" className="ezBuyIcon" />
                 </a>
             </div>
