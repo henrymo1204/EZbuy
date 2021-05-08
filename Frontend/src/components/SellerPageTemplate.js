@@ -20,7 +20,7 @@ const SellerPageTemplate = props => {
     <PageTemplate>
       <div className="page-template-container">
         <Row className="page-template-row">
-          <Col className="seller-navbar">
+          <Col className="seller-navbar" xs="auto">
             <div className="sidenav-left">
               <a href="/sellerinfo">Account</a>
               <a href="/sellerinventory">Inventory</a>
@@ -28,7 +28,7 @@ const SellerPageTemplate = props => {
               <a href="/logout">Log Out</a>
             </div>
           </Col>
-          <Col>
+          <Col xs="9">
             <div className="main-right">
               {props.children}
             </div>
