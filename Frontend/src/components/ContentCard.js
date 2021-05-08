@@ -15,6 +15,7 @@ const ContentCard = (props) => {
     const imageurl = props.adDetail['productImage'];
     const price = props.adDetail['productPrice']
     const productURL = `/productdetail?productID=${props.adDetail['productID']}`; 
+    let refreshPage = null;
 
     const addCart = async () => {
   
@@ -45,7 +46,10 @@ const ContentCard = (props) => {
           }
     
           await global.appState.updateLocalCartNum();
-          props.updatePage();
+          // props.updateAds();
+          // window.location.reload();
+          // props.updateAds();
+          refreshPage();
           toast.success('Added to shopping cart succeeded.');
         } catch (error) {
           toast.error('Added to shopping cart failed.');
@@ -62,6 +66,7 @@ const ContentCard = (props) => {
                   <Button variant="primary" href={productURL}>Go to product</Button>
                   </Card.Title>
                   <Card.Title className="ad-detail">
+                    {refreshPage = props.updateCart}
                     <Nav.Link onClick={addCart} className="ad-btn-field">
                       <i className="fas fa-cart-plus"></i>
                       <span>  Add to Cart </span>

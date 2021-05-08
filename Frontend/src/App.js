@@ -24,6 +24,7 @@ import "./css/home.scss"
 const App = props => {
 
   const [ads, setADs] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(async () => {
     if (global.appState.getUserID() != null) {
@@ -32,12 +33,24 @@ const App = props => {
       global.appState.setLocalCartNum(0);
     }
 
-    if (ads.length == 0) {
+    let localAds = global.appState.getRandomProducts();
+
+    if (localAds == null) {
+      localAds = [];
+    }
+
+    if (ads.length == 0 && localAds.length == 0) {
       await global.appState.setRandomProducts();
       const ads = global.appState.getRandomProducts();
       setADs(ads);
+    } else {
+      setADs(localAds);
     }
   }, []);
+
+  const updateCart = () => {
+    setCart(global.appState.getLocalCartNum());
+  }
 
   const settings = {
     dots: true,
@@ -75,7 +88,7 @@ const App = props => {
             <div className="home-page-slick">            
               <Carousel breakPoints={breakPoints}>
                 {
-                  ads.map((ad, index) => <Advertisement><ContentCard className="ads-card" adDetail={ad} key={index} attributes="advertisement"/></Advertisement>)
+                  ads.map((ad, index) => <Advertisement><ContentCard className="ads-card" adDetail={ad} key={index} attributes="advertisement" updateCart={updateCart}/></Advertisement>)
                 }
               </Carousel>
             </div>
