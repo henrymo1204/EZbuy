@@ -145,7 +145,8 @@ def createUser():
 
     link = url_for('confirm_register', token=token, _external=True)
 
-    link = "https://ezbuy.site/api/v1/confirm_register/" + token
+    link = "http://localhost:5000/api/v1/confirm_register/" + token
+    # link = "https://ezbuy.site/api/v1/confirm_register/" + token
 
     msg.body = 'Your email confirmation link is\n{}\nThe link will expire after 10 minutes.'.format(
         link)
@@ -397,8 +398,8 @@ def sendResetPassowrdEmail():
                   recipients=[email])
     # need to change sender email
 
-    # link = 'http://localhost:3000/reset_password/' + str(token)
-    link = 'https://ezbuy.site/reset_password/' + str(token)
+    link = 'http://localhost:3000/reset_password/' + str(token)
+    # link = 'https://ezbuy.site/reset_password/' + str(token)
 
     msg.body = 'Your reset password link is\n{}\nThe link will expire after 10 minutes.'.format(
         link)
