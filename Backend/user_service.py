@@ -146,6 +146,7 @@ def createUser():
     link = url_for('confirm_register', token=token, _external=True)
 
     link = "https://ezbuy.site/api/v1/confirm_register/" + token
+    # link = "http://localhost:5000/api/v1/confirm_register/" + token
 
     msg.body = 'Your email confirmation link is\n{}\nThe link will expire after 10 minutes.'.format(
         link)
