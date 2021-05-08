@@ -1,11 +1,6 @@
 // This app was created by group 6 for CSUF's CPSC 462 class. It is a collaborative effort to
 //create a react-based website that functions as a unique web store.
 //
-import React, { Component} from 'react';
-
-//Import render styling from react bootstrap
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 import axios from '../commons/axios';
 import { Nav} from 'react-bootstrap';
@@ -16,12 +11,8 @@ import "../../css/account/ResetPassword.scss";
 const ForgetPassword = (props) => {
     const {register, handleSubmit, errors, control} = useForm();
   
-
     const resetPassword = (data) => {
-
         const { email, password, confirm_password } = data;
-        // const password = document.getElementById('password').value;
-        // const confirm_password = document.getElementById('confirm_password').value;
         const index = window.location.href.lastIndexOf('/') + 1;
 
         const token = window.location.href.substring(index);
@@ -34,7 +25,6 @@ const ForgetPassword = (props) => {
                 'password': password
             })
             .then(() => { 
-                // window.location.href = '/'; 
                 props.history.push('/login');
                 toast.success('Successfully reset password.');
             }).catch(() => {
@@ -43,34 +33,17 @@ const ForgetPassword = (props) => {
         }
     }
 
-
-    
-    // const index = window.location.href.lastIndexOf('/') + 1;
-
-    // const token = window.location.href.substring(index);
-
-    // axios.patch(`/api/v1/reset_password/${token}`)
-    // .catch((err) => {
-    //     toast.error('Token expired');
-    // })
-
-    // const user = global.auth.getUser();
-    // if (user) {
-    //     window.location.href = '/';
-    // }
-
     return (
         <div className="reset-password-container">
-      <div className="register-wrapper">
-      <form className="register-box" onSubmit={handleSubmit(resetPassword)}>
-        <Nav className="justify-content-center title-container">
-              <Nav.Link href="/" className="title">Reset Password by Email</Nav.Link>
+      <div className="reset-password-wrapper">
+      <form className="reset-password-box" onSubmit={handleSubmit(resetPassword)}>
+        <Nav className="justify-content-center reset-password-title-container">
+              <Nav.Link href="/" className="reset-password-title">Reset Password</Nav.Link>
         </Nav>
-        <div className="field-container">
-        <p className="forget-password has-text-danger">Please enter your email to reset your passworld</p>
-          <div className="field">
-            <label className="label">Email</label>
-            <div className="control">
+        <div className="reset-password-field-container">
+          <div className="reset-password-field">
+            <label className="reset-password-label">Email</label>
+            <div className="reset-password-control">
               <input
                 className={`input ${errors.email && 'is-danger'}`}
                 type="text"
@@ -90,9 +63,9 @@ const ForgetPassword = (props) => {
             </div>
           </div> 
 
-          <div className="field">
-            <label className="label">Password</label>
-            <div className="control">
+          <div className="reset-password-field">
+            <label className="reset-password-label">Password</label>
+            <div className="reset-password-control">
               <input
                 className={`input ${errors.password && 'is-danger'}`}
                 type="password"
@@ -114,9 +87,9 @@ const ForgetPassword = (props) => {
             </div>
           </div>
 
-          <div className="field">
-            <label className="label">Confirm Password</label>
-            <div className="control">
+          <div className="reset-password-field">
+            <label className="reset-password-label">Confirm Password</label>
+            <div className="reset-password-control">
               <input
                 className={`input ${errors.password && 'is-danger'}`}
                 type="password"
@@ -140,8 +113,8 @@ const ForgetPassword = (props) => {
           
         </div>
         
-          <div className="footer-container text-center">
-              <button className="forget-button">Submit</button> 
+          <div className="reset-password-footer-container">
+              <button className="reset-password-button">Submit</button> 
           </div>
      
       </form>

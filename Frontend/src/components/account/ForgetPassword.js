@@ -19,7 +19,7 @@ const ForgetPassword = (props) => {
             'email': email
         })
         .then(() => { 
-            toast.success('Reset link sent to {}.', email);
+            toast.success('Reset link sent via email.');
         }).catch(() => {
             toast.error('Failed to send reset link.');
         })
@@ -30,10 +30,9 @@ const ForgetPassword = (props) => {
       <div className="forget-wrapper">
       <form className="register-box" onSubmit={handleSubmit(resetPassword)}>
         <Nav className="justify-content-center title-container">
-              <Nav.Link href="/" className="title">Reset Password by Email</Nav.Link>
+              <Nav.Link href="/" className="title">Reset Password</Nav.Link>
         </Nav>
         <div className="field-container">
-        <p className="forget-password has-text-danger">Please enter your email to reset your passworld</p>
           <div className="forget-field">
             <label className="label">Email</label>
             <div className="control">
