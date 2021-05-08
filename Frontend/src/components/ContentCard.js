@@ -2,7 +2,7 @@
 //https://react-bootstrap.github.io/components/cards/
 
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav } from 'react-bootstrap';
 import axios from './commons/axios';
@@ -55,11 +55,18 @@ const ContentCard = (props) => {
     return (
          <Card className={"text-center " + props.attributes}>
             <Card.Img variant="top" src={imageurl} className="ad-image"/>
-            <Card.Body>
+            <Card.Body className="ad-body">
                 <Card.Title className="ad-detail">{productName}</Card.Title>
                 <Card.Title className="ad-detail">${price}</Card.Title>
-                <Button variant="primary" href={productURL}>Go to product</Button>
-                <Button variant="primary" onClick={addCart}>Add to cart</Button>
+                  <Card.Title className="ad-detail">
+                  <Button variant="primary" href={productURL}>Go to product</Button>
+                  </Card.Title>
+                  <Card.Title className="ad-detail">
+                    <Nav.Link onClick={addCart} className="ad-btn-field">
+                      <i className="fas fa-cart-plus"></i>
+                      <span>  Add to Cart </span>
+                    </Nav.Link> 
+                  </Card.Title>
             </Card.Body>
         </Card>
     );

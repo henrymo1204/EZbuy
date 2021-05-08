@@ -123,14 +123,14 @@ const OrderReview = () => {
                     <div className="overlay-panel overlay-left">
                       <h2>Your Order Has Been Placed!</h2>
                       <div className ="finish-order-nav-bar">
-                        <button className="ghost " ><a href="/allproducts">Contiue Shopping</a></button>
-                        <button className="ghost " ><a href="/logout">Logout and exit</a></button>
+                        <button className="ghost order-review-btn" ><a href="/allproducts">Contiue Shopping</a></button>
+                        <button className="ghost order-review-btn" ><a href="/logout">Logout and exit</a></button>
                       </div>
                     </div>
                     <div className="overlay-panel overlay-right">
                       <h2>Hi, here is your orders detail </h2>
                       <p>You can choose any one to see the order detail</p>
-                      <button className="ghost"onClick={handleSignupClick}>Back to the history</button>
+                      <button className="ghost order-review-btn"onClick={handleSignupClick}>Back to the history</button>
                     </div>
                   </div>
                 </div>
