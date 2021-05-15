@@ -17,7 +17,7 @@ This is the team project for CPSC 462 group 6.
 
 ## How to run the program locally
 
-1. In the main directory of the project, run the following command:
+1. In the main directory of the project, run the following command: \
    `$ cd /Script`
 2. Once in the `/Script` directory, run the following command to start both the Frontend React application and the Backend Flask application:
    `$ sh ./local_start_ezbuy_with_db_init.sh`
