@@ -38,3 +38,12 @@ The following is the link for the project on Github: \
 [https://github.com/YingLuo111/CPSC462_Project_EZbuy_Group6](https://github.com/YingLuo111/CPSC462_Project_EZbuy_Group6)
 
 ## Reference
+
+1. User profile UI and cart layout referred from \
+   [https://github.com/lirenmi/react-store](https://github.com/lirenmi/react-store)
+2. Product images are from \
+   [Unsplash Website](https://unsplash.com/)
+3. Frontend Sliding referred from \
+   [Traversy Media](https://codepen.io/FlorinPop17/pen/vPKWjd)
+4. Email confirmation for registration and password reset referred from \
+   [https://www.youtube.com/watch?v=vutyTx7IaAI](https://www.youtube.com/watch?v=vutyTx7IaAI)

@@ -39,4 +39,4 @@ cd ../Frontend
 echo "Install with Yarn..."
 yarn install
 echo "Restart frontend process..."
-exec serve -s build -l 3000 &
+exec npm start &
