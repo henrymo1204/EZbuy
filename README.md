@@ -6,7 +6,7 @@ This is the team project for CPSC 462 group 6.
 
 **Professor: Lidia Morrison**
 
-**Team members:**
+**Team members:** \
 -- Ying Luo, yingluo_holiday@csu.fullerton.edu
 
 -- Gabriel Magallanes, gabe695@csu.fullerton.edu
