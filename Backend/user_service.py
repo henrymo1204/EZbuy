@@ -38,7 +38,7 @@ CORS(app)
 # app.config['MAIL_USE_SSL'] = False
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_PORT'] = 587 #465
 app.config['MAIL_USERNAME'] = 'TestEmailForClass462@gmail.com'
 app.config['MAIL_PASSWORD'] = 'Ezbuy2021462!'
 app.config['MAIL_USE_TLS'] = False
