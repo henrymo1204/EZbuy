@@ -4,7 +4,7 @@ import _axios from 'axios';
 const axios = baseURL => {
   const instance = _axios.create({
     baseURL:
-      'http://localhost:5000',
+      'http://18.144.1.165',
     timeout: 10000
   });
 
