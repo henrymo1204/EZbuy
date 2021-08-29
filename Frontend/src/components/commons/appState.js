@@ -3,7 +3,7 @@ import decode from 'jwt-decode';
 
 //Cart related application state
 const updateLocalCartNum = async () => {
-    const CartID = await getLocalCartNum();
+    const cartID = await getLocalCartNum();
     console.log(cartID);
     if (cartID == null) {
         const remoteCartNum = await getRemoteCartNum();
