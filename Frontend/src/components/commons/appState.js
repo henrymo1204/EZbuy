@@ -3,8 +3,11 @@ import decode from 'jwt-decode';
 
 //Cart related application state
 const updateLocalCartNum = async () => {
-    const remoteCartNum = await getRemoteCartNum();
-    localStorage.setItem('Cart_Num', remoteCartNum);
+    const CartID = await getLocalCartNum();
+    if (cartID == null) {
+        const remoteCartNum = await getRemoteCartNum();
+        localStorage.setItem('Cart_Num', remoteCartNum);
+    }
 };
   
 const setLocalCartNum = (cart_num) => {
