@@ -4,6 +4,7 @@ import decode from 'jwt-decode';
 //Cart related application state
 const updateLocalCartNum = async () => {
     const CartID = await getLocalCartNum();
+    console.log(cartID);
     if (cartID == null) {
         const remoteCartNum = await getRemoteCartNum();
         localStorage.setItem('Cart_Num', remoteCartNum);
